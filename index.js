@@ -11,8 +11,12 @@ const categoryRouter = require('./routes/categoryRoutes');
 // defining path for environment variables
 dotenv.config({ path: `${__dirname}/config/.env` });
 
+
 // app variable
 const app = express();
+
+// using body parser
+app.use(express.json());
 
 // using routers
 app.use('/api/users' , usersRouter);
