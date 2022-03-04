@@ -1,13 +1,13 @@
 const express = require('express');
+
 const router = express.Router();
 
 // importing controllers
 const {
     getCategories,
-    getCategory,
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
 } = require('../controllers/categoryController');
 
 // endpoint for categories

@@ -11,7 +11,6 @@ const categoryRouter = require('./routes/categoryRoutes');
 // defining path for environment variables
 dotenv.config({ path: `${__dirname}/config/.env` });
 
-
 // app variable
 const app = express();
 
@@ -19,13 +18,16 @@ const app = express();
 app.use(express.json());
 
 // using routers
-app.use('/api/users' , usersRouter);
-app.use('/api/incomes' , incomeRouter);
-app.use('/api/expenses' , expenseRouter);
-app.use('/api/categories' , categoryRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/incomes', incomeRouter);
+app.use('/api/expenses', expenseRouter);
+app.use('/api/categories', categoryRouter);
 
 // defining port
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
+
+// if port is not defined throw an error
+if (!process.env.PORT) throw new Error('PORT is not defined');
 
 // listening to the port
 app.listen(port);

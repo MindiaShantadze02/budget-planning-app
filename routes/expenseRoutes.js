@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 // importing controllers
@@ -7,7 +8,7 @@ const {
     getExpense,
     createExpense,
     updateExpense,
-    deleteExpense
+    deleteExpense,
 } = require('../controllers/expenseController');
 
 // endpoint for expenses

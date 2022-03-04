@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 // importing controllers
@@ -7,7 +8,7 @@ const {
     getIncome,
     createIncome,
     updateIncome,
-    deleteIncome
+    deleteIncome,
 } = require('../controllers/incomeController');
 
 // endpoint for incomes

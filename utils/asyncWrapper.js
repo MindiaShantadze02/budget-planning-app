@@ -1,12 +1,10 @@
 // async wrapper function for avoiding try-catch blocks
-const asyncWrapper = (func) => {
-    return async (req,res,next) => {
+const asyncWrapper = (func) => async (req, res, next) => {
         try {
-            await func(req,res,next);
-        } catch(err) {
+            await func(req, res, next);
+        } catch (err) {
             throw new Error(err);
         }
-    }
-}
+    };
 
 module.exports = asyncWrapper;

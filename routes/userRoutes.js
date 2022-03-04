@@ -1,13 +1,14 @@
 const express = require('express');
+
 const router = express.Router();
 
 // importing controllers
-const { 
+const {
     createAccount,
     loginUser,
     getAccount,
     updateAccount,
-    deleteAccount
+    deleteAccount,
  } = require('../controllers/userControllers');
 
 // login endpoint
