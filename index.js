@@ -4,9 +4,8 @@ const dotenv = require('dotenv');
 
 // importing routers
 const usersRouter = require('./routes/userRoutes');
-const incomeRouter = require('./routes/incomeRoutes');
-const expenseRouter = require('./routes/expenseRoutes');
-const categoryRouter = require('./routes/categoryRoutes');
+const incomeRouter = require('./routes/categoryRoutes');
+const transactionRouter = require('./routes/transactionRoutes');
 
 // defining path for environment variables
 dotenv.config({ path: `${__dirname}/config/.env` });
@@ -22,10 +21,9 @@ const app = express();
 app.use(express.json());
 
 // using routers
-app.use('/api/users', usersRouter);
-app.use('/api/incomes', incomeRouter);
-app.use('/api/expenses', expenseRouter);
-app.use('/api/categories', categoryRouter);
+app.use('/users', usersRouter);
+app.use('/incomes', incomeRouter);
+app.use('/transactions', transactionRouter);
 
 // using error handling middleware
 app.use(notFoundHandler);
