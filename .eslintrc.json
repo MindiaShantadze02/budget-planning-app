@@ -14,6 +14,8 @@
         "linebreak-style": "off",
         "no-unused-vars":"warn",
         "indent": "off",
-        "no-console": "error"
+        "no-console": "error",
+        "no-trailing-spaces": "off",
+        "comma-dangle": "off"
     }
 }

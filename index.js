@@ -11,6 +11,10 @@ const categoryRouter = require('./routes/categoryRoutes');
 // defining path for environment variables
 dotenv.config({ path: `${__dirname}/config/.env` });
 
+// error handling middleware
+const errorHandler = require('./middleware/errorMiddleware');
+const notFoundHandler = require('./middleware/notFound');
+
 // app variable
 const app = express();
 
@@ -22,6 +26,10 @@ app.use('/api/users', usersRouter);
 app.use('/api/incomes', incomeRouter);
 app.use('/api/expenses', expenseRouter);
 app.use('/api/categories', categoryRouter);
+
+// using error handling middleware
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // defining port
 const port = process.env.PORT;
