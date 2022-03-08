@@ -9,10 +9,12 @@ const {
     getAccount,
     updateAccount,
     deleteAccount,
+    registerUser
  } = require('../controllers/userControllers');
 
 // login endpoint
 router.route('/login').post(loginUser);
+router.route('/register').post(registerUser);
 
 // endpoint for accounts
 router.route('/accounts').post(createAccount);

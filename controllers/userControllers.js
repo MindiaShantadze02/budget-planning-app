@@ -5,6 +5,10 @@ exports.loginUser = asyncWrapper((req, res, next) => {
     res.json('Login Endpoint POST');
 });
 
+exports.registerUser = asyncWrapper((req, res, next) => {
+    res.json('Register endpoint');
+});
+
 // function for creating an account
 exports.createAccount = asyncWrapper((req, res, next) => {
     res.status(201).json('Account created successfully');
