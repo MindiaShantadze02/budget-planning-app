@@ -1,12 +1,36 @@
 const asyncWrapper = require('../utils/asyncWrapper');
 
+// importing register function
+const { register, users } = require('../data/users');
+
 // Login controller
 exports.loginUser = asyncWrapper((req, res, next) => {
     res.json('Login Endpoint POST');
 });
 
 exports.registerUser = asyncWrapper((req, res, next) => {
-    res.json('Register endpoint');
+    // getting needed fields for users
+    const {
+        email,
+        firstName,
+        lastName,
+        password,
+        role,
+        gender,
+        birthDate,
+        country
+    } = req.body;
+    register({
+        email,
+        firstName,
+        lastName,
+        password,
+        role,
+        gender,
+        birthDate,
+        country
+    });
+    res.json({ message: 'success', data: users });
 });
 
 // function for creating an account
