@@ -115,110 +115,21 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Expenses",
-			"item": [
-				{
-					"name": "Delete Expense",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/expenses/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"expenses",
-								"0"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "Get Single Expense",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/expenses/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"expenses",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Expenses",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/expenses",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"expenses"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create New Expense",
+					"name": "Register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/expenses",
+							"raw": "http://localhost:8000/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"expenses"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Expense",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/api/expenses/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"expenses",
-								"0"
+								"register"
 							]
 						}
 					},
@@ -227,43 +138,41 @@
 			]
 		},
 		{
-			"name": "Incomes",
+			"name": "Transactions",
 			"item": [
 				{
-					"name": "Get Incomes",
+					"name": "Get Transactions",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/incomes",
+							"raw": "http://localhost:8000/transactions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"incomes"
+								"transactions"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Single Income",
+					"name": "Get Single Transaction",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/incomes/0",
+							"raw": "http://localhost:8000/transactions/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"incomes",
+								"transactions",
 								"0"
 							]
 						}
@@ -271,40 +180,38 @@
 					"response": []
 				},
 				{
-					"name": "Create Income",
+					"name": "Create Transaction",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/incomes",
+							"raw": "http://localhost:8000/transactions",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"incomes"
+								"transactions"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Edit Income",
+					"name": "Edit Transaction",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/incomes/0",
+							"raw": "http://localhost:8000/transactions/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"incomes",
+								"transactions",
 								"0"
 							]
 						}
@@ -312,20 +219,19 @@
 					"response": []
 				},
 				{
-					"name": "Delete Income",
+					"name": "Delete Transaction",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/incomes/0",
+							"raw": "http://localhost:8000/transactions/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
-								"incomes",
+								"transactions",
 								"0"
 							]
 						}
@@ -343,14 +249,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/categories",
+							"raw": "http://localhost:8000/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
 								"categories"
 							]
 						}
@@ -363,14 +268,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/categories",
+							"raw": "http://localhost:8000/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
 								"categories"
 							]
 						}
@@ -383,14 +287,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/categories/0",
+							"raw": "http://localhost:8000/categories/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
 								"categories",
 								"0"
 							]
@@ -404,14 +307,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/categories/0",
+							"raw": "http://localhost:8000/categories/0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"api",
 								"categories",
 								"0"
 							]

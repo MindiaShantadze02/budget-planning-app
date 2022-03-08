@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 
 // importing routers
 const usersRouter = require('./routes/userRoutes');
-const incomeRouter = require('./routes/categoryRoutes');
+const categoryRouter = require('./routes/categoryRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
 
 // defining path for environment variables
@@ -22,7 +22,7 @@ app.use(express.json());
 
 // using routers
 app.use('/users', usersRouter);
-app.use('/incomes', incomeRouter);
+app.use('/categories', categoryRouter);
 app.use('/transactions', transactionRouter);
 
 // using error handling middleware
