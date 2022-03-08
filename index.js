@@ -1,6 +1,7 @@
 // importing dependencies
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // importing routers
 const usersRouter = require('./routes/userRoutes');
@@ -17,8 +18,10 @@ const notFoundHandler = require('./middleware/notFound');
 // app variable
 const app = express();
 
-// using body parser
+// using required global middlewares
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // using routers
 app.use('/users', usersRouter);
