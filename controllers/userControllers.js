@@ -1,14 +1,12 @@
+// importing dependencies
+const bcrypt = require('bcrypt');
+
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing register function
-const { register, users } = require('../data/users');
+const { users } = require('../data/users');
 
-// Login controller
-exports.loginUser = asyncWrapper((req, res, next) => {
-    res.json('Login Endpoint POST');
-});
-
-exports.registerUser = asyncWrapper((req, res, next) => {
+exports.registerUser = asyncWrapper(async (req, res, next) => {
     // getting needed fields for users
     const {
         email,
@@ -20,17 +18,36 @@ exports.registerUser = asyncWrapper((req, res, next) => {
         birthDate,
         country
     } = req.body;
-    register({
+
+    if (users.some((userItem) => userItem.email === email)) {
+        res.status(400).json('User already exists');
+        return;
+    }
+
+    users.push({
+        id: Math.random(),
         email,
         firstName,
         lastName,
-        password,
+        password: await bcrypt.hash(password, 10),
         role,
         gender,
         birthDate,
         country
     });
     res.json({ message: 'success', data: users });
+});
+
+// Login controller
+exports.loginUser = asyncWrapper(async (req, res, next) => {
+    const { email, password } = req.body;
+    const user = users.find((userItem) => userItem.email === email);
+    const userExists = user && bcrypt.compareSync(password, user.password);
+    if (userExists) {
+        res.status(200).json(user);
+    }
+
+    res.status(404).json('User Not Found');
 });
 
 // function for creating an account
