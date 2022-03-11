@@ -1,13 +1,15 @@
 // importing dependencies
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const asyncWrapper = require('../utils/asyncWrapper');
 
-// importing register function
+// importing users data
 const { users } = require('../data/users');
 
+// function for registering user
 exports.registerUser = asyncWrapper(async (req, res, next) => {
-    // getting needed fields for users
+    // getting needed fields for users from request body
     const {
         email,
         firstName,
@@ -38,34 +40,26 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     res.json({ message: 'success', data: users });
 });
 
-// Login controller
+// function for logging in user
 exports.loginUser = asyncWrapper(async (req, res, next) => {
     const { email, password } = req.body;
     const user = users.find((userItem) => userItem.email === email);
-    const userExists = user && bcrypt.compareSync(password, user.password);
-    if (userExists) {
-        res.status(200).json(user);
+    const isUserLogged = user && bcrypt.compareSync(password, user.password);
+    
+    if (isUserLogged) {
+        const payload = {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role
+        };
+
+        const token = jwt.sign(
+            payload,
+            process.env.JWT_SECRET
+            );
     }
 
     res.status(404).json('User Not Found');
-});
-
-// function for creating an account
-exports.createAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json('Account created successfully');
-});
-
-// function for getting a single account
-exports.getAccount = asyncWrapper((req, res, next) => {
-    res.status(200).json(`You are visiting an account with id of ${req.params.id}`);
-});
-
-// function for updating an account
-exports.updateAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json(`You are updating an account with id of ${req.params.id}`);
-});
-
-// function for deleting an account
-exports.deleteAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json(`Account with id ${req.params.id} deleted successfully`);
 });

@@ -7,6 +7,7 @@ const cors = require('cors');
 const usersRouter = require('./routes/userRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
+const accountRouter = require('./routes/accountRoutes');
 
 // defining path for environment variables
 dotenv.config({ path: `${__dirname}/config/.env` });
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/users', usersRouter);
 app.use('/categories', categoryRouter);
 app.use('/transactions', transactionRouter);
+app.use('/accounts', accountRouter);
 
 // using error handling middleware
 app.use(notFoundHandler);
