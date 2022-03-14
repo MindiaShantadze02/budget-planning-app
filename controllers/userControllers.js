@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// importing async wrapper
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing users data
@@ -21,7 +22,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     } = req.body;
 
-    if (users.some((userItem) => userItem.email === email)) {
+    if (users.find((userItem) => userItem.email === email)) {
         res.status(400).json('User already exists');
         return;
     }
@@ -37,29 +38,44 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         birthDate,
         country
     });
-    res.json({ message: 'success', data: users });
+    res.json({ 
+        message: 'success',
+        data: 'User registered successfully'
+    });
 });
 
 // function for logging in user
 exports.loginUser = asyncWrapper(async (req, res, next) => {
-    const { email, password } = req.body;
-    const user = users.find((userItem) => userItem.email === email);
-    const isUserLogged = user && bcrypt.compareSync(password, user.password);
-    
-    if (isUserLogged) {
-        const payload = {
-            id: user.id,
+    const {
+        email,
+        password
+    } = req.body;
+
+    const user = users.find(user => user.email === email);
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+        const token = jwt.sign(
+            { email: user.email, id: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1d' }
+        );
+
+        res.status(200).json({
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
-            role: user.role
-        };
-
-        const token = jwt.sign(
-            payload,
-            process.env.JWT_SECRET
-            );
+            token: `Bearer: ${token}`
+        });
     }
+});
 
-    res.status(404).json('User Not Found');
+// function for getting users
+exports.getUsers = asyncWrapper(async (req, res, next) => {
+    res.status(200).json(users);
+});
+
+// function for getting users
+exports.getUser = asyncWrapper(async (req, res, next) => {
+    const user = users.find(user => user.id === req.params.id);
+    res.status(200).json();
 });

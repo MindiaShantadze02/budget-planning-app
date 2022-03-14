@@ -11,6 +11,7 @@ const {
     deleteTransaction,
  } = require('../controllers/transactionController');
 
+// getting all transactions and creating a transaction
 router.route('/')
     .get(getTransactions)
     .post(createTransaction);
