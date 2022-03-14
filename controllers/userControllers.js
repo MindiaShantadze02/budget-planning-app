@@ -22,7 +22,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     } = req.body;
 
-    const id = Math.random();
+    const id = Math.floor(Math.random() * 1000000);
 
     if (
         users.find((userItem) => userItem.email === email)
