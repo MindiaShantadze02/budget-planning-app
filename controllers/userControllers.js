@@ -22,13 +22,18 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     } = req.body;
 
-    if (users.find((userItem) => userItem.email === email)) {
+    const id = Math.random();
+
+    if (
+        users.find((userItem) => userItem.email === email)
+        || users.find((userItem) => userItem.id === id)
+        ) {
         res.status(400).json('User already exists');
         return;
     }
 
     users.push({
-        id: Math.random(),
+        id,
         email,
         firstName,
         lastName,
@@ -51,7 +56,7 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
         password
     } = req.body;
 
-    const user = users.find(user => user.email === email);
+    const user = users.find(userItem => userItem.email === email);
 
     if (user && (await bcrypt.compare(password, user.password))) {
         const token = jwt.sign(
@@ -76,6 +81,6 @@ exports.getUsers = asyncWrapper(async (req, res, next) => {
 
 // function for getting users
 exports.getUser = asyncWrapper(async (req, res, next) => {
-    const user = users.find(user => user.id === req.params.id);
+    const user = users.find(userItem => userItem.id === req.params.id);
     res.status(200).json();
 });
