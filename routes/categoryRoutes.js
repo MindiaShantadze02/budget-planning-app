@@ -10,14 +10,17 @@ const {
     deleteCategory,
 } = require('../controllers/categoryController');
 
+// auth middleware
+const auth = require('../middleware/auth');
+
 // endpoint for categories
 router.route('/')
-    .get(getCategories)
-    .post(createCategory);
+    .get(auth, getCategories)
+    .post(auth, createCategory);
 
 // endpoint for one category
 router.route('/:id')
-    .put(updateCategory)
-    .delete(deleteCategory);
+    .put(auth, updateCategory)
+    .delete(auth, deleteCategory);
 
 module.exports = router;

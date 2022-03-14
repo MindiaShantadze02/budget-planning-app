@@ -10,14 +10,17 @@ const {
     deleteAccount
  } = require('../controllers/accountController');
 
+// auth middleware
+const auth = require('../middleware/auth');
+
 router.route('/')
-    .get(getAccounts)
-    .post(createAccount);
+    .get(auth, getAccounts)
+    .post(auth, createAccount);
 
 // getting deleting and updating a single account
 router.route('/:id')
-    .get(getAccount)
-    .put(updateAccount)
-    .delete(deleteAccount);
+    .get(auth, getAccount)
+    .put(auth, updateAccount)
+    .delete(auth, deleteAccount);
 
 module.exports = router;
