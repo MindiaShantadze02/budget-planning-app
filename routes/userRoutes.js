@@ -5,6 +5,9 @@ const router = express.Router();
 // auth middleware
 const auth = require('../middleware/auth');
 
+// endpoint guard middlewares
+const { adminGuard } = require('../middleware/guards');
+
 // importing controllers
 const {
     loginUser,
@@ -13,7 +16,7 @@ const {
  } = require('../controllers/userControllers');
 
 // function for getting users
-router.get('/', auth, getUsers);
+router.get('/', auth, adminGuard, getUsers);
 
 // login endpoint
 router.route('/login').post(loginUser);
