@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 
 // defining schema
-const TransactionSchema = new mongoose.Schema({
-    transactionType: {
-        type: String,
-        enum: ['Income', 'Expense'],
-        required: [true, 'Transaction type is required']
+const AccountSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.model.objectId
     },
     title: {
         type: String,
@@ -18,27 +16,19 @@ const TransactionSchema = new mongoose.Schema({
         maxlength: [512, 'Description must have less than 512 characters'],
         minlength: [10, 'Description must have more than 10 characters']
     },
-    operationDate: {
-        type: Date,
-        default: Date.now()
-    },
-    category: {
-        type: String,
-        required: [true, 'Category is required']
-    },
     currency: {
         type: String
     },
-    amount: {
+    availableAmount: {
         type: Number
     },
     createdAt: {
         type: Date,
         default: Date.now()
     },
-    updatedAt: {
+    updateDate: {
         type: Date
     }
 });
 
-module.exports = mongoose.model('Transaction', TransactionSchema);
+module.exports = mongoose.model('Account', AccountSchema);
