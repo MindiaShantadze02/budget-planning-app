@@ -22,11 +22,14 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     } = req.body;
 
-    const id = Math.floor(Math.random() * 1000000);
+    let id = Math.floor(Math.random() * 1000000);
+    
+    if (users.find(user => user.id === id)) {
+        id = Math.floor(Math.random() * 1000000);
+    }
 
     if (
         users.find((userItem) => userItem.email === email)
-        || users.find((userItem) => userItem.id === id)
         ) {
         res.status(400).json('User already exists');
         return;
