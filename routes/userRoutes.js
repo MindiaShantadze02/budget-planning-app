@@ -2,25 +2,26 @@ const express = require('express');
 
 const router = express.Router();
 
+// auth middleware
+const auth = require('../middleware/auth');
+
+// endpoint guard middlewares
+const { adminGuard } = require('../middleware/guards');
+
 // importing controllers
 const {
-    createAccount,
     loginUser,
-    getAccount,
-    updateAccount,
-    deleteAccount,
+    registerUser,
+    getUsers
  } = require('../controllers/userControllers');
+
+// function for getting users
+router.get('/', auth, adminGuard, getUsers);
 
 // login endpoint
 router.route('/login').post(loginUser);
 
-// endpoint for accounts
-router.route('/accounts').post(createAccount);
-
-// getting deleting and updating a single account
-router.route('/accounts/:id')
-    .get(getAccount)
-    .put(updateAccount)
-    .delete(deleteAccount);
+// register endpoint
+router.route('/register').post(registerUser);
 
 module.exports = router;

@@ -1,15 +1,19 @@
+// defining path for environment variables
+require('dotenv').config({ path: `${__dirname}/config/.env` });
+
+// checking if JWT SECRET is defined or not
+if (!process.env.JWT_SECRET) throw new Error('JWT Secret is not defined');
+
 // importing dependencies
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
+const passport = require('passport');
 
 // importing routers
 const usersRouter = require('./routes/userRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
-
-// defining path for environment variables
-dotenv.config({ path: `${__dirname}/config/.env` });
+const accountRouter = require('./routes/accountRoutes');
 
 // error handling middleware
 const errorHandler = require('./middleware/errorMiddleware');
@@ -22,11 +26,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 // using routers
 app.use('/users', usersRouter);
 app.use('/categories', categoryRouter);
 app.use('/transactions', transactionRouter);
+app.use('/accounts', accountRouter);
 
 // using error handling middleware
 app.use(notFoundHandler);

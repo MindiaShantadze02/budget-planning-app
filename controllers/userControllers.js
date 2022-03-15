@@ -1,26 +1,89 @@
+// importing dependencies
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+// importing async wrapper
 const asyncWrapper = require('../utils/asyncWrapper');
 
-// Login controller
-exports.loginUser = asyncWrapper((req, res, next) => {
-    res.json('Login Endpoint POST');
+// importing users data
+const { users } = require('../data/users');
+
+// function for registering user
+exports.registerUser = asyncWrapper(async (req, res, next) => {
+    // getting needed fields for users from request body
+    const {
+        email,
+        firstName,
+        lastName,
+        password,
+        role,
+        gender,
+        birthDate,
+        country
+    } = req.body;
+
+    let id = Math.floor(Math.random() * 1000000);
+    
+    if (users.find(user => user.id === id)) {
+        id = Math.floor(Math.random() * 1000000);
+    }
+
+    if (
+        users.find((userItem) => userItem.email === email)
+        ) {
+        res.status(400).json('User already exists');
+        return;
+    }
+
+    users.push({
+        id,
+        email,
+        firstName,
+        lastName,
+        password: await bcrypt.hash(password, 10),
+        role,
+        gender,
+        birthDate,
+        country
+    });
+    res.json({ 
+        message: 'success',
+        data: 'User registered successfully'
+    });
 });
 
-// function for creating an account
-exports.createAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json('Account created successfully');
+// function for logging in user
+exports.loginUser = asyncWrapper(async (req, res, next) => {
+    const {
+        email,
+        password
+    } = req.body;
+
+    const user = users.find(userItem => userItem.email === email);
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+        const token = jwt.sign(
+            { email: user.email, id: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1d' }
+        );
+
+        res.status(200).json({
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            token: `Bearer: ${token}`
+        });
+    }
 });
 
-// function for getting a single account
-exports.getAccount = asyncWrapper((req, res, next) => {
-    res.status(200).json(`You are visiting an account with id of ${req.params.id}`);
+// function for getting users
+exports.getUsers = asyncWrapper(async (req, res, next) => {
+    res.status(200).json(users);
 });
 
-// function for updating an account
-exports.updateAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json(`You are updating an account with id of ${req.params.id}`);
-});
-
-// function for deleting an account
-exports.deleteAccount = asyncWrapper((req, res, next) => {
-    res.status(201).json(`Account with id ${req.params.id} deleted successfully`);
+// function for getting users
+exports.getUser = asyncWrapper(async (req, res, next) => {
+    const user = users.find(userItem => userItem.id === req.params.id);
+    res.status(200).json();
 });
