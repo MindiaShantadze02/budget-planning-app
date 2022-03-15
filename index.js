@@ -8,6 +8,7 @@ if (!process.env.JWT_SECRET) throw new Error('JWT Secret is not defined');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 // importing routers
 const usersRouter = require('./routes/userRoutes');
@@ -18,6 +19,10 @@ const accountRouter = require('./routes/accountRoutes');
 // error handling middleware
 const errorHandler = require('./middleware/errorMiddleware');
 const notFoundHandler = require('./middleware/notFound');
+const connectDB = require('./config/connectDB');
+// connecting to database
+const mongoUri = `${process.env.MONGO_URI}${process.env.DB_NAME}`;
+connectDB(mongoUri);
 
 // app variable
 const app = express();
