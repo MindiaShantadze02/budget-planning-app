@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // defining schema
-const SubscriptionSchema = new mongoose.Schema({
+const CurrencySchema = new mongoose.Schema({
     name: {
         type: String
     },
@@ -10,4 +10,4 @@ const SubscriptionSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Subscription', SubscriptionSchema);
+module.exports = mongoose.model('Subscription', CurrencySchema);

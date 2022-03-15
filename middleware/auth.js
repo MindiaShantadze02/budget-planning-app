@@ -2,8 +2,9 @@
 const passport = require('passport');
 const { ExtractJwt } = require('passport-jwt');
 const JwtStrategy = require('passport-jwt').Strategy;
-// importing mock data to work on
-const { users } = require('../data/users');
+
+// user model
+const User = require('../models/User');
 
 // options for JWT Strategy
 const opts = {
@@ -12,8 +13,8 @@ const opts = {
 };
 
 // callback for Jwt Strategy
-const jwtCallback = (jwtPayload, done) => {
-    const user = users.find(user => user.email === jwtPayload.email);
+const jwtCallback = async (jwtPayload, done) => {
+    const user = await User.findOne({ _id: jwtPayload.id });
 
     if (user) {
         return done(null, user);

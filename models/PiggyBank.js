@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 // defining schema
-const ObligatoryPaymentSchema = new mongoose.Schema({
-    userId: {
+const PiggyBank = new mongoose.Schema({
+    accountId: {
         type: mongoose.model.objectId
     },
     title: {
@@ -16,31 +16,18 @@ const ObligatoryPaymentSchema = new mongoose.Schema({
         maxlength: [512, 'Description must have less than 512 characters'],
         minlength: [10, 'Description must have more than 10 characters']
     },
-    currency: {
-        type: String
+    goal: {
+        type: Number
     },
-    dayOfPayment: {
-        type: Date
-    },
-    frequency: {
-        type: String
-    },
-    firstPaymentDate: {
-        type: Date
-    },
-    lastPaymentDate: {
-        type: Date
-    },
-    availableAmount: {
+    avaliableAmount: {
         type: Number
     },
     createdAt: {
-        type: Date,
-        default: Date.now()
+        type: Date
     },
     updateDate: {
         type: Date
     }
 });
 
-module.exports = mongoose.model('ObligatoryPayment', ObligatoryPaymentSchema);
+module.exports = mongoose.model('PiggyBank', PiggyBank);
