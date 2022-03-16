@@ -33,14 +33,9 @@ const SubscriptionSchema = new mongoose.Schema({
     },
     amount: {
         type: String
-    },
-    createdAt: {
-        type: Date,
-        required: true
-    },
-    updateDate: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Subscription', SubscriptionSchema);

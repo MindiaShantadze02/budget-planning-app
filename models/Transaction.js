@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 // defining schema
 const TransactionSchema = new mongoose.Schema({
+    account: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Account'
+    },
     transactionType: {
         type: String,
         enum: ['Income', 'Expense'],
@@ -31,14 +36,9 @@ const TransactionSchema = new mongoose.Schema({
     },
     amount: {
         type: Number
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    updatedAt: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

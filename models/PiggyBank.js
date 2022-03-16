@@ -21,13 +21,9 @@ const PiggyBank = new mongoose.Schema({
     },
     avaliableAmount: {
         type: Number
-    },
-    createdAt: {
-        type: Date
-    },
-    updateDate: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('PiggyBank', PiggyBank);

@@ -13,6 +13,8 @@ const CategorySchema = new mongoose.Schema({
         required: true,
         enum: ['Income', 'Expense']
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Category', CategorySchema);

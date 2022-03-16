@@ -45,6 +45,8 @@ const UserSchema = new mongoose.Schema({
         type: 'String',
         required: [true, 'Please enter country of residence']
     }
+}, {
+    timestamps: true
 });
 
 // defining and exporting user schema

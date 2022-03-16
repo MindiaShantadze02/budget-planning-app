@@ -33,14 +33,9 @@ const ObligatoryPaymentSchema = new mongoose.Schema({
     },
     availableAmount: {
         type: Number
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    updateDate: {
-        type: Date
     }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('ObligatoryPayment', ObligatoryPaymentSchema);
