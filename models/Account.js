@@ -21,9 +21,8 @@ const AccountSchema = new mongoose.Schema({
         trim: true
     },
     currency: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Currency'
+        type: String,
+        required: true
     },
     availableAmount: {
         type: Number

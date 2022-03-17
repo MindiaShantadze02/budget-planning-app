@@ -5,7 +5,7 @@ const Account = require('../models/Account');
 
 // function for getting a single accounts
 exports.getAccounts = asyncWrapper(async (req, res, next) => {
-    const accounts = await Account.find({ user: req.user.id });
+    const accounts = await Account.find({ user: req.user.id }) || [];
 
     res.status(200).json({
         status: 'success',
@@ -38,10 +38,22 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
 
 // function for getting a single account
 exports.getAccount = asyncWrapper(async (req, res, next) => {
-    const account = await Account.find({
-        user: req.user.id,
-        _id: req.params.id
-    });
+    const account = await Account.findById(req.params.id);
+
+    if (!account) {
+        res.status(400);
+        throw new Error('Account not found');
+    }
+
+    if (!req.user) {
+        res.status(400);
+        throw new Error('User Not Found');
+    }
+
+    if (account.user.toString() !== req.user.id) {
+        res.status(400);
+        throw new Error('Unauthorized');
+    }
 
     res.status(200).json({
         status: 'success',
@@ -51,7 +63,29 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
 
 // function for updating an account
 exports.updateAccount = asyncWrapper(async (req, res, next) => {
-    res.status(201).json(`You are updating an account with id of ${req.params.id}`);
+    const account = await Account.findById(req.params.id);
+
+    if (!account) {
+        res.status(400);
+        throw new Error('Account not found');
+    }
+
+    if (!req.user) {
+        res.status(400);
+        throw new Error('User Not Found');
+    }
+
+    if (account.user.toString() !== req.user.id) {
+        res.status(400);
+        throw new Error('Unauthorized');
+    }
+
+    await Account.findByIdAndUpdate(req.params.id, req.body);
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Account Updated Successfully'
+    });
 });
 
 // function for deleting an account

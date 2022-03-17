@@ -65,7 +65,7 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
                 firstName: user.firstName
             },
             process.env.JWT_SECRET,
-            { expiresIn: '2h' }
+            { expiresIn: '1h' }
         );
 
         res.status(201).json({

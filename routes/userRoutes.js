@@ -18,7 +18,7 @@ const {
  } = require('../controllers/userControllers');
 
 // function for getting users
-router.route('/:id').get(auth, adminGuard, getUsers);
+router.route('/').get(auth, adminGuard, getUsers);
 
 router.route('/:id')
     .get(auth, adminGuard, getUser)
