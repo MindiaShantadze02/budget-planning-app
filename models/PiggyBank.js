@@ -2,19 +2,26 @@ const mongoose = require('mongoose');
 
 // defining schema
 const PiggyBank = new mongoose.Schema({
-    accountId: {
-        type: mongoose.model.objectId
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    account: {
+        type: mongoose.model.objectId,
+        required: true,
+        ref: 'Account'
     },
     title: {
         type: String,
-        required: [true, 'Title is required'],
-        maxlength: [255, 'Title must have less than 255 characters'],
-        minlength: [3, 'Title must have more than 3 characters']
+        required: [true, 'PiggyBank title is required'],
+        maxlength: [255, 'PiggyBank title must have less than 255 characters'],
+        minlength: [3, 'PiggyBank title must have more than 3 characters']
     },
     description: {
         type: String,
-        maxlength: [512, 'Description must have less than 512 characters'],
-        minlength: [10, 'Description must have more than 10 characters']
+        maxlength: [512, 'PiggyBank description must have less than 512 characters'],
+        minlength: [10, 'PiggyBank description must have more than 10 characters']
     },
     goal: {
         type: Number
