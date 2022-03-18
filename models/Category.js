@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 // defining schema
 const CategorySchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     title: {
         type: String,
         required: [true, 'Category title is required'],
