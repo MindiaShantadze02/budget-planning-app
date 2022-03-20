@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 // defining schema
 const CurrencySchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: [true, 'Currency name not defined']
     },
     symbol: {
-        type: String
+        type: String,
+        required: [true, 'Currency symbol is required']
     }
 });
 

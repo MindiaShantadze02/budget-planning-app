@@ -46,4 +46,8 @@ const TransactionSchema = new mongoose.Schema({
     timestamps: true
 });
 
+TransactionSchema.pre('save', function () {
+    this.transactionType = this.amount > 0 ? 'Income' : 'Expense';
+});
+
 module.exports = mongoose.model('Transaction', TransactionSchema);

@@ -26,7 +26,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
 
     if (userExists) {
         res.status(401).json({
-            status: 'fail',
+            success: false,
             message: 'User already exists'
         });
         return;
@@ -44,7 +44,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     });
     res.json({ 
-        status: 'success',
+        success: true,
         message: 'User created successfully'
     });
 });
@@ -65,15 +65,15 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
                 firstName: user.firstName
             },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
         res.status(201).json({
-            token: `Bearer ${token}`
+            token
         });
     } else {
-        res.status(404).json({
-            status: 'fail',
+        res.status(400).json({
+            success: false,
             message: 'User not found'
         });
     }
@@ -81,9 +81,10 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
 
 // function for getting users
 exports.getUsers = asyncWrapper(async (req, res, next) => {
-    const users = await User.find({});
+    const users = await User.find({}) || [];
     res.status(200).json({
-        status: 'success',
+        success: true,
+        count: users.length,
         data: users
     });
 });
@@ -92,7 +93,7 @@ exports.getUsers = asyncWrapper(async (req, res, next) => {
 exports.getUser = asyncWrapper(async (req, res, next) => {
     const user = await User.findById(req.params.id);
     res.status(200).json({
-        status: 'success',
+        success: true,
         data: user
     });
 });

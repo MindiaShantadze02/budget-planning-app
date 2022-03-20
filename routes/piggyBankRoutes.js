@@ -4,11 +4,11 @@ const router = express.Router();
 
 // importing controllers
 const {
-    getPiggyBanks,
-    createPiggyBank,
-    getPiggyBank,
-    updatePiggyBank,
-    deletePiggyBank,
+    getPiggybanks,
+    createPiggybank,
+    getPiggybank,
+    updatePiggybank,
+    deletePiggybank,
  } = require('../controllers/piggyBankController');
 
 // auth middleware
@@ -16,13 +16,13 @@ const auth = require('../middleware/auth');
 
 // getting all transactions and creating a transaction
 router.route('/:accountId')
-    .get(auth, getPiggyBanks)
-    .post(auth, createPiggyBank);
+    .get(auth, getPiggybanks)
+    .post(auth, createPiggybank);
 
 // getting deleting and writing transactions
 router.route('/:accountId/:piggyBankId')
-    .get(auth, getPiggyBank)
-    .put(auth, updatePiggyBank)
-    .delete(auth, deletePiggyBank);
+    .get(auth, getPiggybank)
+    .put(auth, updatePiggybank)
+    .delete(auth, deletePiggybank);
 
 module.exports = router;

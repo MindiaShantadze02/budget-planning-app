@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 // defining schema
 const SubscriptionSchema = new mongoose.Schema({
-    accountId: {
-        type: mongoose.model.objectId
+    account: {
+        type: mongoose.Schema.Types.ObjectId
     },
     title: {
         type: String,

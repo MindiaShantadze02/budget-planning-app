@@ -1,32 +1,35 @@
 // importing dependencies
-const passport = require('passport');
-const { ExtractJwt } = require('passport-jwt');
-const JwtStrategy = require('passport-jwt').Strategy;
+const jwt = require('jsonwebtoken');
+
+const asyncWrapper = require('../utils/asyncWrapper');
 
 // user model
 const User = require('../models/User');
 
-// options for JWT Strategy
-const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET
-};
+const auth = asyncWrapper(async (req, res, next) => {
+    let token;
 
-// callback for Jwt Strategy
-const jwtCallback = async (jwtPayload, done) => {
-    const user = await User.findOne({ _id: jwtPayload.id });
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
+            // getting token from req.authorization
+            token = req.headers.authorization.split(' ')[1];
+            // decoding jwt hash
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (user) {
-        return done(null, user);
+            // getting logged in user
+            req.user = await User.findById(decoded.id).select('-password');
+
+            next();
+        } catch (err) {
+            res.status(401);
+            throw new Error('Unauthorized');
+        }
     }
 
-    return done(null, false);
-};
-
-// defining jwt strategy
-passport.use(new JwtStrategy(opts, jwtCallback));
-
-// defining authentication middleware for protected routes
-const auth = passport.authenticate('jwt', { session: false });
+    if (!token) {
+        res.status(401);
+        throw new Error('Unauthorized, no token');
+    }
+});
 
 module.exports = auth;

@@ -17,6 +17,10 @@
         "no-console": "error",
         "no-trailing-spaces": "off",
         "comma-dangle": "off",
-        "arrow-parens": "off"
+        "arrow-parens": "off",
+        "prefer-destructuring": ["error", {
+            "array": false,
+            "object": true
+        }]
     }
 }

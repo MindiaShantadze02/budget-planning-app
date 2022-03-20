@@ -9,6 +9,7 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
         res.status(400);
         throw new Error('User not found');
     }
+
     const transactions = await Transaction.find({
         user: req.user.id,
         account: req.params.accountId

@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 // defining schema
 const ObligatoryPaymentSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.model.objectId
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     },
     title: {
         type: String,

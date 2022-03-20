@@ -1,6 +1,6 @@
 const asyncWrapper = require('../utils/asyncWrapper');
 
-// importing account model
+// importing models
 const Account = require('../models/Account');
 
 // function for getting a single accounts
@@ -8,7 +8,8 @@ exports.getAccounts = asyncWrapper(async (req, res, next) => {
     const accounts = await Account.find({ user: req.user.id }) || [];
 
     res.status(200).json({
-        status: 'success',
+        success: true,
+        count: accounts.length,
         data: accounts
     });
 });
@@ -18,20 +19,18 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
     const {
         title,
         description,
-        currency,
-        availableAmount
+        currency
     } = req.body;
     
     await Account.create({
         user: req.user.id,
         title,
         description,
-        currency,
-        availableAmount
+        currency
     });
 
     res.status(201).json({
-        status: 'success',
+        success: true,
         message: 'Account created successfully'
     });
 });
@@ -56,7 +55,7 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
     }
 
     res.status(200).json({
-        status: 'success',
+        success: true,
         data: account
     });
 });
@@ -83,7 +82,7 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
     await Account.findByIdAndUpdate(req.params.id, req.body);
 
     res.status(200).json({
-        status: 'success',
+        success: true,
         message: 'Account Updated Successfully'
     });
 });
@@ -110,7 +109,7 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
     await account.remove();
 
     res.status(200).json({
-        status: 'success',
+        success: true,
         message: 'Account deleted successfully'
     });
 });
