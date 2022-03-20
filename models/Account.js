@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 // defining schema
 const AccountSchema = new mongoose.Schema({
+    isDefault: {
+        type: Boolean,
+        default: false
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

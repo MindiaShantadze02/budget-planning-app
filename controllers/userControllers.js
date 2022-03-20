@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken');
 // importing async wrapper
 const asyncWrapper = require('../utils/asyncWrapper');
 
-// importing user model
+// importing models
 const User = require('../models/User');
+const Account = require('../models/Account');
+const Transaction = require('../models/Transaction');
 
 // function for registering user
 exports.registerUser = asyncWrapper(async (req, res, next) => {
@@ -101,4 +103,11 @@ exports.getUser = asyncWrapper(async (req, res, next) => {
 // function for deleting user
 exports.deleteUser = asyncWrapper(async (req, res, next) => {
     await User.findByIdAndDelete(req.params.id);
+    await Account.deleteMany({ user: req.params.id });
+    await Transaction.deleteMany({ user: req.params.id });
+
+    res.status(201).json({
+        success: true,
+        message: 'User deleted successfully'
+    });
 });

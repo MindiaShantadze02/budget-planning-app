@@ -2,6 +2,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Account = require('../models/Account');
+const Transaction = require('../models/Transaction');
 
 // function for getting a single accounts
 exports.getAccounts = asyncWrapper(async (req, res, next) => {
@@ -39,6 +40,9 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
 exports.getAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
+    const availableAmount = (await Transaction.find({ account: req.params.id }))
+        .reduce((acc, transaction) => acc + transaction, 0);
+
     if (!account) {
         res.status(400);
         throw new Error('Account not found');
@@ -56,6 +60,7 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
+        availableAmount,
         data: account
     });
 });
@@ -106,7 +111,8 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    await account.remove();
+    await Account.findByIdAndDelete(req.params.id);
+    await Transaction.deleteMany({ account: req.params.id });
 
     res.status(200).json({
         success: true,
