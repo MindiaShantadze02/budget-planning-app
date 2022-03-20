@@ -44,17 +44,17 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
         .reduce((acc, transaction) => acc + transaction, 0);
 
     if (!account) {
-        res.status(400);
+        res.status(404);
         throw new Error('Account not found');
     }
 
     if (!req.user) {
-        res.status(400);
+        res.status(401);
         throw new Error('User Not Found');
     }
 
     if (account.user.toString() !== req.user.id) {
-        res.status(400);
+        res.status(401);
         throw new Error('Unauthorized');
     }
 
@@ -70,17 +70,17 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
     if (!account) {
-        res.status(400);
+        res.status(404);
         throw new Error('Account not found');
     }
 
     if (!req.user) {
-        res.status(400);
+        res.status(401);
         throw new Error('User Not Found');
     }
 
     if (account.user.toString() !== req.user.id) {
-        res.status(400);
+        res.status(401);
         throw new Error('Unauthorized');
     }
 
@@ -102,7 +102,7 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
     }
 
     if (!req.user) {
-        res.status(400);
+        res.status(401);
         throw new Error('User not found');
     }
 

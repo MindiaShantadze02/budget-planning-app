@@ -63,8 +63,7 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
     if (user && (await bcrypt.compare(password, user.password))) {
         const token = jwt.sign(
             { 
-                id: user.id,
-                firstName: user.firstName
+                id: user.id
             },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN }
