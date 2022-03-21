@@ -15,12 +15,12 @@ const {
 const auth = require('../middleware/auth');
 
 // getting all transactions and creating a transaction
-router.route('/')
+router.route('/:accountId')
     .get(auth, getTransactions)
     .post(auth, createTransaction);
 
 // getting deleting and writing transactions
-router.route('/:id')
+router.route('/:accountId/:transactionId')
     .get(auth, getTransaction)
     .put(auth, updateTransaction)
     .delete(auth, deleteTransaction);

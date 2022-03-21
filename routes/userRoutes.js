@@ -12,11 +12,17 @@ const { adminGuard } = require('../middleware/guards');
 const {
     loginUser,
     registerUser,
-    getUsers
+    getUsers,
+    getUser,
+    deleteUser
  } = require('../controllers/userControllers');
 
 // function for getting users
-router.get('/', auth, adminGuard, getUsers);
+router.route('/').get(auth, adminGuard, getUsers);
+
+router.route('/:id')
+    .get(auth, adminGuard, getUser)
+    .delete(auth, adminGuard, deleteUser);
 
 // login endpoint
 router.route('/login').post(loginUser);

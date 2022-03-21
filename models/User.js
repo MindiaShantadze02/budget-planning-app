@@ -12,12 +12,15 @@ const UserSchema = new mongoose.Schema({
         type: String,
         maxlength: 255,
         minlength: 10,
-        required: [true, 'Please enter your password']
+        required: [true, 'Please add your password']
     },
-    role: String,
+    role: {
+        type: String,
+        enum: ['Admin', 'User']
+    },
     firstName: {
         type: String,
-        required: [true, 'Please enter your firstname'],
+        required: [true, 'Please add your firstname'],
         maxlength: 255,
         minlength: 2
     },
@@ -42,6 +45,8 @@ const UserSchema = new mongoose.Schema({
         type: 'String',
         required: [true, 'Please enter country of residence']
     }
+}, {
+    timestamps: true
 });
 
 // defining and exporting user schema

@@ -13,6 +13,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shantadze@gmail.com\",\r\n    \"password\": \"qwerty_02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8000/users/login",
 							"protocol": "http",
@@ -33,6 +42,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john@gmail.com\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"password\": \"john\",\r\n    \"role\": \"User\",\r\n    \"gender\": \"Male\",\r\n    \"birthDate\": \"02/12/2000\",\r\n    \"country\": \"Georgia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8000/users/register",
 							"protocol": "http",
@@ -47,6 +65,346 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzYyNzAxNSwiZXhwIjoxNjQ3NjMwNjE1fQ.Par8lVjdFSySWU7IK2oNxP_1xGmAfFxZGDFiR-JRSKE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Getting All Accounts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzYyNTM5OCwiZXhwIjoxNjQ3NjI4OTk4fQ.6Qm8FAHpGirP_KiNXx5Vn_0pLbObX7PN4vZYygf9EXg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzY5Mzk1MSwiZXhwIjoxNjQ3Njk3NTUxfQ.iBOGz9_ymIMZk4jOaqbnt1ALgsQv4WCn5XiZFw1Jh10",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Credit Card\",\r\n    \"currency\": \"6235cf2e5284e4635059058d\",\r\n    \"description\": \"Account for my credit card\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/accounts/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0Nzc2NTM1OCwiZXhwIjoxNjQ3NzY4OTU4fQ.gZYW8PGO6y3gJGCEBunEIswc94pbziU77tci-4b8IDc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/accounts/6235dd9a3308a49065236e90",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts",
+								"6235dd9a3308a49065236e90"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzY5Mzk1MSwiZXhwIjoxNjQ3Njk3NTUxfQ.iBOGz9_ymIMZk4jOaqbnt1ALgsQv4WCn5XiZFw1Jh10",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/accounts/6235d0887cece16d8d900fc0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts",
+								"6235d0887cece16d8d900fc0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU5MjE0MCwiZXhwIjoxNjQ3NTk1NzQwfQ.l0iU1ftUnEwhgfRCKYdLiVI6UMQqMsJdWKNVpu7PhtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU5MjE0MCwiZXhwIjoxNjQ3NTk1NzQwfQ.l0iU1ftUnEwhgfRCKYdLiVI6UMQqMsJdWKNVpu7PhtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Shop\",\r\n    \"categoryType\": \"Expense\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/categories/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU5MjE0MCwiZXhwIjoxNjQ3NTk1NzQwfQ.l0iU1ftUnEwhgfRCKYdLiVI6UMQqMsJdWKNVpu7PhtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/categories/6234469376cbc7cf2bf055d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"6234469376cbc7cf2bf055d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU5MjE0MCwiZXhwIjoxNjQ3NTk1NzQwfQ.l0iU1ftUnEwhgfRCKYdLiVI6UMQqMsJdWKNVpu7PhtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/categories/62344a219f2c6d18e4fd533e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"62344a219f2c6d18e4fd533e"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -56,17 +414,28 @@
 				{
 					"name": "Get Transactions",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU0Nzc1MCwiZXhwIjoxNjQ3NTUxMzUwfQ.jsJSP8wq-p4EEOzL-QY1rC5tDSVNl3jptdM2HHvoi7A",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/transactions",
+							"raw": "http://localhost:8000/transactions/62339587f9a99426be03d6d7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"transactions"
+								"transactions",
+								"62339587f9a99426be03d6d7"
 							]
 						}
 					},
@@ -75,10 +444,20 @@
 				{
 					"name": "Get Single Transaction",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU0Nzc1MCwiZXhwIjoxNjQ3NTUxMzUwfQ.jsJSP8wq-p4EEOzL-QY1rC5tDSVNl3jptdM2HHvoi7A",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/transactions/0",
+							"raw": "http://localhost:8000/transactions/62339587f9a99426be03d6d7/62339d7bb3579a5bca389a0e",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -86,7 +465,8 @@
 							"port": "8000",
 							"path": [
 								"transactions",
-								"0"
+								"62339587f9a99426be03d6d7",
+								"62339d7bb3579a5bca389a0e"
 							]
 						}
 					},
@@ -95,17 +475,37 @@
 				{
 					"name": "Create Transaction",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU0Nzc1MCwiZXhwIjoxNjQ3NTUxMzUwfQ.jsJSP8wq-p4EEOzL-QY1rC5tDSVNl3jptdM2HHvoi7A",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Sold Car\",\r\n    \"description\": \"Sold a Mercedes for good amount of money\",\r\n    \"transactionType\": \"Income\",\r\n    \"operationDate\": \"03.18.2022\",\r\n    \"category\": \"Cars\",\r\n    \"currency\": \"Dollar\",\r\n    \"amount\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8000/transactions",
+							"raw": "http://localhost:8000/transactions/62339587f9a99426be03d6d7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"transactions"
+								"transactions",
+								"62339587f9a99426be03d6d7"
 							]
 						}
 					},
@@ -154,81 +554,116 @@
 			]
 		},
 		{
-			"name": "Categories",
+			"name": "PiggyBank",
 			"item": [
 				{
-					"name": "Get Categories",
+					"name": "Get Piggybanks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzU5ODczMiwiZXhwIjoxNjQ3NjAyMzMyfQ.qjj76RaGdoHS80dvFsajLSKoT74WXMCqj-bxiNoIUcE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/piggybanks/piggybankid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"piggybanks",
+								"piggybankid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Piggybank",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/categories",
+							"raw": "http://localhost:8000/piggybanks/accountid/piggybankid",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"categories"
+								"piggybanks",
+								"accountid",
+								"piggybankid"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create Category",
+					"name": "Create A Piggybank",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/categories",
+							"raw": "http://localhost:8000/piggybanks/accountid",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"categories"
+								"piggybanks",
+								"accountid"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Edit Category",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/categories/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"categories",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Category",
+					"name": "Delete A Piggybank",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/categories/0",
+							"raw": "http://localhost:8000/piggybanks/accountid/piggybankid",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"categories",
-								"0"
+								"piggybanks",
+								"accountid",
+								"piggybankid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put A Piggybank",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/piggybank/accountid/piggybankid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"piggybank",
+								"accountid",
+								"piggybankid"
 							]
 						}
 					},
@@ -237,101 +672,120 @@
 			]
 		},
 		{
-			"name": "Accounts",
+			"name": "Currency",
 			"item": [
 				{
-					"name": "Getting All Accounts",
+					"name": "Get Currencies",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/accounts",
+							"raw": "http://localhost:8000/currencies",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"accounts"
+								"currencies"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create New Account",
+					"name": "Create Currency",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA4OTEwZTkyZjBkYjAyYmZiZjQwZSIsImZpcnN0TmFtZSI6Ik1pbmRpYSIsImlhdCI6MTY0NzY5MzU2MSwiZXhwIjoxNjQ3Njk3MTYxfQ.QS6ZbQoK-V_2pgQ7hLEukvLH5_1SD77wS3jwEP3edvc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ruble\",\r\n    \"symbol\": \"₽\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8000/accounts",
+							"raw": "http://localhost:8000/currencies",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"accounts"
+								"currencies"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Edit Account",
+					"name": "Get Currency",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/currencies/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"currencies",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Currency",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/accounts/0",
+							"raw": "http://localhost:8000/currencies/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"accounts",
-								"0"
+								"currencies",
+								"id"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Account",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8000/accounts/0",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"accounts",
-								"0"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Account",
+					"name": "Delete Currency",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/accounts/0",
+							"raw": "http://localhost:8000/currencies/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"accounts",
-								"0"
+								"currencies",
+								"id"
 							]
 						}
 					},

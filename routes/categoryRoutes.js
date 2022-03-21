@@ -8,6 +8,7 @@ const {
     createCategory,
     updateCategory,
     deleteCategory,
+    getCategory,
 } = require('../controllers/categoryController');
 
 // auth middleware
@@ -20,6 +21,7 @@ router.route('/')
 
 // endpoint for one category
 router.route('/:id')
+    .get(auth, getCategory)
     .put(auth, updateCategory)
     .delete(auth, deleteCategory);
 
