@@ -2,6 +2,7 @@ const supertest = require('supertest');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const app = require('../app');
+const Account = require('../models/Account');
 
 const userId = mongoose.Types.ObjectId().toString();
 const accountId = mongoose.Types.ObjectId().toString();
@@ -64,9 +65,16 @@ describe('Accounts', () => {
 
         it('should return 200 message and accounts of array if user is authorized', async () => {
             const token = jwt.sign(userPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
-            const res = await supertest(app).get('/accounts').set('Authorization', `Bearer ${token}`);
+            const res = await supertest(app).get('/accounts').set('Authorization', `Bearer ${token}`)
+            .send(accountPayload);
 
             expect(res.status).toBe(200);
+            expect(res.body).toEqual(expect.arrayContaining([
+                expect.objectContaining({
+                    title: expect.any(String),
+                    description: expect.any(String)
+                })
+            ]));
         });
     });
 

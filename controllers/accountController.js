@@ -40,17 +40,9 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
 exports.getAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
-    const availableAmount = (await Transaction.find({ account: req.params.id }))
-        .reduce((acc, transaction) => acc + transaction, 0);
-
     if (!account) {
         res.status(404);
         throw new Error('Account not found');
-    }
-
-    if (!req.user) {
-        res.status(401);
-        throw new Error('User Not Found');
     }
 
     if (account.user.toString() !== req.user.id) {
@@ -60,7 +52,6 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        availableAmount,
         data: account
     });
 });
@@ -72,11 +63,6 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
     if (!account) {
         res.status(404);
         throw new Error('Account not found');
-    }
-
-    if (!req.user) {
-        res.status(401);
-        throw new Error('User Not Found');
     }
 
     if (account.user.toString() !== req.user.id) {
@@ -101,11 +87,6 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
         throw new Error('Account not found');
     }
 
-    if (!req.user) {
-        res.status(401);
-        throw new Error('User not found');
-    }
-
     if (account.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error('Unauthorized');
@@ -119,3 +100,24 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
         message: 'Account deleted successfully'
     });
 });
+
+exports.getAvailableAmount = async (req, res, next) => {
+    const account = await Account.findById(req.params.id);
+    
+    if (!account) {
+        res.status(400);
+        throw new Error('Account not found');
+    }
+
+    if (account.user.toString() !== req.user.id) {
+        res.status(401);
+        throw new Error('Unauthorized');
+    }
+    const transactions = await Transaction.find({ account: req.params.id });
+    const availableAmount = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+
+    res.status(200).json({
+        success: true,
+        data: availableAmount
+    });
+};

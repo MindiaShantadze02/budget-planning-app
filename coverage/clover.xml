@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647849161778" clover="3.2.0">
-  <project timestamp="1647849161778" name="All files">
+<coverage generated="1647935997927" clover="3.2.0">
+  <project timestamp="1647935997927" name="All files">
     <metrics statements="340" coveredstatements="168" conditionals="84" coveredconditionals="8" methods="38" coveredmethods="6" elements="462" coveredelements="182" complexity="0" loc="340" ncloc="340" packages="6" files="24" classes="24"/>
     <package name="budget-planning-app">
       <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -332,7 +332,7 @@
         <line num="4" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="Piggybank.js" path="C:\Users\User\Desktop\budget-planning-app\models\Piggybank.js">
+      <file name="PiggyBank.js" path="C:\Users\User\Desktop\budget-planning-app\models\PiggyBank.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -387,7 +387,7 @@
         <line num="24" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="piggybankRoutes.js" path="C:\Users\User\Desktop\budget-planning-app\routes\piggybankRoutes.js">
+      <file name="piggyBankRoutes.js" path="C:\Users\User\Desktop\budget-planning-app\routes\piggyBankRoutes.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>

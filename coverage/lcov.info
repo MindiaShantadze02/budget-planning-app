@@ -554,7 +554,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:models\Piggybank.js
+SF:models\PiggyBank.js
 FNF:0
 FNH:0
 DA:1,1
@@ -646,7 +646,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:routes\piggybankRoutes.js
+SF:routes\piggyBankRoutes.js
 FNF:0
 FNH:0
 DA:1,1

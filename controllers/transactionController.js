@@ -17,7 +17,7 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        message: transactions
+        data: transactions
     });
 });
 

@@ -7,7 +7,8 @@ const {
     createAccount,
     getAccount,
     updateAccount,
-    deleteAccount
+    deleteAccount,
+    getAvailableAmount
  } = require('../controllers/accountController');
 
 // auth middleware
@@ -22,5 +23,7 @@ router.route('/:id')
     .get(auth, getAccount)
     .put(auth, updateAccount)
     .delete(auth, deleteAccount);
+
+router.get('/:id/available-amount', auth, getAvailableAmount);
 
 module.exports = router;
