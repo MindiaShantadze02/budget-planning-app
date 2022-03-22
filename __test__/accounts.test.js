@@ -7,6 +7,7 @@ const Account = require('../models/Account');
 const userId = mongoose.Types.ObjectId().toString();
 const accountId = mongoose.Types.ObjectId().toString();
 const accountId2 = mongoose.Types.ObjectId().toString();
+const currencyId = mongoose.Types.ObjectId().toString();
 
 const userPayload = {
     _id: userId,
@@ -14,100 +15,141 @@ const userPayload = {
     password: 'john'
 };
 
-const accountPayload = [
-    {
-        isDefault: true,
-        accountId,
-        user: userId,
-        title: 'Credit Card',
-        description: 'Lorem ipsum 1',
-        currency: mongoose.Types.ObjectId.toString()
-    },
-    {
-        isDefault: false,
-        accountId: accountId2,
-        user: userId,
-        title: 'Credit Card',
-        description: 'Lorem ipsum 1',
-        currency: mongoose.Types.ObjectId.toString()
-    }
-];
+const token = jwt.sign(userPayload, process.env.JWT_SECRET);
 
-describe('Accounts', () => {
-    beforeAll(async () => {
-        await mongoose.disconnect();
-        await mongoose.connect('mongodb://localhost:27017/test-database-01');
-    });
-    
-    afterAll(async () => {
-        await mongoose.disconnect();
-        await mongoose.connection.close();
+const account1 = {
+    isDefault: true,
+    accountId,
+    user: userId,
+    title: 'Credit Card',
+    description: 'Lorem ipsum 1',
+    currency: currencyId
+};
+const account2 = {
+    isDefault: false,
+    accountId: accountId2,
+    user: userId,
+    title: 'Credit Card 2',
+    description: 'Lorem ipsum 2',
+    currency: currencyId
+};
+
+// testing accounts route
+describe('ACCOUNTS', () => {
+    beforeAll(() => {
+        mongoose.disconnect();
+        mongoose.connect('mongodb://localhost:27017/testing-db');
     });
 
-    // for testing getting accounts functionality
-    describe('GET /accounts', () => {
-        it('should return 401 status code if user is not authorized', async () => {
-            const res = await supertest(app).get('/accounts');
+    afterAll(() => {
+        mongoose.disconnect();
+    })
+
+    // test for /accounts endpoint
+    describe('/accounts', () => {
+        // test cases for GET /accounts
+        describe('GET getting all accounts', () => {
+            it('should return 401 if user is not authorized', async () => {
+                const res = await supertest(app).get('/accounts');
+
+                expect(res.status).toBe(401);
+                expect(res.body.message).toBe('Unauthorized, no token');
+            });
+
+            it('should return status 200 if user is authorized', async () => {
+                const res = await supertest(app).get('/accounts').set('Authorization', `Bearer ${token}`);
+
+                expect(res.status).toBe(200);
+            });
+        });
+
+        // test cases for POST /accounts
+        describe('POST creating an account', () => {
+            it('should return status 401 if user is not authorized', async () => {
+                await Account.create(account1);
+
+                const res = await supertest(app).post('/accounts');
+
+                expect(res.status).toBe(401);
+                expect(res.body.message).toBe('Unauthorized, no token');
+            });
+
+            it('should return status 201 if user is created successfully', async () => {
+                const res = await supertest(app).post('/accounts').set('Authorization', `Bearer ${token}`);
+
+                Account.create(account1);
+
+                expect(res.status).toBe(200);
+            });
+        });
+    });
+
+    // test for /account/:id endpoint
+    describe('/account/:id', () => {
+        describe('GET getting single account', () => {
+            it('should set the status to 200 if user is authorized', async () => {
+                const account = await Account.create(account1);
             
-            expect(res.status).toBe(401);
-            expect(res.body.message).toBe('Unauthorized, no token');
-        });
-    });
+                const res = await supertest(app).get(`/accounts/${account.id}`).set(
+                    'Authorization',
+                    `Bearer ${token}`
+                );
 
-    // for testing adding account functionallity
-    describe('POST /accounts', () => {
-        it('should return 401 status code if user is not authorized', async () => {
-            const res = await supertest(app).post('/accounts');
+                expect(res.status).toBe(200);
+            });
+
+            it('should set the status to 401 if user is not authorized' , async () => {
+                const account = await Account.create(account1);
             
-            expect(res.status).toBe(401);
-            expect(res.body.message).toBe('Unauthorized, no token');
+                const res = await supertest(app).get(`/accounts/${account.id}`);
+
+                expect(res.status).toBe(401);
+                expect(res.body.message).toBe('Unauthorized, no token');
+            });
         });
 
-        it('should return 200 message and accounts of array if user is authorized', async () => {
-            const token = jwt.sign(userPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
-            const res = await supertest(app).get('/accounts').set('Authorization', `Bearer ${token}`)
-            .send(accountPayload);
+        describe('PUT updating single account', () => {
+            it('should set the status to 200 if user is authorized', async () => {
+                const account = await Account.create(account1);
+            
+                const res = await supertest(app).put(`/accounts/${account.id}`).set(
+                    'Authorization',
+                    `Bearer ${token}`
+                );
 
-            expect(res.status).toBe(200);
-            expect(res.body).toEqual(expect.arrayContaining([
-                expect.objectContaining({
-                    title: expect.any(String),
-                    description: expect.any(String)
-                })
-            ]));
+                expect(res.status).toBe(200);
+            });
+
+            it('should set the status to 401 if user is not authorized' , async () => {
+                const account = await Account.create(account1);
+            
+                const res = await supertest(app).put(`/accounts/${account.id}`);
+
+                expect(res.status).toBe(401);
+                expect(res.body.message).toBe('Unauthorized, no token');
+            });
         });
-    });
 
-    // for testing getting single account functionallity
-    describe('GET /accounts/:id', () => {
-        it('should return status 404 if account does not exists', async () => {
-            const res = await supertest(app).get('/account/randomid432432');
+        describe('DELETE a single account', () => {
+            it('should set the status to 200 if user is authorized', async () => {
+                const account = await Account.create(account1);
+            
+                const res = await supertest(app).delete(`/accounts/${account.id}`).set(
+                    'Authorization',
+                    `Bearer ${token}`
+                );
 
-            expect(res.status).toBe(404);
-            expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-            expect(res.body).toBe('Route does not exists');
+                expect(res.status).toBe(200);
+            });
+
+            it('should set the status to 401 if user is not authorized' , async () => {
+                const account = await Account.create(account1);
+            
+                const res = await supertest(app).delete(`/accounts/${account.id}`);
+
+                expect(res.status).toBe(401);
+                expect(res.body.message).toBe('Unauthorized, no token');
+            });
         });
-    });
-
-    // for testing updating single account functionallity
-    describe('PUT /accounts/:id', () => {
-        it('should return status 404 if account does not exists', async () => {
-            const res = await supertest(app).put('/account/randomid432432');
-
-            expect(res.status).toBe(404);
-            expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-            expect(res.body).toBe('Route does not exists');
-        });
-    });
-
-    // for testing deleting an account functionallity
-    describe('DELETE /accounts/:id', () => {
-        it('should return status 404 if account does not exists', async () => {
-            const res = await supertest(app).delete('/account/randomid432432');
-
-            expect(res.status).toBe(404);
-            expect(res.header['content-type']).toBe('application/json; charset=utf-8');
-            expect(res.body).toBe('Route does not exists');
-        });
-    });
+    })
 });
