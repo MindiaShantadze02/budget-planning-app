@@ -1,5 +1,5 @@
 // defining path for environment variables
-require('dotenv').config({ path: `${__dirname}/.env` });
+require('dotenv').config();
 
 // importing dependencies
 const express = require('express');

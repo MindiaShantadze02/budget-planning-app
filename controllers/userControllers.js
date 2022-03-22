@@ -2,13 +2,14 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// importing async wrapper
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const User = require('../models/User');
 const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
+const Piggybank = require('../models/Piggybank');
 
 // function for registering user
 exports.registerUser = asyncWrapper(async (req, res, next) => {
@@ -104,6 +105,7 @@ exports.deleteUser = asyncWrapper(async (req, res, next) => {
     await User.findByIdAndDelete(req.params.id);
     await Account.deleteMany({ user: req.params.id });
     await Transaction.deleteMany({ user: req.params.id });
+    await Piggybank.deleteMany({ user: req.params.id });
 
     res.status(201).json({
         success: true,

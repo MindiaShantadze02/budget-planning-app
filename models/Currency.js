@@ -1,3 +1,4 @@
+// importing dependencies
 const mongoose = require('mongoose');
 
 // defining schema
@@ -12,4 +13,5 @@ const CurrencySchema = new mongoose.Schema({
     }
 });
 
+//exporting model
 module.exports = mongoose.model('Subscription', CurrencySchema);

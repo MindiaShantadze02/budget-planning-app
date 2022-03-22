@@ -1,3 +1,4 @@
+// importing dependencies
 const mongoose = require('mongoose');
 
 // defining schema
@@ -49,6 +50,5 @@ const UserSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// defining and exporting user schema
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+// exporting model
+module.exports = mongoose.model('User', UserSchema);

@@ -1,3 +1,4 @@
+// importing dependencies
 const mongoose = require('mongoose');
 
 // defining schema
@@ -22,4 +23,5 @@ const CategorySchema = new mongoose.Schema({
     timestamps: true
 });
 
+// exporting model
 module.exports = mongoose.model('Category', CategorySchema);

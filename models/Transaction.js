@@ -1,3 +1,4 @@
+// importing dependencies
 const mongoose = require('mongoose');
 
 // defining schema
@@ -46,8 +47,10 @@ const TransactionSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// defining transaction type depending on amount passed by user
 TransactionSchema.pre('save', function () {
     this.transactionType = this.amount > 0 ? 'Income' : 'Expense';
 });
 
+// exporting model
 module.exports = mongoose.model('Transaction', TransactionSchema);

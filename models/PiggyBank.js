@@ -1,3 +1,4 @@
+// importing dependencies
 const mongoose = require('mongoose');
 
 // defining schema
@@ -33,4 +34,5 @@ const PiggybankSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// exporting model
 module.exports = mongoose.model('Piggybank', PiggybankSchema);

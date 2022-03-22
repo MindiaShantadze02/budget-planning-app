@@ -1,10 +1,14 @@
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
+const Piggybank = require('../models/Piggybank');
 
-// function for getting a single accounts
+// GET /accounts
+// PRIVATE
+// for getting user accounts
 exports.getAccounts = asyncWrapper(async (req, res, next) => {
     const accounts = await Account.find({ user: req.user.id }) || [];
 
@@ -15,7 +19,9 @@ exports.getAccounts = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for creating an account
+// POST /accounts
+// PRIVATE
+// for creating an account for user
 exports.createAccount = asyncWrapper(async (req, res, next) => {
     const {
         title,
@@ -36,7 +42,9 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for getting a single account
+// GET /accounts/:id
+// PRIVATE
+// for getting a single account
 exports.getAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
@@ -56,7 +64,9 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for updating an account
+// PUT /accounts/:id
+// PRIVATE
+// for updating an account
 exports.updateAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
@@ -78,7 +88,9 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for deleting an account
+// DELETE /accounts/:id
+// PRIVATE
+// for deleting an account
 exports.deleteAccount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
 
@@ -101,6 +113,9 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
     });
 });
 
+// GET /accounts/:id/available-amount
+// PRIVATE
+// for getting sum of all transactions of current account
 exports.getAvailableAmount = async (req, res, next) => {
     const account = await Account.findById(req.params.id);
     

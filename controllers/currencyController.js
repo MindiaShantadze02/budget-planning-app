@@ -1,9 +1,12 @@
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Currency = require('../models/Currency');
 
-// function for getting a single currencies
+// GET /currencies
+// PUBLIC
+// for getting all available currencies
 exports.getCurrencies = asyncWrapper(async (req, res, next) => {
     const currencies = await Currency.find({});
 
@@ -14,7 +17,9 @@ exports.getCurrencies = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for creating an currency
+// POST /currencies
+// PRIVATE admin
+// for creating a currency
 exports.createCurrency = asyncWrapper(async (req, res, next) => {
     await Currency.create(req.body);
 
@@ -24,7 +29,9 @@ exports.createCurrency = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for getting a single currency
+// GET /currencies/:id
+// PUBLIC
+// for getting a single currency
 exports.getCurrency = asyncWrapper(async (req, res, next) => {
     const currency = await Currency.findById(req.params.id);
 
@@ -34,7 +41,9 @@ exports.getCurrency = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for updating an currency
+// GET /currencies
+// PRIVATE admin
+// for updating a currency
 exports.updateCurrency = asyncWrapper(async (req, res, next) => {
     await Currency.findByIdAndUpdate(req.params.id, req.body);
 
@@ -44,7 +53,9 @@ exports.updateCurrency = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for deleting an currency
+// DELETE /currencies/:id
+// PRIVATE admin
+// for deleting a currency
 exports.deleteCurrency = asyncWrapper(async (req, res, next) => {
     await Currency.findByIdAndDelete(req.params.id);
 

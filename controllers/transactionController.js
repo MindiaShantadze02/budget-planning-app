@@ -1,9 +1,12 @@
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Transaction = require('../models/Transaction');
 
-// function for getting all transactions
+// GET /transactions/:accountId
+// PRIVATE
+// for getting all transactions
 exports.getTransactions = asyncWrapper(async (req, res, next) => {
     if (!req.user) {
         res.status(400);
@@ -13,7 +16,7 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
     const transactions = await Transaction.find({
         user: req.user.id,
         account: req.params.accountId
-    }) || [];
+    });
 
     res.status(200).json({
         status: 'success',
@@ -21,7 +24,9 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for creating a transaction
+// POST /transactions/:accountId
+// PRIVATE
+// for creating a transaction
 exports.createTransaction = asyncWrapper(async (req, res, next) => {
     await Transaction.create({
         account: req.params.accountId,
@@ -35,7 +40,9 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for getting a single transaction
+// POST /transactions/:accountId/:transactionId
+// PRIVATE
+// for getting a transaction
 exports.getTransaction = asyncWrapper(async (req, res, next) => {
     const transaction = await Transaction.findOne({
         _id: req.params.transactionId,
@@ -53,7 +60,9 @@ exports.getTransaction = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for updating transaction
+// POST /transactions/:accountId/:transactionId
+// PRIVATE
+// for updating a transaction
 exports.updateTransaction = asyncWrapper(async (req, res, next) => {
     const transaction = await Transaction.findOne({
         _id: req.params.transactionId,
@@ -73,7 +82,9 @@ exports.updateTransaction = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for deleting transaction
+// DELETE /transactions/:accountId/:transactionId
+// PRIVATE
+// for deleting a transaction
 exports.deleteTransaction = asyncWrapper(async (req, res, next) => {
     const transaction = await Transaction.findOne({
         _id: req.params.transactionId,

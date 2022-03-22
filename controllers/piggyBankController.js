@@ -1,9 +1,12 @@
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Piggybank = require('../models/Piggybank');
 
-// function for getting all piggybanks
+// GET /piggybanks/:accountId
+// PRIVATE
+// for getting all piggybanks
 exports.getPiggybanks = asyncWrapper(async (req, res, next) => {
     if (!req.user) {
         res.status(400);
@@ -21,7 +24,9 @@ exports.getPiggybanks = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for creating a piggybank
+// POST /piggybanks/:accountId
+// PRIVATE
+// for creating a piggybank
 exports.createPiggybank = asyncWrapper(async (req, res, next) => {
     await Piggybank.create({
         account: req.params.accountId,
@@ -35,7 +40,9 @@ exports.createPiggybank = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for getting a piggybank
+// GET /piggybanks/:accountId/:piggyBankId
+// PRIVATE
+// for getting a single piggybank
 exports.getPiggybank = asyncWrapper(async (req, res, next) => {
     const piggyBank = await Piggybank.findOne({
         _id: req.params.piggyBankId,
@@ -53,7 +60,9 @@ exports.getPiggybank = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for updating piggybank
+// PUT /piggybanks/:accountId/:piggyBankId
+// PRIVATE
+// for updating a piggybank
 exports.updatePiggybank = asyncWrapper(async (req, res, next) => {
     const piggyBank = await Piggybank.findOne({
         _id: req.params.piggyBankId,
@@ -73,7 +82,9 @@ exports.updatePiggybank = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for deleting piggybank
+// DELETE /piggybanks/:accountId/:piggyBankId\
+// PRIVATE
+// for deleting a piggybank
 exports.deletePiggybank = asyncWrapper(async (req, res, next) => {
     const piggyBank = await Piggybank.findOne({
         _id: req.params.piggyBankId,

@@ -1,11 +1,14 @@
+// importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
-// importing category model
+// importing models
 const Category = require('../models/Category');
 
-// function for getting a single categories
+// GET /categories
+// PRIVATE
+// for getting all users categories
 exports.getCategories = asyncWrapper(async (req, res, next) => {
-    const categories = await Category.find({ user: req.user.id }) || [];
+    const categories = await Category.find({ user: req.user.id });
 
     res.status(200).json({
         success: true,
@@ -14,7 +17,9 @@ exports.getCategories = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for creating an category
+// POST /categories
+// PRIVATE
+// for creating a category
 exports.createCategory = asyncWrapper(async (req, res, next) => {
     const {
         title,
@@ -40,7 +45,9 @@ exports.createCategory = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for getting a single category
+// GET /categories/:id
+// PRIVATE
+// for getting a single category
 exports.getCategory = asyncWrapper(async (req, res, next) => {
     const category = await Category.findById(req.params.id);
 
@@ -49,33 +56,26 @@ exports.getCategory = asyncWrapper(async (req, res, next) => {
         throw new Error('Category not found');
     }
 
-    if (!req.user) {
-        res.status(401);
-        throw new Error('User Not Found');
-    }
-
     if (category.user.toString() !== req.user.id) {
          res.status(401);
         throw new Error('Unauthorized');
     }
+    
     res.status(200).json({
         success: true,
         data: category
     });
 });
 
-// function for updating an category
+// PUT /categories/:id
+// PRIVATE
+// for updating a category
 exports.updateCategory = asyncWrapper(async (req, res, next) => {
     const category = await Category.findById(req.params.id);
 
     if (!category) {
         res.status(400);
         throw new Error('Category not found');
-    }
-
-    if (!req.user) {
-        res.status(401);
-        throw new Error('User Not Found');
     }
 
     if (category.user.toString() !== req.user.id) {
@@ -91,18 +91,15 @@ exports.updateCategory = asyncWrapper(async (req, res, next) => {
     });
 });
 
-// function for deleting an category
+// DELETE /categories/:id
+// PRIVATE
+// for deleting a category
 exports.deleteCategory = asyncWrapper(async (req, res, next) => {
     const category = await Category.findById(req.params.id);
 
     if (!category) {
         res.status(400);
         throw new Error('Category not found');
-    }
-
-    if (!req.user) {
-        res.status(400);
-        throw new Error('User not found');
     }
 
     if (category.user.toString() !== req.user.id) {
