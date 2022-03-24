@@ -6,7 +6,6 @@ const Account = require('../models/Account');
 
 const userId = mongoose.Types.ObjectId().toString();
 const accountId = mongoose.Types.ObjectId().toString();
-const accountId2 = mongoose.Types.ObjectId().toString();
 const currencyId = mongoose.Types.ObjectId().toString();
 
 const userPayload = {
@@ -25,14 +24,6 @@ const account1 = {
     description: 'Lorem ipsum 1',
     currency: currencyId
 };
-const account2 = {
-    isDefault: false,
-    accountId: accountId2,
-    user: userId,
-    title: 'Credit Card 2',
-    description: 'Lorem ipsum 2',
-    currency: currencyId
-};
 
 // testing accounts route
 describe('ACCOUNTS', () => {
@@ -43,7 +34,7 @@ describe('ACCOUNTS', () => {
 
     afterAll(() => {
         mongoose.disconnect();
-    })
+    });
 
     // test for /accounts endpoint
     describe('/accounts', () => {
@@ -98,7 +89,7 @@ describe('ACCOUNTS', () => {
                 expect(res.status).toBe(200);
             });
 
-            it('should set the status to 401 if user is not authorized' , async () => {
+            it('should set the status to 401 if user is not authorized', async () => {
                 const account = await Account.create(account1);
             
                 const res = await supertest(app).get(`/accounts/${account.id}`);
@@ -120,7 +111,7 @@ describe('ACCOUNTS', () => {
                 expect(res.status).toBe(200);
             });
 
-            it('should set the status to 401 if user is not authorized' , async () => {
+            it('should set the status to 401 if user is not authorized', async () => {
                 const account = await Account.create(account1);
             
                 const res = await supertest(app).put(`/accounts/${account.id}`);
@@ -142,7 +133,7 @@ describe('ACCOUNTS', () => {
                 expect(res.status).toBe(200);
             });
 
-            it('should set the status to 401 if user is not authorized' , async () => {
+            it('should set the status to 401 if user is not authorized', async () => {
                 const account = await Account.create(account1);
             
                 const res = await supertest(app).delete(`/accounts/${account.id}`);
@@ -151,5 +142,5 @@ describe('ACCOUNTS', () => {
                 expect(res.body.message).toBe('Unauthorized, no token');
             });
         });
-    })
+    });
 });
