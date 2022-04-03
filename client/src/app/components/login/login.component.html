@@ -1,19 +1,21 @@
 <main class="login-page">
     <div class="login-page__form-wrapper">
         <h1 class="login-page__title">Budgetify</h1>
-        <form class="login-page__form">
+        <h4 *ngIf="message" class="register-page__message" [style.color]="success ? '#000' : 'red'">{{message}}</h4>
+        <form class="login-page__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill" class="login-form__form-field">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput formControlName="email">
             </mat-form-field>
             <mat-form-field appearance="fill" class="login-form__form-field">
                 <mat-label>Password</mat-label>
-                <input matInput>
+                <input matInput formControlName="password" type="password">
             </mat-form-field>
             <button 
             mat-raised-button
             class="login-page__button" 
-            type="submit">Login</button>
+            type="submit"
+            [disabled]="loginForm.invalid">Login</button>
             <a 
             [ngStyle]="{height: '50px', marginTop: '15px'}"
             [routerLink]="['/register']"

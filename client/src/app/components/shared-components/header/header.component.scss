@@ -1,0 +1,25 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    &__logo {
+        flex: 1;
+        color: #0000;
+        text-decoration: none;
+    }
+    &__links {
+        flex: 1;
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+    }
+    &__user {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+}

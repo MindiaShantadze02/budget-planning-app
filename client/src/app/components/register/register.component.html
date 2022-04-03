@@ -1,6 +1,7 @@
 <main class="register-page">
     <div class="register-page__form-wrapper">
         <h1 class="register-page__title">Budgetify</h1>
+        <h4 *ngIf="message" class="register-page__message" [style.color]="success ? '#000' : 'red'">{{message}}</h4>
         <form class="register-page__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>First Name</mat-label>
@@ -41,9 +42,9 @@
             type="submit">Register</button>
             <a 
             [ngStyle]="{height: '50px', marginTop: '15px'}"
-            [routerLink]="['/login']"
             mat-raised-button
             color="primary"
+            [routerLink]="['/login']" 
             >Login</a>
         </form>
     </div>

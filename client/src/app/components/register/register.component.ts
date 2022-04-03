@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,12 +18,15 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
     password2: new FormControl('', [Validators.required])
   });
-
+  success: boolean = false;
+  message: string = '';
+  
   constructor(
-    private authService: AuthService
-  ) { }
-
-  ngOnInit(): void {
+    private authService: AuthService,
+    private router: Router
+    ) { }
+    
+    ngOnInit(): void {
   }
 
   onSubmit() {
@@ -43,6 +47,16 @@ export class RegisterComponent implements OnInit {
       birthDate,
       role: 'User',
       password
-    })
+    }).subscribe(res => {
+      this.success = res.success;
+      this.message = res.message;
+
+      if (res.success) {
+        setTimeout(() => {
+          this.message = '';
+          this.router.navigateByUrl('login');
+        }, 2000);
+      }
+    });
   }
 }

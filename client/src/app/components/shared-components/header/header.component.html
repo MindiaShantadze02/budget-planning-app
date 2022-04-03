@@ -1,1 +1,21 @@
-<h1>Header</h1>
+<header class="app-header">
+    <div class="app-header__logo">
+        <h2>
+            <a [routerLink]="['/main']">Budgetify</a>
+        </h2>
+    </div>
+    <ul class="app-header__links">
+        <li class="app-header__list-item">
+            <a class="app-header__link">Categories</a>
+        </li>
+        <li class="app-header__list-item">
+            <a class="app-header__link">Statistic</a>
+        </li>
+        <li class="app-header__list-item" *ngIf="isAdmin">
+            <a class="app-header__link" routerLink="admin">Admin</a>
+        </li>
+    </ul>
+    <div class="app-header__user">
+        <h2>User Avatar</h2>
+    </div>
+</header>

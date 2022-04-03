@@ -7,11 +7,26 @@ import { RouterModule, Routes } from '@angular/router';
 // importing components
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { RegisterComponent } from 'src/app/components/register/register.component';
+import { NotFoundComponent } from 'src/app/components/not-found/not-found.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { MainPageComponent } from 'src/app/components/main-page/main-page.component';
+import { AdminPageComponent } from 'src/app/components/admin-page/admin-page.component';
+import { AdminGuard } from 'src/app/guards/admin.guard';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { 
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full' 
+  },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' }
+  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'main', component: MainPageComponent, canActivate: [AuthGuard], 
+    children: [
+      { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] }
+    ] 
+  },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
