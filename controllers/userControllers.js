@@ -19,6 +19,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         firstName,
         lastName,
         password,
+        password2,
         role,
         gender,
         birthDate,
@@ -26,6 +27,11 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     } = req.body;
 
     const userExists = await User.findOne({ email });
+
+    if (password !== password2) {
+        res.status(400);
+        throw new Error('Passwords does not match');
+    }
 
     if (userExists) {
         res.status(401).json({
@@ -46,7 +52,8 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         birthDate,
         country
     });
-    res.json({ 
+    
+    res.json({
         success: true,
         message: 'User created successfully'
     });
@@ -64,20 +71,21 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
     if (user && (await bcrypt.compare(password, user.password))) {
         const token = jwt.sign(
             { 
-                id: user.id
+                id: user.id,
+                role: user.role
             },
             process.env.JWT_SECRET,
             { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
         res.status(201).json({
+            success: true,
+            expiresIn: process.env.JWT_EXPIRES_IN,
             token
         });
     } else {
-        res.status(400).json({
-            success: false,
-            message: 'User not found'
-        });
+        res.status(400);
+        throw new Error('User not found');
     }
 });
 

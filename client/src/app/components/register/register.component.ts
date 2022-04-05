@@ -57,6 +57,10 @@ export class RegisterComponent implements OnInit {
           this.router.navigateByUrl('login');
         }, 2000);
       }
+    },
+    err => {
+      this.success = err.error.success;
+      this.message = err.error.message;
     });
   }
 }

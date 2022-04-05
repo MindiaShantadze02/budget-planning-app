@@ -32,6 +32,10 @@ export class LoginComponent implements OnInit {
       if (res.success) {
         this.router.navigateByUrl('main');
       }
+    },
+    err => {
+      this.success = err.error.success;
+      this.message=  err.error.message;
     });
   }
 }

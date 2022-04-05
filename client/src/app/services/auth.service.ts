@@ -52,7 +52,8 @@ export class AuthService {
   
   isAdmin():boolean {
     const token: string = localStorage.getItem('token') || '';
-    console.log(JSON.parse(atob(token.split('.')[1])));
-    return JSON.parse(atob(token.split('.')[1])).role.toLowerCase() === 'admin';
+    const user = JSON.parse(atob(token.split('.')[1]));
+    
+    return user.role.toLowerCase() === 'admin';
   }
 }
