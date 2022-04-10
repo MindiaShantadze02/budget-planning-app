@@ -28,6 +28,7 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
+    "@auth0/angular-jwt": "^5.0.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",

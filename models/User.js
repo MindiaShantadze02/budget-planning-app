@@ -7,12 +7,15 @@ const UserSchema = new mongoose.Schema({
         type: String,
         maxlength: 255,
         minlength: 7,
-        required: [true, 'Please add your email']
+        trim: true,
+        required: [true, 'Please add your email'],
+        match: [/^[\w]{3,255}?[a-zA-Z0-9]{0,255}@[a-z]{2,50}\.[a-z]{2,4}$/, 'Please enter valid email adress']
     },
     password: {
         type: String,
-        maxlength: 255,
-        minlength: 10,
+        maxlength: [255, 'Password must be less than 255 characters long'],
+        minlength: [10, 'Password must be more than 10 characters long'],
+        match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'Password must be Minimum eight characters long,and with at least one letter and one number:'],
         required: [true, 'Please add your password']
     },
     role: {
@@ -22,14 +25,16 @@ const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'Please add your firstname'],
-        maxlength: 255,
-        minlength: 2
+        maxlength: [255, 'User name must be less than 255 characters long'],
+        minlength: [2, 'User name must be more than 2 characters long'],
+        match: [/^[a-zA-Z ]{3,255}$/gi, 'User name should only contain letters and spaces'],
     },
     lastName: {
         type: String,
         required: [true, 'Please enter your lastname'],
-        maxlength: 255,
-        minlength: 2
+        maxlength: [255, 'User lastname must be less than 255 characters long'],
+        minlength: [2, 'User name must be more than 2 characters long'],
+        match: [/^[a-zA-Z ]{3,255}$/gi, 'User last name should only contain letters and spaces'],
     },
     gender: {
         required: [true, 'Please enter your gender'],

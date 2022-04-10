@@ -34,11 +34,8 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     }
 
     if (userExists) {
-        res.status(401).json({
-            success: false,
-            message: 'User already exists'
-        });
-        return;
+        res.status(401);
+        throw new Error('User with this email already exists');
     }
 
     // creating user
@@ -85,13 +82,19 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
         });
     } else {
         res.status(400);
-        throw new Error('User not found');
+        throw new Error('Incorrect email or password');
     }
 });
 
 // function for getting users
 exports.getUsers = asyncWrapper(async (req, res, next) => {
     const users = await User.find({}) || [];
+
+    if (!users && users.length === 0) {
+        res.status(404);
+        throw new Error('Users list is empty');
+    }
+
     res.status(200).json({
         success: true,
         count: users.length,
@@ -102,6 +105,7 @@ exports.getUsers = asyncWrapper(async (req, res, next) => {
 // function for getting users
 exports.getUser = asyncWrapper(async (req, res, next) => {
     const user = await User.findById(req.params.id);
+    
     res.status(200).json({
         success: true,
         data: user
@@ -118,5 +122,12 @@ exports.deleteUser = asyncWrapper(async (req, res, next) => {
     res.status(201).json({
         success: true,
         message: 'User deleted successfully'
+    });
+});
+
+exports.getMe = asyncWrapper(async (req, res, next) => {
+    res.status(200).json({
+        success: true,
+        data: req.user
     });
 });

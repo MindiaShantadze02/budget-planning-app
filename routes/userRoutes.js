@@ -14,15 +14,17 @@ const {
     registerUser,
     getUsers,
     getUser,
-    deleteUser
+    deleteUser,
+    getMe
  } = require('../controllers/userControllers');
 
 // function for getting users
 router.route('/').get(auth, adminGuard, getUsers);
+router.route('/me').get(auth, getMe);
 
 router.route('/:id')
-    .get(auth, adminGuard, getUser)
-    .delete(auth, adminGuard, deleteUser);
+.get(auth, adminGuard, getUser)
+.delete(auth, adminGuard, deleteUser);
 
 // login endpoint
 router.route('/login').post(loginUser);

@@ -10,7 +10,9 @@ const Piggybank = require('../models/Piggybank');
 // PRIVATE
 // for getting user accounts
 exports.getAccounts = asyncWrapper(async (req, res, next) => {
-    const accounts = await Account.find({ user: req.user.id }) || [];
+    const accounts = await Account.find({ user: req.user.id }).sort({
+        createdAt: -1
+    }) || [];
 
     res.status(200).json({
         success: true,
@@ -26,19 +28,28 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
     const {
         title,
         description,
-        currency
+        currency,
+        isDefault
     } = req.body;
     
-    await Account.create({
+    const defualtAccount = await Account.findOne({ isDefault: true });
+
+    if (req.body.isDefault && defualtAccount) {
+        await Account.updateMany({ isDefault: false });
+    }
+
+    const newAccount = await Account.create({
         user: req.user.id,
         title,
         description,
-        currency
+        currency,
+        isDefault
     });
 
     res.status(201).json({
         success: true,
-        message: 'Account created successfully'
+        message: 'Account created successfully',
+        account: newAccount
     });
 });
 
@@ -106,6 +117,7 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
 
     await Account.findByIdAndDelete(req.params.id);
     await Transaction.deleteMany({ account: req.params.id });
+    await Piggybank.deleteMany({ account });
 
     res.status(200).json({
         success: true,

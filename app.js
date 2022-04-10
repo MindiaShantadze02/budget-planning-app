@@ -10,7 +10,7 @@ const usersRouter = require('./routes/userRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
 const accountRouter = require('./routes/accountRoutes');
-const piggybankRouter = require('./routes/piggybankRoutes');
+const piggybankRouter = require('./routes/piggyBankRoutes');
 const currencyRouter = require('./routes/currencyRoutes');
 
 // error handling middleware

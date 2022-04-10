@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 
 // defining schema
 const AccountSchema = new mongoose.Schema({
-    isDefault: {
-        type: Boolean,
-        default: false
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -20,9 +16,8 @@ const AccountSchema = new mongoose.Schema({
         trim: true
     },
     currency: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Currency'
+        type: String,
+        // ref: 'Currency'
     },
     description: {
         type: String,
