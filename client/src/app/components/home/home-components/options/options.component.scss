@@ -1,0 +1,48 @@
+.options {
+    h3 {
+        text-align: end;
+    }
+    &__transaction-options {
+        margin-top: 10px;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        width: 100%;
+    }
+    .arrow-icon {
+        margin-left: 11px;
+        color: #FFF;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 7px;
+    }
+    .arrow-upward {
+        background-color: #21C206;
+    }
+    .arrow-downward {
+        background-color: #EE3F19;
+    }
+    button {
+        height: 49px;
+        width: 80%;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        align-items: center;
+    }
+    &__filter-transactions {
+        background-color: #FFF;
+    }
+    &__add-transaction {
+        background-color: #B9E2E6;
+    }
+    .add-plus {
+        background-color: #FFF;
+        color: #B9E2E6;
+    }
+}

@@ -1,0 +1,40 @@
+.transactions {
+    margin: 0 20px;
+    &__search-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    &__search-form {
+        margin-top: 10px;
+        display: flex;
+        input {
+            border: 1px solid #000;
+            border-right: none;
+            flex: 5;
+        }
+        button {
+            border: 1px solid #000;
+            background: #FFF;
+            border-left: none;
+            flex: 1;
+            cursor: pointer;
+        }
+    }
+    &__sort-by-date {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        span {
+            margin-left: 5px;
+        }
+    }
+    &__search-button {
+        cursor: pointer;
+    }
+    h3 {
+        text-align: center;
+    }
+}

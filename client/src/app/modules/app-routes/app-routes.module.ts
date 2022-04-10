@@ -12,6 +12,8 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { MainPageComponent } from 'src/app/components/main-page/main-page.component';
 import { AdminPageComponent } from 'src/app/components/admin-page/admin-page.component';
 import { AdminGuard } from 'src/app/guards/admin.guard';
+import { HomeComponent } from 'src/app/components/home/home.component';
+import { TransactionsComponent } from 'src/app/components/home/home-components/transactions/transactions.component';
 
 const appRoutes: Routes = [
   { 
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'main', component: MainPageComponent, canActivate: [AuthGuard], 
     children: [
-      { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] }
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], pathMatch: 'full' }
     ] 
   },
   { path: '**', component: NotFoundComponent }

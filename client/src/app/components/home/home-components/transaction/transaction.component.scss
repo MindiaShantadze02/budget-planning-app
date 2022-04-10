@@ -1,0 +1,22 @@
+.transaction {
+    display: flex;
+    height: 91px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 28px;
+    &__amount-wrapper {
+        display: flex;
+        height: 100%;
+        align-items: flex-start;
+    }
+    &__category {
+        color: #373737;
+        background-color: #ECEDED;
+        padding: 20px 40px;
+        border-radius: 10px;
+    }
+}

@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 const MatModuleItems = [
   MatFormFieldModule,
@@ -17,7 +20,10 @@ const MatModuleItems = [
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatRippleModule
+  MatRippleModule,
+  MatGridListModule,
+  MatIconModule,
+  MatSelectModule
 ];
 
 @NgModule({

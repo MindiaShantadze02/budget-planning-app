@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { MessageResponse } from '../interfaces/MessageResponse';
-
+import { MessageResponse } from '../../interfaces/MessageResponse';
 import { tap } from 'rxjs';
+import * as moment from 'moment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,11 +14,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl: string = 'http://localhost:8000';
+  private apiUrl: string = 'http://localhost:8000';
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
     ) { }
 
   register(user: object) {
@@ -31,8 +29,10 @@ export class AuthService {
     .pipe(
       tap(res => {
         if (res.token) {
+          const expiresAt = moment().add(res.expiresIn, 'second');
+
           localStorage.setItem('token', res.token);
-          localStorage.setItem('expiresIn', res.expiresIn);
+          localStorage.setItem('expiresIn', JSON.stringify(expiresAt.valueOf()));
         }
       })
     );
@@ -40,10 +40,13 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('expiresAt');
   }
 
   isLoggedIn() {
-    return localStorage.getItem('token') ? true : false;
+    const token: string = localStorage.getItem('token') || '';
+
+    return token ? true : false;
   }
 
   getToken() {
@@ -53,7 +56,7 @@ export class AuthService {
   isAdmin():boolean {
     const token: string = localStorage.getItem('token') || '';
     const user = JSON.parse(atob(token.split('.')[1]));
-    
+
     return user.role.toLowerCase() === 'admin';
   }
 }

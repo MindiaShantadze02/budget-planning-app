@@ -1,0 +1,16 @@
+.accounts {
+    display: flex;
+    flex-direction: column;
+    &__new-account-button {
+        margin-top: 10px;
+        padding: 5px 0;
+        text-align: start;
+    }
+    &__form {
+        padding: 10px;
+        background-color: #FFF;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+}
