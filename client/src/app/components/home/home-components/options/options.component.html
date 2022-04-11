@@ -10,11 +10,28 @@
                 <mat-icon class="arrow-icon arrow-upward">arrow_upward</mat-icon>
                  Expenses
             </button>
-            <button class="options__add-transaction">
+            <button class="options__add-transaction" (click)="toggleTransactionForm()">
                 <mat-icon class="arrow-icon add-plus">add</mat-icon>
                  Add Transaction
             </button>
-            <button class="options__delete-account" mat-button color="warn">Delete Account</button>
+            <form 
+            class="options__add-transaction-form"
+            *ngIf="showTransactionForm" 
+            [formGroup]="transactionForm"
+            (ngSubmit)="createTransaction()">
+                <input type="text" placeholder="Transaction Title" formControlName="title">
+                <textarea placeholder="Transaction Description"  formControlName="description"></textarea>
+                <div class="options__category-div">
+                    <label for="select-category">Transaction Category</label>
+                    <select id="select-category" formControlName="category">
+                        <option value="home">Home</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="tech">Tech</option>
+                    </select>
+                </div>
+                <input type="number" placeholder="Enter Amount" formControlName="amount">
+                <button type="submit" class="options__add-transaction-submit">Submit</button>
+            </form>
         </section>
     </div>
 </aside>

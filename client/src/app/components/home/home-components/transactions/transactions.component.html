@@ -12,7 +12,10 @@
             <span>Transactions By Date</span>
         </button>
     </section>
-    <section class="transactions__account-transactions">
-        <app-transaction></app-transaction>
+    <section class="transactions__account-transactions" *ngIf="transactions.length > 0">
+        <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"></app-transaction>
+    </section>
+    <section class="transactions__no-transactions" *ngIf="transactions.length === 0">
+        <h2>This account does not have any transactions</h2>
     </section>
 </div>

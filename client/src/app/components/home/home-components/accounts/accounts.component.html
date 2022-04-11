@@ -7,17 +7,23 @@
     (click)="toggleAccountForm()"><mat-icon>add_plus</mat-icon> Add New Account</button>
     <form *ngIf="showAccountForm" class="accounts__form" [formGroup]="accountForm" (ngSubmit)="createAccount()">
         <mat-form-field appearance="fill">
-            <mat-label>Title</mat-label>
+            <mat-label>Title (min: 3 chars)</mat-label>
             <input matInput formControlName="title">
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
+            <mat-label>Description (min: 10 chars)</mat-label>
             <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
-        <button mat-raised-button type="submit" color="primary">Submit</button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="accountForm.invalid">Submit</button>
     </form>
     <div class="accounts__accounts-content" *ngIf="accounts.length > 0">
-        <app-account *ngFor="let account of accounts" [account]="account"></app-account>
+        <app-account 
+        *ngFor="let account of accounts" 
+        [account]="account"
+        [currentAccount]="currentAccount"
+        (accDelete)="deleteAccount(account._id)"
+        (currentAcc)="setCurrentAccount(account)"
+        ></app-account>
     </div>
     <div *ngIf="accounts.length === 0" [ngStyle]="{marginTop: '10px', color: 'red'}">
         <h2>Accounts List Is Empty</h2>

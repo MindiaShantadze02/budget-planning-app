@@ -19,7 +19,7 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
     });
 
     res.status(200).json({
-        status: 'success',
+        success: true,
         data: transactions
     });
 });
@@ -35,7 +35,7 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
     });
 
     res.status(201).json({
-        status: 'success',
+        success: true,
         message: 'Transaction created successfully'
     });
 });
@@ -55,7 +55,7 @@ exports.getTransaction = asyncWrapper(async (req, res, next) => {
     }
 
     res.status(200).json({
-        status: 'success',
+        success: true,
         data: transaction
     });
 });
@@ -77,7 +77,7 @@ exports.updateTransaction = asyncWrapper(async (req, res, next) => {
     await Transaction.findByIdAndUpdate(req.params.transactionId, req.body);
 
     res.status(201).json({
-        status: 'success',
+        success: true,
         message: 'Transaction updated successfully'
     });
 });
@@ -99,7 +99,7 @@ exports.deleteTransaction = asyncWrapper(async (req, res, next) => {
     await Transaction.findByIdAndUpdate(req.params.transactionId);
 
     res.status(201).json({
-        status: 'success',
+        success: true,
         message: 'Transaction deleted successfully'
     });
 });

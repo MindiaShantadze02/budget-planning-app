@@ -15,8 +15,7 @@ const TransactionSchema = new mongoose.Schema({
     },
     transactionType: {
         type: String,
-        enum: ['Income', 'Expense'],
-        required: [true, 'Transaction type is required']
+        enum: ['Income', 'Expense']
     },
     title: {
         type: String,
@@ -28,10 +27,6 @@ const TransactionSchema = new mongoose.Schema({
         type: String,
         maxlength: [512, 'Description must have less than 512 characters'],
         minlength: [10, 'Description must have more than 10 characters']
-    },
-    operationDate: {
-        type: Date,
-        default: Date.now()
     },
     category: {
         type: String,

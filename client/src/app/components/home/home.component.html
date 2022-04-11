@@ -1,5 +1,14 @@
 <main class="home-page">
-    <app-accounts></app-accounts>
-    <app-transactions></app-transactions>
-    <app-options></app-options>
+    <app-accounts 
+    [accounts]="accounts"
+    [currentAccount]="currentAccount"
+    ></app-accounts>
+    <app-transactions 
+    [transactions]="transactions"
+    [currentAccount]="currentAccount"
+    ></app-transactions>
+    <app-options     
+    [transactions]="transactions"
+    [currentAccount]="currentAccount"
+    ></app-options>
 </main>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AccountService } from 'src/app/services/accounts/account.service';
 
 @Component({
@@ -8,6 +8,11 @@ import { AccountService } from 'src/app/services/accounts/account.service';
 })
 export class AccountComponent implements OnInit {
   @Input() account!: any;
+  @Input() currentAccount!: any;
+
+  @Output() accDelete = new EventEmitter();
+  @Output() currentAcc = new EventEmitter();
+
   availableAmount: number = 0;
 
   constructor(private accountService: AccountService) { }
@@ -16,5 +21,13 @@ export class AccountComponent implements OnInit {
     this.accountService.getAvailableAmount(this.account['_id']).subscribe((res: any) => (
       this.availableAmount = res.data
     ));
+  }
+
+  setCurrentAccount(account: any) {
+    this.currentAcc.emit(account);
+  }
+
+  onDelete(id: string) {
+    this.accDelete.emit(id);
   }
 }

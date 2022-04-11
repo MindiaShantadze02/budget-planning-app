@@ -1,14 +1,12 @@
 <div class="transaction">
-    <h4 class="transaction__category">Home</h4>
+    <h4 class="transaction__category">{{transaction.category}}</h4>
     <div class="transaction__description">
-        <h4>Flat Rent For March</h4>
-        <span class="transaction__type">Expenses</span>
+        <h4>{{transaction.title}}</h4>
+        <span class="transaction__type">{{transaction.transactionType}}</span>
         &#183;
-        <span class="transaction__date">28.02.2022</span>
-        &#183;
-        <span class="transaction__author">John Doe</span>
+        <span class="transaction__date">{{transaction.createdAt | date:'MM.dd.yy'}}</span>
     </div>
     <div class="transaction__amount-wrapper">
-        <h2 class="transaction__amount">600$</h2>
+        <h2 class="transaction__amount">{{transaction.amount}}$</h2>
     </div>
 </div>

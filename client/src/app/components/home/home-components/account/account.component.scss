@@ -1,5 +1,7 @@
 .account {
     background: linear-gradient(45deg,#f5a7a7, #9198e5);
+    cursor: pointer;
+    opacity: 0.5;
     color: #FFF;
     margin-top: 20px;
     padding: 40px 20px;
@@ -11,4 +13,18 @@
     h2 {
         font-size: 32px;
     }
+    &__delete-button {
+        color: #FFF;
+        font-size: 20px;
+        border: none;
+        background-color: rgba(255, 0, 0, 0.493);
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
+
+.current-account {
+    background: linear-gradient(45deg,#f5a7a7, #9198e5);
+    opacity: 1;
 }
