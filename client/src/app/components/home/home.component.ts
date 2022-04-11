@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
 
       this.currentAccount = res.data[0];
 
+      // getting transactions
       this.transactionService.getTransactions(this.currentAccount._id).subscribe((res: any) => (
         this.transactions = res.data
       ));
