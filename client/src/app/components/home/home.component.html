@@ -1,14 +1,7 @@
 <main class="home-page">
-    <app-accounts 
-    [accounts]="accounts"
-    [currentAccount]="currentAccount"
-    ></app-accounts>
-    <app-transactions 
-    [transactions]="transactions"
-    [currentAccount]="currentAccount"
-    ></app-transactions>
-    <app-options     
-    [transactions]="transactions"
-    [currentAccount]="currentAccount"
-    ></app-options>
+    <app-accounts></app-accounts>
+    <div class="router-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <app-options></app-options>
 </main>

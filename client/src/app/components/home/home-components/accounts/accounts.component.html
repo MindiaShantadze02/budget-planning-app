@@ -20,9 +20,7 @@
         <app-account 
         *ngFor="let account of accounts" 
         [account]="account"
-        [currentAccount]="currentAccount"
         (accDelete)="deleteAccount(account._id)"
-        (currentAcc)="setCurrentAccount(account)"
         ></app-account>
     </div>
     <div *ngIf="accounts.length === 0" [ngStyle]="{marginTop: '10px', color: 'red'}">

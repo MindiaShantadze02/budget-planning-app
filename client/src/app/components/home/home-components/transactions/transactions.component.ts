@@ -7,9 +7,6 @@ import { TransactionService } from 'src/app/services/transactions/transaction.se
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  @Input() transactions!: any;
-  @Input() currentAccount!: any;
-
   constructor() { }
 
   ngOnInit(): void {

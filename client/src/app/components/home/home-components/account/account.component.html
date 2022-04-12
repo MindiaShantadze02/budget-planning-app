@@ -1,7 +1,4 @@
-<div 
-[class]="currentAccount._id === account._id ? 'account current-account' : 'account'" 
-routerLinkActive="router-link-active"
-(click)="setCurrentAccount(account)">
+<div class="account" [routerLink]="['/', account._id]" routerLinkActive="current-account" >
     <div class="account__account-description">
         <h2>{{account.title}}</h2>
         <p>{{account.description}}</p>
