@@ -12,22 +12,8 @@ export class HomeComponent implements OnInit {
   transactions: any = [];
   currentAccount: any = {};
 
-  constructor(
-    private accountService: AccountService,
-    private transactionService: TransactionService
-    ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.accountService.getAccounts().subscribe((res: any) => {
-      this.accounts = res.data;
-      
-      if (res.data.length === 0) return;
-
-      this.currentAccount = res.data[0];
-
-      this.transactionService.getTransactions(this.currentAccount._id).subscribe((res: any) => (
-        this.transactions = res.data
-      ));
-    });
   }
 }

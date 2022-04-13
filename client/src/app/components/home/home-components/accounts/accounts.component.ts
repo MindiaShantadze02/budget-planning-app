@@ -10,13 +10,7 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
-  // accounts array
-  @Input() accounts: any = [];
-  @Input() transactions: any = [];
-  @Input() currentAccount!: any;
-
-  // emitting account changing event
-  @Output() accChange = new EventEmitter();
+  accounts: any[] = [];
 
   // variable for toggling the account form
   showAccountForm = false;
@@ -35,38 +29,29 @@ export class AccountsComponent implements OnInit {
 
 
   constructor(
-    private accountService: AccountService,
-    private transactionService: TransactionService
+    private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
+    this.accountService.getAccounts().subscribe((res: any) => {
+      this.accounts = res.data;
+    })
   }
 
   toggleAccountForm() {
     this.showAccountForm = !this.showAccountForm;
   }
 
-  setCurrentAccount(account: any) {
-    this.accChange.emit(account)
-    this.currentAccount = account;
-    this.transactionService.getTransactions(account._id).subscribe((res: any) => (
-      this.transactions = res.data,
-      console.log(this.transactions)
-    ));
-  }
-
   createAccount() {
     this.accountService.createAccount(this.accountForm.value).subscribe((res: any) => (
       this.accounts = [res.account, ...this.accounts],
-      this.currentAccount = res.account,
       this.accountForm.reset()
     ));
   }
 
   deleteAccount(id: string) {
     this.accountService.deleteAccount(id).subscribe(() => (
-      this.accounts = this.accounts.filter((accountItem: any) => accountItem._id !== id),
-      this.currentAccount = this.accounts[0]
+      this.accounts = this.accounts.filter((accountItem: any) => accountItem._id !== id)
     ));
   }
 }

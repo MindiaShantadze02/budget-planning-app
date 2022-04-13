@@ -16,19 +16,19 @@ import { HomeComponent } from 'src/app/components/home/home.component';
 import { TransactionsComponent } from 'src/app/components/home/home-components/transactions/transactions.component';
 
 const appRoutes: Routes = [
-  { 
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full' 
-  },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'main', component: MainPageComponent, canActivate: [AuthGuard], 
+  { path: '', component: MainPageComponent, canActivate: [AuthGuard], 
     children: [
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, 
+        children: [
+          { path: '', component: TransactionsComponent },
+          { path: ':id', component: TransactionsComponent }
+        ]
+      },
       { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], pathMatch: 'full' }
     ] 
   },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
 
