@@ -26,15 +26,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login(this.loginForm.value).subscribe(res => {
-      this.success = res.success;
-      this.message = res.message;
+      this.success = true;
 
-      if (res.success) {
-        this.router.navigateByUrl('main');
+      if (this.success) {
+        this.router.navigateByUrl('');
       }
     },
     err => {
-      this.success = err.error.success;
+      this.success = false;
       this.message=  err.error.message;
     });
   }

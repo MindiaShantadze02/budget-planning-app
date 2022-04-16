@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Observable, pipe, tap } from 'rxjs';
+import { Account } from 'src/app/interfaces/Account';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,39 +15,33 @@ const httpOptions = {
 })
 export class AccountService {
   private apiUrl = 'http://localhost:8000';
-
-  public accounts: any = [];
-  public currentAccount: any = {};
+  currentAccount$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getAccounts() {
-    return this.http.get(`${this.apiUrl}/accounts`).pipe(
-      tap((res: any) => {
-        this.accounts = res.data;
-      })
-    );
+  getAccounts():Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.apiUrl}/accounts`);
   }
 
-  createAccount(account: any) {
-    return this.http.post(`${this.apiUrl}/accounts`, account, httpOptions);
+  createAccount(account: Account):Observable<Account> {
+    return this.http.post<Account>(`${this.apiUrl}/accounts`, account, httpOptions);
   }
 
-  getAccount(accountId: string) {
-    return this.http.get(`${this.apiUrl}/accounts/${accountId}`);
+  getAccount(accountId: string):Observable<Account> {
+    return this.http.get<Account>(`${this.apiUrl}/accounts/${accountId}`);
   }
 
-  deleteAccount(accountId: string) {
-    return this.http.delete(`${this.apiUrl}/accounts/${accountId}`);
+  deleteAccount(accountId: string):Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/accounts/${accountId}`);
   }
 
-  updateAccount(accountId: string, updatedAccount: any) {
-    return this.http.put(`${this.apiUrl}/accounts/${accountId}`, updatedAccount, httpOptions);
+  updateAccount(accountId: string, updatedAccount: any):Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/accounts/${accountId}`, updatedAccount, httpOptions);
   }
 
-  getAvailableAmount(id: string):Observable<object> {
-    return this.http.get(`${this.apiUrl}/accounts/${id}/available-amount`);
+  getAvailableAmount(id: string):Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/accounts/${id}/available-amount`);
   }
 }

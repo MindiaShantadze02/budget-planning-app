@@ -16,20 +16,23 @@ import { HomeComponent } from 'src/app/components/home/home.component';
 import { TransactionsComponent } from 'src/app/components/home/home-components/transactions/transactions.component';
 
 const appRoutes: Routes = [
-  { path: '', component: MainPageComponent, canActivate: [AuthGuard], 
+  { path: '', component: MainPageComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', component: HomeComponent, 
+      { 
+        path: '',
+        component: HomeComponent,
         children: [
           { path: '', component: TransactionsComponent },
-          { path: ':id', component: TransactionsComponent }
+          { path: ':id/transactions', component: TransactionsComponent }
         ]
-      },
-      { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], pathMatch: 'full' }
-    ] 
-  },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+       },
+      { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] },
+    ]
+ },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];
 
 @NgModule({

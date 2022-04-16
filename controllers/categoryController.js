@@ -10,11 +10,7 @@ const Category = require('../models/Category');
 exports.getCategories = asyncWrapper(async (req, res, next) => {
     const categories = await Category.find({ user: req.user.id });
 
-    res.status(200).json({
-        success: true,
-        count: categories.length,
-        data: categories
-    });
+    res.status(200).json(categories);
 });
 
 // POST /categories
@@ -33,16 +29,13 @@ exports.createCategory = asyncWrapper(async (req, res, next) => {
         throw new Error('Category with this title already exists');
     }
 
-    await Category.create({
+    const account = await Category.create({
         user: req.user.id,
         title,
         categoryType
     });
 
-    res.status(201).json({
-        success: true,
-        message: 'Category created successfully'
-    });
+    res.status(201).json(account);
 });
 
 // GET /categories/:id
@@ -61,10 +54,7 @@ exports.getCategory = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
     
-    res.status(200).json({
-        success: true,
-        data: category
-    });
+    res.status(200).json(category);
 });
 
 // PUT /categories/:id
@@ -85,10 +75,7 @@ exports.updateCategory = asyncWrapper(async (req, res, next) => {
 
     await Category.findByIdAndUpdate(req.params.id, req.body);
 
-    res.status(200).json({
-        success: true,
-        message: 'Category Updated Successfully'
-    });
+    res.status(200).json('Category Updated Successfully');
 });
 
 // DELETE /categories/:id
@@ -109,8 +96,5 @@ exports.deleteCategory = asyncWrapper(async (req, res, next) => {
 
     await category.remove();
 
-    res.status(200).json({
-        success: true,
-        message: 'Category deleted successfully'
-    });
+    res.status(200).json('Category deleted successfully');
 });

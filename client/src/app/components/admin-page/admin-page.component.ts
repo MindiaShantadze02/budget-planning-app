@@ -12,11 +12,11 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.getUsers().subscribe(res => {
-      console.log(res);
+      
     });
 
     this.usersService.getMe().subscribe(res => {
-      console.log(res);
+      
     });
   }
 }

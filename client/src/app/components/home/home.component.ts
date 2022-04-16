@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/accounts/account.service';
-import { TransactionService } from 'src/app/services/transactions/transaction.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +7,7 @@ import { TransactionService } from 'src/app/services/transactions/transaction.se
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  accounts: any = [];
-  transactions: any = [];
-  currentAccount: any = {};
-
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }

@@ -10,15 +10,9 @@ const Piggybank = require('../models/Piggybank');
 // PRIVATE
 // for getting user accounts
 exports.getAccounts = asyncWrapper(async (req, res, next) => {
-    const accounts = await Account.find({ user: req.user.id }).sort({
-        createdAt: -1
-    }) || [];
+    const accounts = await Account.find({ user: req.user.id }).sort({ createdAt: -1 });
 
-    res.status(200).json({
-        success: true,
-        count: accounts.length,
-        data: accounts
-    });
+    res.status(200).json(accounts);
 });
 
 // POST /accounts
@@ -46,11 +40,7 @@ exports.createAccount = asyncWrapper(async (req, res, next) => {
         isDefault
     });
 
-    res.status(201).json({
-        success: true,
-        message: 'Account created successfully',
-        account: newAccount
-    });
+    res.status(201).json(newAccount);
 });
 
 // GET /accounts/:id
@@ -69,10 +59,7 @@ exports.getAccount = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    res.status(200).json({
-        success: true,
-        data: account
-    });
+    res.status(200).json(account);
 });
 
 // PUT /accounts/:id
@@ -93,10 +80,7 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
 
     await Account.findByIdAndUpdate(req.params.id, req.body);
 
-    res.status(200).json({
-        success: true,
-        message: 'Account Updated Successfully'
-    });
+    res.status(200).json('Account Updated Successfully');
 });
 
 // DELETE /accounts/:id
@@ -119,10 +103,7 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
     await Transaction.deleteMany({ account: req.params.id });
     await Piggybank.deleteMany({ account });
 
-    res.status(200).json({
-        success: true,
-        message: 'Account deleted successfully'
-    });
+    res.status(200).json('Account Deleted Successfully');
 });
 
 // GET /accounts/:id/available-amount
@@ -143,8 +124,5 @@ exports.getAvailableAmount = async (req, res, next) => {
     const transactions = await Transaction.find({ account: req.params.id });
     const availableAmount = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
 
-    res.status(200).json({
-        success: true,
-        data: availableAmount
-    });
+    res.status(200).json(availableAmount);
 };

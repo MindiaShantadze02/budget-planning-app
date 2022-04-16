@@ -49,7 +49,8 @@ import { TransactionComponent } from './components/home/home-components/transact
     provide: HTTP_INTERCEPTORS, 
     useClass: TokenInterceptor,
     multi: true
-  }],
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

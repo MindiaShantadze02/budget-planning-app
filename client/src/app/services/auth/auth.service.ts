@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MessageResponse } from '../../interfaces/MessageResponse';
-import { tap } from 'rxjs';
-import * as moment from 'moment';
+import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,43 +16,46 @@ export class AuthService {
   private apiUrl: string = 'http://localhost:8000';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
     ) { }
 
   register(user: object) {
-    return this.http.post<MessageResponse>(`${this.apiUrl}/users/register`, user, httpOptions);
+    return this.http.post(`${this.apiUrl}/users/register`, user, httpOptions);
   }
 
-  login(user: object) {
+  login(user: object):Observable<string> {
     return this.http.post<any>(`${this.apiUrl}/users/login`, user, httpOptions)
     .pipe(
-      tap(res => {
-        if (res.token) {
-          const expiresAt = moment().add(res.expiresIn, 'second');
-
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('expiresIn', JSON.stringify(expiresAt.valueOf()));
+      tap((token: string) => {
+        if (token) {
+          localStorage.setItem('token', token);
         }
       })
     );
   }
 
-  logout() {
+  logout():void {
     localStorage.removeItem('token');
-    localStorage.removeItem('expiresAt');
+    localStorage.removeItem('expiresIn');
+    this.router.navigateByUrl('login');
   }
 
-  isLoggedIn() {
+  isLoggedIn():boolean {
     const token: string = localStorage.getItem('token') || '';
 
-    return token ? true : false;
+    if (token) {
+      return true;
+    }
+
+    return false;
   }
 
-  getToken() {
+  getToken():string {
     return localStorage.getItem('token') || '';
   }
   
-  isAdmin():boolean {
+  public isAdmin():boolean {
     const token: string = localStorage.getItem('token') || '';
     const user = JSON.parse(atob(token.split('.')[1]));
 
