@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Transaction } from 'src/app/interfaces/Transaction';
+import { AccountService } from 'src/app/services/accounts/account.service';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 
 @Component({
@@ -8,8 +11,13 @@ import { TransactionService } from 'src/app/services/transactions/transaction.se
   styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
-  @Input() transactions!: any;
-  @Input() currentAccount!: any;
+  accountId: string = '';
+  transactions: any = [];
+
+  message: string = '';
+  success: boolean = false;
+
+  showTransactionForm: boolean = false;
 
   transactionForm: FormGroup = new FormGroup({
     title: new FormControl(''),
@@ -18,22 +26,36 @@ export class OptionsComponent implements OnInit {
     amount: new FormControl(0)
   });
 
-  showTransactionForm: boolean = false;
-
-  constructor(private transactionService: TransactionService) { }
+  constructor(
+    private transactionService: TransactionService,
+    private accountService: AccountService
+    ) { }
 
   ngOnInit(): void {
+    this.accountService.currentAccount$.subscribe((accountId: string) => {
+      this.accountId = accountId;
+      this.transactionService.transactions$.subscribe((transactions: any) => {
+        this.transactions = transactions;
+      })     
+    })
   }
 
   toggleTransactionForm() {
     this.showTransactionForm = !this.showTransactionForm;
   }
 
-  createTransaction() {
-    this.transactionService.createTransaction('6253386ecf2e09468b87a45c', this.transactionForm.value)
-    .subscribe((res: any) => (
-      console.log(res),
-      this.transactions = [this.transactionForm.value , ...this.transactions]
-    ));
+  createTransaction():void {
+    if (this.accountId) {
+      this.transactionService.createTransaction(
+        this.accountId,
+        this.transactionForm.value
+      ).subscribe((transaction: Transaction) => {
+        this.transactionService.transactions$.next([transaction , ...this.transactions]);
+        console.log(transaction);
+      });
+    } else {
+      this.success = false;
+      this.message = 'Please select an account';
+    }
   }
 }

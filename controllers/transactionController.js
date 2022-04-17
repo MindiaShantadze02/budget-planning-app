@@ -4,9 +4,25 @@ const asyncWrapper = require('../utils/asyncWrapper');
 // importing models
 const Transaction = require('../models/Transaction');
 
-// GET /transactions/:accountId
+// GET /transactions
 // PRIVATE
 // for getting all transactions
+exports.getAllTransactions = asyncWrapper(async (req, res, next) => {
+    if (!req.user) {
+        res.status(400);
+        throw new Error('User not found');
+    }
+
+    const transactions = await Transaction.find({}).sort({
+        createdAt: -1
+    });
+
+    res.status(200).json(transactions);
+});
+
+// GET /transactions/:accountId
+// PRIVATE
+// for getting account transactions
 exports.getTransactions = asyncWrapper(async (req, res, next) => {
     if (!req.user) {
         res.status(400);
@@ -16,28 +32,23 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
     const transactions = await Transaction.find({
         user: req.user.id,
         account: req.params.accountId
+    }).sort({
+        createdAt: -1
     });
 
-    res.status(200).json({
-        success: true,
-        data: transactions
-    });
+    res.status(200).json(transactions);
 });
 
 // POST /transactions/:accountId
 // PRIVATE
 // for creating a transaction
 exports.createTransaction = asyncWrapper(async (req, res, next) => {
-    await Transaction.create({
+    const transaction = await Transaction.create({
         account: req.params.accountId,
         user: req.user.id,
         ...req.body
     });
-
-    res.status(201).json({
-        success: true,
-        message: 'Transaction created successfully'
-    });
+    res.status(201).json(transaction);
 });
 
 // POST /transactions/:accountId/:transactionId
@@ -54,10 +65,7 @@ exports.getTransaction = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    res.status(200).json({
-        success: true,
-        data: transaction
-    });
+    res.status(200).json(transaction);
 });
 
 // POST /transactions/:accountId/:transactionId
@@ -76,10 +84,7 @@ exports.updateTransaction = asyncWrapper(async (req, res, next) => {
 
     await Transaction.findByIdAndUpdate(req.params.transactionId, req.body);
 
-    res.status(201).json({
-        success: true,
-        message: 'Transaction updated successfully'
-    });
+    res.status(201).json('Transaction updated successfully');
 });
 
 // DELETE /transactions/:accountId/:transactionId
@@ -98,8 +103,5 @@ exports.deleteTransaction = asyncWrapper(async (req, res, next) => {
 
     await Transaction.findByIdAndUpdate(req.params.transactionId);
 
-    res.status(201).json({
-        success: true,
-        message: 'Transaction deleted successfully'
-    });
+    res.status(201).json('Transaction deleted successfully');
 });

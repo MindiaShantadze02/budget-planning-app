@@ -18,8 +18,8 @@ export class AccountComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.accountService.getAvailableAmount(this.account['_id']).subscribe((res: any) => (
-      this.availableAmount = res.data
+    this.accountService.getAvailableAmount(this.account['_id']).subscribe((availableAmount: number) => (
+      this.availableAmount = availableAmount
     ));
   }
 

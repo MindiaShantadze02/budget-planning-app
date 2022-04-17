@@ -10,23 +10,16 @@ const Currency = require('../models/Currency');
 exports.getCurrencies = asyncWrapper(async (req, res, next) => {
     const currencies = await Currency.find({});
 
-    res.status(200).json({
-        success: true,
-        count: currencies.length,
-        data: currencies
-    });
+    res.status(200).json(currencies);
 });
 
 // POST /currencies
 // PRIVATE admin
 // for creating a currency
 exports.createCurrency = asyncWrapper(async (req, res, next) => {
-    await Currency.create(req.body);
+    const currency = await Currency.create(req.body);
 
-    res.status(201).json({
-        success: true,
-        message: 'Currency added successfully'
-    });
+    res.status(201).json(currency);
 });
 
 // GET /currencies/:id
@@ -35,10 +28,7 @@ exports.createCurrency = asyncWrapper(async (req, res, next) => {
 exports.getCurrency = asyncWrapper(async (req, res, next) => {
     const currency = await Currency.findById(req.params.id);
 
-    res.status(200).json({
-        success: true,
-        data: currency
-    });
+    res.status(200).json(currency);
 });
 
 // GET /currencies
@@ -47,10 +37,7 @@ exports.getCurrency = asyncWrapper(async (req, res, next) => {
 exports.updateCurrency = asyncWrapper(async (req, res, next) => {
     await Currency.findByIdAndUpdate(req.params.id, req.body);
 
-    res.status(201).json({
-        success: true,
-        message: 'Currency updated successfully'
-    });
+    res.status(201).json('Currency updated successfully');
 });
 
 // DELETE /currencies/:id
@@ -59,8 +46,5 @@ exports.updateCurrency = asyncWrapper(async (req, res, next) => {
 exports.deleteCurrency = asyncWrapper(async (req, res, next) => {
     await Currency.findByIdAndDelete(req.params.id);
 
-    res.status(201).json({
-        success: true,
-        message: 'Currency deleted successfully'
-    });
+    res.status(201).json('Currency deleted successfully');
 });

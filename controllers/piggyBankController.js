@@ -17,11 +17,7 @@ exports.getPiggybanks = asyncWrapper(async (req, res, next) => {
         account: req.params.accountId
     }) || [];
 
-    res.status(200).json({
-        success: true,
-        count: piggyBanks.length,
-        message: piggyBanks
-    });
+    res.status(200).json(piggyBanks);
 });
 
 // POST /piggybanks/:accountId

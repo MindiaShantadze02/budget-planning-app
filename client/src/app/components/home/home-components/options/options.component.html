@@ -14,6 +14,9 @@
                 <mat-icon class="arrow-icon add-plus">add</mat-icon>
                  Add Transaction
             </button>
+            <ng-template *ngIf="message">
+                <p [style.color]="success ? '#000' : 'red'">{{message}}</p>
+            </ng-template>
             <form 
             class="options__add-transaction-form"
             *ngIf="showTransactionForm" 
@@ -24,9 +27,12 @@
                 <div class="options__category-div">
                     <label for="select-category">Transaction Category</label>
                     <select id="select-category" formControlName="category">
-                        <option value="home">Home</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="tech">Tech</option>
+                        <option value="income category">Home</option>
+                        <option value="salary">Shopping</option>
+                        <option value="debt payment">Tech</option>
+                        <option value="gift">Gift</option>
+                        <option value="rental income">Rental Income</option>
+                        <option value="bonus">bonus</option>
                     </select>
                 </div>
                 <input type="number" placeholder="Enter Amount" formControlName="amount">

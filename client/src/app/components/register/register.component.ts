@@ -50,10 +50,10 @@ export class RegisterComponent implements OnInit {
       password,
       password2
     }).subscribe(res => {
-      this.success = res.success;
-      this.message = res.message;
+      this.success = true;
+      this.message = 'Account Created Successfully';
 
-      if (res.success) {
+      if (this.success) {
         setTimeout(() => {
           this.message = '';
           this.router.navigateByUrl('login');
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       }
     },
     err => {
-      this.success = err.error.success;
+      this.success = false;
       this.message = err.error.message;
     });
   }

@@ -33,8 +33,8 @@ export class AccountsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAccounts().subscribe((res: any) => {
-      this.accounts = res.data;
+    this.accountService.getAccounts().subscribe((accounts: any) => {
+      this.accounts = accounts;
     })
   }
 

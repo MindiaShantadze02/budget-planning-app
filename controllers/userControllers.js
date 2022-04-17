@@ -39,7 +39,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     }
 
     // creating user
-    await User.create({
+    const user = await User.create({
         email,
         firstName,
         lastName,
@@ -50,10 +50,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     });
     
-    res.json({
-        success: true,
-        message: 'User created successfully'
-    });
+    res.json(user);
 });
 
 // function for logging in user
@@ -75,11 +72,7 @@ exports.loginUser = asyncWrapper(async (req, res, next) => {
             { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
-        res.status(201).json({
-            success: true,
-            expiresIn: process.env.JWT_EXPIRES_IN,
-            token
-        });
+        res.status(201).json(token);
     } else {
         res.status(400);
         throw new Error('Incorrect email or password');
@@ -95,21 +88,14 @@ exports.getUsers = asyncWrapper(async (req, res, next) => {
         throw new Error('Users list is empty');
     }
 
-    res.status(200).json({
-        success: true,
-        count: users.length,
-        data: users
-    });
+    res.status(200).json(users);
 });
 
 // function for getting users
 exports.getUser = asyncWrapper(async (req, res, next) => {
     const user = await User.findById(req.params.id);
     
-    res.status(200).json({
-        success: true,
-        data: user
-    });
+    res.status(200).json(user);
 });
 
 // function for deleting user
@@ -119,15 +105,9 @@ exports.deleteUser = asyncWrapper(async (req, res, next) => {
     await Transaction.deleteMany({ user: req.params.id });
     await Piggybank.deleteMany({ user: req.params.id });
 
-    res.status(201).json({
-        success: true,
-        message: 'User deleted successfully'
-    });
+    res.status(201).json('User deleted successfully');
 });
 
 exports.getMe = asyncWrapper(async (req, res, next) => {
-    res.status(200).json({
-        success: true,
-        data: req.user
-    });
+    res.status(200).json(req.user);
 });

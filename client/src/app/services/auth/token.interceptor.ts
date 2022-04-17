@@ -5,8 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { AuthService } from './auth.service';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -19,6 +20,11 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(token);
+    return next.handle(token).pipe(
+      catchError(err => {
+        this.authService.logout();
+        return throwError(err);
+      })
+    );
   }
 }

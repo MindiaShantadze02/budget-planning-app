@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Transaction } from 'src/app/interfaces/Transaction';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,23 +20,33 @@ export class TransactionService {
     private http: HttpClient
   ) { }
 
-  getTransactions(accountId: string) {
-    return this.http.get(`${this.apiUrl}/${accountId}`);
+  transactions$ = new BehaviorSubject<Transaction[]>([]);
+
+  getTransactions(accountId: string):Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/${accountId}`);
   }
 
-  createTransaction(accountId: string, transaction: any) {
-    return this.http.post(`${this.apiUrl}/${accountId}`, transaction, httpOptions);
+  getAllTransactions():Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.apiUrl);
   }
 
-  getTransaction(accountId: string, transactionId: string) {
-    return this.http.get(`${this.apiUrl}/${accountId}/${transactionId}`);
+  createTransaction(accountId: string, transaction: Transaction):Observable<Transaction> {
+    return this.http.post<Transaction>(`${this.apiUrl}/${accountId}`, transaction, httpOptions);
+  } 
+
+  getTransaction(accountId: string, transactionId: string):Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.apiUrl}/${accountId}/${transactionId}`);
   }
 
-  updateTransaction(accountId: string, transactionId: string, updatedTransaction: any) {
-    return this.http.post(`${this.apiUrl}/${accountId}/${transactionId}`, updatedTransaction, httpOptions);
+  updateTransaction(accountId: string, transactionId: string, updatedTransaction: Transaction):Observable<string> {
+    return this.http.post<string>(
+      `${this.apiUrl}/${accountId}/${transactionId}`,
+      updatedTransaction,
+      httpOptions
+    );
   }
 
-  deleteTransaction(accountId: string, transactionId: string) {
-    return this.http.delete(`${this.apiUrl}/${accountId}/${transactionId}`);
+  deleteTransaction(accountId: string, transactionId: string):Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/${accountId}/${transactionId}`);
   }
 }
