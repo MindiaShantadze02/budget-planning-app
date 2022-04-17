@@ -15,7 +15,12 @@ const httpOptions = {
 })
 export class AccountService {
   private apiUrl = 'http://localhost:8000';
+
   currentAccount$: BehaviorSubject<string> = new BehaviorSubject('');
+  accounts$: BehaviorSubject<Account[]> = new BehaviorSubject([{
+    user: '',
+    title: ''
+  }]);
 
   constructor(
     private http: HttpClient

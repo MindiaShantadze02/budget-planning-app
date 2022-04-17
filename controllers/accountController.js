@@ -126,3 +126,7 @@ exports.getAvailableAmount = async (req, res, next) => {
 
     res.status(200).json(availableAmount);
 };
+
+// PUT /accounts/:id/available-amount
+// PRIVATE
+// for updating sum of current account
