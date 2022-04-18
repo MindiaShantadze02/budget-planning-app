@@ -43,7 +43,7 @@ import { TransactionComponent } from './components/home/home-components/transact
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutesModule,
+    AppRoutesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, 
