@@ -29,13 +29,13 @@ exports.createCategory = asyncWrapper(async (req, res, next) => {
         throw new Error('Category with this title already exists');
     }
 
-    const account = await Category.create({
+    const category = await Category.create({
         user: req.user.id,
         title,
         categoryType
     });
 
-    res.status(201).json(account);
+    res.status(201).json(category);
 });
 
 // GET /categories/:id

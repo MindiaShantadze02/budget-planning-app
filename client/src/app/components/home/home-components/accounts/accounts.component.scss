@@ -1,6 +1,7 @@
 .accounts {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     &__new-account-button {
         margin-top: 10px;
         padding: 5px 0;

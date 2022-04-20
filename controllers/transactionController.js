@@ -43,11 +43,17 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
 // PRIVATE
 // for creating a transaction
 exports.createTransaction = asyncWrapper(async (req, res, next) => {
+    if (!req.params.accountId) {
+        res.status(404);
+        throw new Error('Please select an account');
+    }
+
     const transaction = await Transaction.create({
         account: req.params.accountId,
         user: req.user.id,
         ...req.body
     });
+    
     res.status(201).json(transaction);
 });
 

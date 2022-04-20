@@ -39,6 +39,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
     this.router.navigateByUrl('login');
+    return;
   }
 
   isLoggedIn():boolean {

@@ -12,6 +12,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 
 const MatModuleItems = [
   MatFormFieldModule,
@@ -23,7 +24,8 @@ const MatModuleItems = [
   MatRippleModule,
   MatGridListModule,
   MatIconModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCardModule
 ];
 
 @NgModule({

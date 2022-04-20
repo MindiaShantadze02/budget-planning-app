@@ -1,3 +1,6 @@
+// importing mongoose
+const mongoose = require('mongoose');
+
 // importing utils
 const asyncWrapper = require('../utils/asyncWrapper');
 
@@ -5,6 +8,9 @@ const asyncWrapper = require('../utils/asyncWrapper');
 const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
 const Piggybank = require('../models/Piggybank');
+
+// defining object id type
+const { ObjectId } = mongoose.Types;
 
 // GET /accounts
 // PRIVATE
@@ -121,12 +127,22 @@ exports.getAvailableAmount = async (req, res, next) => {
         res.status(401);
         throw new Error('Unauthorized');
     }
-    const transactions = await Transaction.find({ account: req.params.id });
-    const availableAmount = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+    
+    const availableAmount = await Transaction.aggregate([
+        {
+            $match: {
+                account: ObjectId(req.params.id)
+            }
+        },
+        {
+            $group: {
+                _id: null,
+                availableAmount: { $sum: '$amount' }
+            }   
+        }
+    ]);
 
-    res.status(200).json(availableAmount);
+    // transactions = await transactions.find();
+
+    res.status(200).json(availableAmount[0].availableAmount || 0);
 };
-
-// PUT /accounts/:id/available-amount
-// PRIVATE
-// for updating sum of current account

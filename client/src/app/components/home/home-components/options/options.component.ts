@@ -49,10 +49,9 @@ export class OptionsComponent implements OnInit {
       this.transactionService.createTransaction(
         this.accountId,
         this.transactionForm.value
-      ).subscribe((transaction: Transaction) => {
-        this.transactionService.transactions$.next([transaction , ...this.transactions]);
-        console.log(transaction);
-      });
+      ).subscribe((transaction: Transaction) => (
+        this.transactionService.transactions$.next([transaction , ...this.transactions])
+      ));
     } else {
       this.success = false;
       this.message = 'Please select an account';

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/services/accounts/account.service';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 import { EventEmitter } from '@angular/core';
+import { Account } from 'src/app/interfaces/Account';
 
 @Component({
   selector: 'app-accounts',
@@ -10,7 +11,7 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
-  accounts: any[] = [];
+  accounts: Account[] = [];
 
   // variable for toggling the account form
   showAccountForm = false;
@@ -33,9 +34,9 @@ export class AccountsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAccounts().subscribe((accounts: any) => {
-      this.accounts = accounts;
-    })
+    this.accountService.getAccounts().subscribe((accounts: any) => (
+      this.accounts = accounts
+    ));
   }
 
   toggleAccountForm() {
@@ -43,8 +44,8 @@ export class AccountsComponent implements OnInit {
   }
 
   createAccount() {
-    this.accountService.createAccount(this.accountForm.value).subscribe((res: any) => (
-      this.accounts = [res.account, ...this.accounts],
+    this.accountService.createAccount(this.accountForm.value).subscribe((account: Account) => (
+      this.accounts = [account, ...this.accounts],
       this.accountForm.reset()
     ));
   }

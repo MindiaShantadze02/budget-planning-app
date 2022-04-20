@@ -1,0 +1,22 @@
+<main class="categories">
+    <h1 class="categories__categories-title">Categories</h1>
+    <form 
+    class="categories__category-form"
+    [formGroup]="categoryForm"
+    (ngSubmit)="createCategory()"
+    >
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-radio-group 
+        aria-label="Select Transaction Type"
+        class="categories__category-type" 
+        formControlName="categoryType">
+            <mat-radio-button value="Income" class="radio-button">Income</mat-radio-button>
+            <mat-radio-button value="Expense" class="radio-button">Expense</mat-radio-button>
+        </mat-radio-group>
+        <button mat-raised-button color="primary" type="submit"><mat-icon>add_plus</mat-icon> Add Category</button>
+    </form>
+    <app-categories [categories]="categories"></app-categories>
+</main>

@@ -6,10 +6,12 @@
     </div>
     <ul class="app-header__links">
         <li class="app-header__list-item">
-            <a class="app-header__link">Categories</a>
+            <a class="app-header__link" [routerLink]="['/categories']" 
+            routerLinkActive="router-link-active"
+            >Categories</a>
         </li>
         <li class="app-header__list-item">
-            <a class="app-header__link">Statistic</a>
+            <a class="app-header__link">Statistics</a>
         </li>
         <li class="app-header__list-item" *ngIf="isAdmin">
             <a class="app-header__link" routerLink="admin">Admin</a>

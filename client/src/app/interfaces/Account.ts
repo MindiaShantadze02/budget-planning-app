@@ -1,6 +1,7 @@
 export interface Account {
+    _id: string,
     user: string,
     title: string,
-    currency?: string,
-    descripiton?: string
+    description: string,
+    currency?: string
 }

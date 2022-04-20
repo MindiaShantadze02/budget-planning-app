@@ -14,6 +14,7 @@ import { AdminPageComponent } from 'src/app/components/admin-page/admin-page.com
 import { AdminGuard } from 'src/app/guards/admin.guard';
 import { HomeComponent } from 'src/app/components/home/home.component';
 import { TransactionsComponent } from 'src/app/components/home/home-components/transactions/transactions.component';
+import { CategoriesPageComponent } from 'src/app/components/categories-page/categories-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent, canActivate: [AuthGuard],
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
         ]
        },
       { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] },
+      { path: 'categories', component: CategoriesPageComponent }
     ]
  },
   { path: 'login', component: LoginComponent },

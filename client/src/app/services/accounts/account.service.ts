@@ -17,10 +17,7 @@ export class AccountService {
   private apiUrl = 'http://localhost:8000';
 
   currentAccount$: BehaviorSubject<string> = new BehaviorSubject('');
-  accounts$: BehaviorSubject<Account[]> = new BehaviorSubject([{
-    user: '',
-    title: ''
-  }]);
+  accounts$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor(
     private http: HttpClient

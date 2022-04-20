@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Account } from 'src/app/interfaces/Account';
 import { AccountService } from 'src/app/services/accounts/account.service';
 
 @Component({
@@ -7,8 +8,8 @@ import { AccountService } from 'src/app/services/accounts/account.service';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  @Input() account!: any;
-  @Input() currentAccount!: any;
+  @Input() account!: Account;
+  @Input() currentAccount!: Account;
 
   @Output() accDelete = new EventEmitter();
   @Output() currentAcc = new EventEmitter();
@@ -18,7 +19,7 @@ export class AccountComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.accountService.getAvailableAmount(this.account['_id']).subscribe((availableAmount: number) => (
+    this.accountService.getAvailableAmount(this.account._id).subscribe((availableAmount: number) => (
       this.availableAmount = availableAmount
     ));
   }

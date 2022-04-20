@@ -1,6 +1,9 @@
 // importing dependencies
 const mongoose = require('mongoose');
 
+// importing models
+const Account = require('./Account');
+
 // defining schema
 const TransactionSchema = new mongoose.Schema({
     user: {

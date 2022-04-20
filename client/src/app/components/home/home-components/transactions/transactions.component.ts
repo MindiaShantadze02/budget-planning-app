@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Transaction } from 'src/app/interfaces/Transaction';
 import { AccountService } from 'src/app/services/accounts/account.service';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 
@@ -21,18 +22,18 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.transactionService.transactions$.subscribe((transactions: any) => {
       this.transactions = transactions;
-    })
+    });
     this.route.params.subscribe((params: Params) => {
       this.accountId = params['id'];
       
       this.accountService.currentAccount$.next(params['id']);
 
       if (this.accountId) {
-        this.transactionService.getTransactions(this.accountId).subscribe((transactions: any) => {
+        this.transactionService.getTransactions(this.accountId).subscribe((transactions: Transaction[]) => {
           this.transactionService.transactions$.next(transactions);
         });
       } else {
-        this.transactionService.getAllTransactions().subscribe((transactions: any) => {
+        this.transactionService.getAllTransactions().subscribe((transactions: Transaction[]) => {
           this.transactionService.transactions$.next(transactions);
         });
       }

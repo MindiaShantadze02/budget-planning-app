@@ -1,0 +1,8 @@
+<main class="categories-wrapper">
+    <div class="categories" *ngIf="categories.length > 0; else noCategories">
+        <app-category *ngFor="let category of categories" [category]="category"></app-category>
+    </div>
+    <ng-template #noCategories>
+        <h2 class="categories__no-category-text">You don't have any user defined categories</h2>
+    </ng-template>
+</main>

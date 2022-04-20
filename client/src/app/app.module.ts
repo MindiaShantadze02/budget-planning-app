@@ -20,6 +20,9 @@ import { TransactionsComponent } from './components/home/home-components/transac
 import { OptionsComponent } from './components/home/home-components/options/options.component';
 import { AccountComponent } from './components/home/home-components/account/account.component';
 import { TransactionComponent } from './components/home/home-components/transaction/transaction.component';
+import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
+import { CategoriesComponent } from './components/categories-page/categories/categories.component';
+import { CategoryComponent } from './components/categories-page/category/category.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { TransactionComponent } from './components/home/home-components/transact
     OptionsComponent,
     AccountComponent,
     TransactionComponent,
+    CategoriesPageComponent,
+    CategoriesComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
