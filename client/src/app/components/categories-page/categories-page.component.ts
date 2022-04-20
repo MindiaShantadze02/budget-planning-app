@@ -19,8 +19,12 @@ export class CategoriesPageComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.categories$.subscribe((categories: Category[]) => {
+      this.categories = categories;
+    })
+
     this.categoryService.getCategories().subscribe((categories: Category[]) => (
-      this.categories = categories
+      this.categoryService.categories$.next(categories)
     ));
   }
 
