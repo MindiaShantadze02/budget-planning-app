@@ -1,10 +1,6 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/accounts/account.service';
 import { Account } from 'src/app/interfaces/Account';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AccountsDialogBoxComponent } from 'src/app/components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
-import { AccountDeleteDialogComponent } from 'src/app/components/dialog-boxes/account-delete-dialog/account-delete-dialog.component';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 @Component({
   selector: 'app-accounts',

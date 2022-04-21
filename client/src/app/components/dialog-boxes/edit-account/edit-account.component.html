@@ -1,0 +1,11 @@
+<form [formGroup]="editAccountForm" (ngSubmit)="updateAccount()">
+    <mat-form-field appearance="fill" class="edit-account-form">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput [value]="account.title">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput [value]="account.description"></textarea>
+    </mat-form-field>
+    <button type="submit">Edit Account</button>
+</form>

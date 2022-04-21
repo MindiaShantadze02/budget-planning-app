@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/User';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UsersService,
-    private router: Router
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +34,12 @@ export class HeaderComponent implements OnInit {
     ))
   }
 
-  logout():void {
-    this.authService.logout();
+  showLogoutDialog():void {
+    this.dialogService.showLogoutDialog().afterClosed().subscribe(res => {
+      if (res) {
+        this.authService.logout();
+      }
+    });
   }
 
   toggleOptions():void {

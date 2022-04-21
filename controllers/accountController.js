@@ -84,9 +84,9 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    await Account.findByIdAndUpdate(req.params.id, req.body);
-
-    res.status(200).json('Account Updated Successfully');
+    const updatedAccount = await Account.findByIdAndUpdate(req.params.id, req.body);
+    
+    res.status(200).json(updatedAccount);
 });
 
 // DELETE /accounts/:id

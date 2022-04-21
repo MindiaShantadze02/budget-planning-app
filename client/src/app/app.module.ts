@@ -26,6 +26,9 @@ import { CategoryComponent } from './components/categories-page/category/categor
 import { AccountsDialogBoxComponent } from './components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
 import { AccountDeleteDialogComponent } from './components/dialog-boxes/account-delete-dialog/account-delete-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AccountDetailsComponent } from './components/dialog-boxes/account-details/account-details.component';
+import { LogoutDialogComponent } from './components/dialog-boxes/logout-dialog/logout-dialog.component';
+import { EditAccountComponent } from './components/dialog-boxes/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { MatDialogRef } from '@angular/material/dialog';
     CategoriesComponent,
     CategoryComponent,
     AccountsDialogBoxComponent,
-    AccountDeleteDialogComponent
+    AccountDeleteDialogComponent,
+    AccountDetailsComponent,
+    LogoutDialogComponent,
+    EditAccountComponent
   ],
   entryComponents: [
     AccountsDialogBoxComponent,

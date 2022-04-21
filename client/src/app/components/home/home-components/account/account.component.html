@@ -3,6 +3,6 @@
         <h2>{{account.title}}</h2>
         <p>{{account.description}}</p>
         <h1>{{availableAmount}}</h1>
-        <button class="account__delete-button" (click)="onDelete(account._id)">Delete Account</button>
     </div>
+    <button mat-button class="account__details" (click)="showDetails(account._id)">See Details</button>
 </div>

@@ -1,5 +1,6 @@
 // importing dependencies
 const mongoose = require('mongoose');
+const { isEmail } = require('validator');
 
 // defining schema
 const UserSchema = new mongoose.Schema({
@@ -9,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         minlength: 7,
         trim: true,
         required: [true, 'Please add your email'],
-        match: [/^[\w]{3,255}?[a-zA-Z0-9]{0,255}@[a-z]{2,50}\.[a-z]{2,4}$/, 'Please enter valid email adress']
+        validate: [isEmail, 'Please enter an valid email']
     },
     password: {
         type: String,

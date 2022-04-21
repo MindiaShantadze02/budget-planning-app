@@ -39,8 +39,8 @@ export class AccountService {
     return this.http.delete<string>(`${this.apiUrl}/accounts/${accountId}`);
   }
 
-  updateAccount(accountId: string, updatedAccount: any):Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/accounts/${accountId}`, updatedAccount, httpOptions);
+  updateAccount(accountId: string, updatedAccount: Account):Observable<Account> {
+    return this.http.put<Account>(`${this.apiUrl}/accounts/${accountId}`, updatedAccount, httpOptions);
   }
 
   getAvailableAmount(id: string):Observable<number> {
