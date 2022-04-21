@@ -23,6 +23,9 @@ import { TransactionComponent } from './components/home/home-components/transact
 import { CategoriesPageComponent } from './components/categories-page/categories-page.component';
 import { CategoriesComponent } from './components/categories-page/categories/categories.component';
 import { CategoryComponent } from './components/categories-page/category/category.component';
+import { AccountsDialogBoxComponent } from './components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
+import { AccountDeleteDialogComponent } from './components/dialog-boxes/account-delete-dialog/account-delete-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,13 @@ import { CategoryComponent } from './components/categories-page/category/categor
     TransactionComponent,
     CategoriesPageComponent,
     CategoriesComponent,
-    CategoryComponent
+    CategoryComponent,
+    AccountsDialogBoxComponent,
+    AccountDeleteDialogComponent
+  ],
+  entryComponents: [
+    AccountsDialogBoxComponent,
+    AccountDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,11 +60,16 @@ import { CategoryComponent } from './components/categories-page/category/categor
     HttpClientModule,
     AppRoutesModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, 
-    useClass: TokenInterceptor,
-    multi: true
-  }
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }
 ],
   bootstrap: [AppComponent]
 })

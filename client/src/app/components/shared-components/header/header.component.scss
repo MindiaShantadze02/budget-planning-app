@@ -17,9 +17,17 @@
         flex: 1;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+    }
+    &__options-item {
+        cursor: pointer;
+    }
+    &__logout {
+        color: red;
     }
     a {
         color: #000;
         text-decoration: none;
     }
+
 }

@@ -18,6 +18,15 @@
         </li>
     </ul>
     <div class="app-header__user">
-        <h2>User Avatar</h2>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+             {{user.firstName | titlecase}} {{user.lastName | titlecase}}
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item><mat-icon>settings</mat-icon> Settings</button>
+            <button 
+            mat-menu-item
+            (click)="logout()"><mat-icon>logout</mat-icon> Log Out</button>
+        </mat-menu>
     </div>
 </header>

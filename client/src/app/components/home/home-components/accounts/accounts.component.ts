@@ -1,10 +1,11 @@
 import { Component, Input, Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/services/accounts/account.service';
-import { TransactionService } from 'src/app/services/transactions/transaction.service';
-import { EventEmitter } from '@angular/core';
 import { Account } from 'src/app/interfaces/Account';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AccountsDialogBoxComponent } from 'src/app/components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
+import { AccountDeleteDialogComponent } from 'src/app/components/dialog-boxes/account-delete-dialog/account-delete-dialog.component';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
@@ -13,46 +14,33 @@ import { Account } from 'src/app/interfaces/Account';
 export class AccountsComponent implements OnInit {
   accounts: Account[] = [];
 
-  // variable for toggling the account form
-  showAccountForm = false;
-
-  // for creating new account
-  accountForm: FormGroup = new FormGroup({
-    title: new FormControl('', [
-      Validators.required, Validators.minLength(3),
-      Validators.maxLength(255)
-    ]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(255)])
-  });
-
-
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAccounts().subscribe((accounts: any) => (
+    this.accountService.accounts$.subscribe((accounts: Account[]) => (
       this.accounts = accounts
     ));
-  }
 
-  toggleAccountForm() {
-    this.showAccountForm = !this.showAccountForm;
-  }
-
-  createAccount() {
-    this.accountService.createAccount(this.accountForm.value).subscribe((account: Account) => (
-      this.accounts = [account, ...this.accounts],
-      this.accountForm.reset()
+    this.accountService.getAccounts().subscribe((accounts: Account[]) => (
+      this.accountService.accounts$.next(accounts)
     ));
   }
 
   deleteAccount(id: string) {
-    this.accountService.deleteAccount(id).subscribe(() => (
-      this.accounts = this.accounts.filter((accountItem: any) => accountItem._id !== id)
-    ));
+    this.dialogService.deleteAccountDialog().afterClosed().subscribe(res => {
+      if (res) {
+        this.accountService.deleteAccount(id).subscribe((res: string) => {
+          const filteredAccounts: Account[] = this.accounts.filter((account: Account) => account._id !== id);
+          this.accountService.accounts$.next(filteredAccounts);
+        });
+      }
+    });
+  }
+
+  showDialog() {
+    this.dialogService.openAccountForm();
   }
 }

@@ -32,7 +32,8 @@
                         <option value="debt payment">Tech</option>
                         <option value="gift">Gift</option>
                         <option value="rental income">Rental Income</option>
-                        <option value="bonus">bonus</option>
+                        <option value="bonus">Bonus</option>
+                        <option *ngFor="let category of categories" [value]="category.title">{{category.title}}</option>
                     </select>
                 </div>
                 <input type="number" placeholder="Enter Amount" formControlName="amount">

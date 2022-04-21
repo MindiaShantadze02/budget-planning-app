@@ -13,6 +13,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MatModuleItems = [
   MatFormFieldModule,
@@ -25,7 +27,9 @@ const MatModuleItems = [
   MatGridListModule,
   MatIconModule,
   MatSelectModule,
-  MatCardModule
+  MatCardModule,
+  MatMenuModule,
+  MatDialogModule
 ];
 
 @NgModule({

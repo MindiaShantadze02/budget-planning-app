@@ -1,0 +1,16 @@
+<form class="account-form" [formGroup]="accountForm" (ngSubmit)="createAccount()">
+    <h2 mat-dialog-title>Create An Account</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Title (min: 3 chars)</mat-label>
+        <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description (min: 10 chars)</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+    <button 
+    mat-raised-button 
+    type="submit"
+    color="primary" 
+    [disabled]="accountForm.invalid">Submit</button>
+</form>

@@ -17,7 +17,7 @@ export class UsersService {
     return this.http.get(this.apiUrl);
   }
 
-  getMe() {
-    return this.http.get(`${this.apiUrl}/me`);
+  getMe():Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`);
   }
 }

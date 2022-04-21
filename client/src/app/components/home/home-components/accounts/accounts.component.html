@@ -4,18 +4,7 @@
     mat-button 
     color="primary" 
     class="accounts__new-account-button" 
-    (click)="toggleAccountForm()"><mat-icon>add_plus</mat-icon> Add New Account</button>
-    <form *ngIf="showAccountForm" class="accounts__form" [formGroup]="accountForm" (ngSubmit)="createAccount()">
-        <mat-form-field appearance="fill">
-            <mat-label>Title (min: 3 chars)</mat-label>
-            <input matInput formControlName="title">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Description (min: 10 chars)</mat-label>
-            <textarea matInput formControlName="description"></textarea>
-          </mat-form-field>
-        <button mat-raised-button type="submit" color="primary" [disabled]="accountForm.invalid">Submit</button>
-    </form>
+    (click)="showDialog()"><mat-icon>add_plus</mat-icon> Add New Account</button>
     <div class="accounts__accounts-content" *ngIf="accounts.length > 0">
         <app-account 
         *ngFor="let account of accounts" 

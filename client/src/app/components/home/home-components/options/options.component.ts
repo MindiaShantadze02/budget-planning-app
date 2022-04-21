@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Category } from 'src/app/interfaces/Category';
 import { Transaction } from 'src/app/interfaces/Transaction';
 import { AccountService } from 'src/app/services/accounts/account.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 
 @Component({
@@ -12,7 +14,8 @@ import { TransactionService } from 'src/app/services/transactions/transaction.se
 })
 export class OptionsComponent implements OnInit {
   accountId: string = '';
-  transactions: any = [];
+  transactions: Transaction[] = [];
+  categories: Category[] = [];
 
   message: string = '';
   success: boolean = false;
@@ -28,16 +31,25 @@ export class OptionsComponent implements OnInit {
 
   constructor(
     private transactionService: TransactionService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private categoryService: CategoryService
     ) { }
 
   ngOnInit(): void {
     this.accountService.currentAccount$.subscribe((accountId: string) => {
       this.accountId = accountId;
-      this.transactionService.transactions$.subscribe((transactions: any) => {
-        this.transactions = transactions;
-      })     
-    })
+      this.transactionService.transactions$.subscribe((transactions: any) => (
+        this.transactions = transactions
+      ))     
+    });
+
+    this.categoryService.categories$.subscribe((categories: Category[]) => (
+      this.categories = categories
+    ));
+
+    this.categoryService.getCategories().subscribe((categories: Category[]) => (
+      this.categoryService.categories$.next(categories)
+    ));
   }
 
   toggleTransactionForm() {
