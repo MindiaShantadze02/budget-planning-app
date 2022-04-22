@@ -84,7 +84,11 @@ exports.updateAccount = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    const updatedAccount = await Account.findByIdAndUpdate(req.params.id, req.body);
+    const updatedAccount = await Account.findByIdAndUpdate(
+        req.params.id, 
+        req.body, 
+        { runValidators: true }
+        );
     
     res.status(200).json(updatedAccount);
 });

@@ -47,7 +47,11 @@ const TransactionSchema = new mongoose.Schema({
 
 // defining transaction type depending on amount passed by user
 TransactionSchema.pre('save', function () {
-    this.transactionType = this.amount > 0 ? 'Income' : 'Expense';
+    if (this.transactionType === 'Expense' && this.amount > 0) {
+        this.amount = 0 - Number(this.amount);
+    } else if (this.transactionType === 'Income' && this.amount < 0) {
+        this.amount = Math.abs(this.amount);
+    }
 });
 
 // exporting model

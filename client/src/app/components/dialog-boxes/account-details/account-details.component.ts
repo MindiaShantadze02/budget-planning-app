@@ -24,6 +24,7 @@ export class AccountDetailsComponent implements OnInit {
     private accountService: AccountService,
     private dialogService: DialogService,
     private dialog: MatDialogRef<AccountDetailsComponent>,
+    private accountDetailsDialog: MatDialogRef<AccountDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) private data:any
   ) { }
 
@@ -61,6 +62,8 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   showEditAccountForm() {
-    this.dialogService.showEditAccountForm();
+    this.dialogService.showEditAccountForm().afterOpened().subscribe(() => {
+      this.accountDetailsDialog.close();
+    });
   }
 }

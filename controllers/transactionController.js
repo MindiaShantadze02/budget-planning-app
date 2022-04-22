@@ -48,6 +48,11 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
         throw new Error('Please select an account');
     }
 
+    const { 
+        amount,
+        transactionType
+    } = req.body;
+
     const transaction = await Transaction.create({
         account: req.params.accountId,
         user: req.user.id,

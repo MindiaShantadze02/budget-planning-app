@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/interfaces/Category';
 import { Transaction } from 'src/app/interfaces/Transaction';
 import { AccountService } from 'src/app/services/accounts/account.service';
@@ -32,7 +32,8 @@ export class OptionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private accountService: AccountService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -67,6 +68,14 @@ export class OptionsComponent implements OnInit {
     } else {
       this.success = false;
       this.message = 'Please select an account';
+    }
+  }
+
+  showTransactionPage() {
+    if (this.accountId) {
+      this.router.navigate(['/', this.accountId, 'create-transaction'])
+    } else {
+      console.log('please choose an account')
     }
   }
 }

@@ -28,10 +28,6 @@ export class AccountComponent implements OnInit {
     ));
   }
 
-  setCurrentAccount(account: any) {
-    this.currentAcc.emit(account);
-  }
-
   showDetails(id: string) {
     this.dialogService.showAccountDetailsComponent(id);
   }

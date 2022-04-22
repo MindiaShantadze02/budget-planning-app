@@ -29,6 +29,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AccountDetailsComponent } from './components/dialog-boxes/account-details/account-details.component';
 import { LogoutDialogComponent } from './components/dialog-boxes/logout-dialog/logout-dialog.component';
 import { EditAccountComponent } from './components/dialog-boxes/edit-account/edit-account.component';
+import { CreateTransactionComponent } from './components/create-transaction/create-transaction.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { EditAccountComponent } from './components/dialog-boxes/edit-account/edi
     AccountDeleteDialogComponent,
     AccountDetailsComponent,
     LogoutDialogComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    CreateTransactionComponent
   ],
   entryComponents: [
     AccountsDialogBoxComponent,

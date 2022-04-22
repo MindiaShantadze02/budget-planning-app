@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Account } from 'src/app/interfaces/Account';
 import { AccountService } from 'src/app/services/accounts/account.service';
+import { AccountDeleteDialogComponent } from '../account-delete-dialog/account-delete-dialog.component';
 
 @Component({
   selector: 'app-edit-account',
@@ -18,8 +19,8 @@ export class EditAccountComponent implements OnInit {
     description: ''
   };
   editAccountForm: FormGroup = new FormGroup({
-    title: new FormControl(this.account.title),
-    description: new FormControl(this.account.description)
+    title: new FormControl(''),
+    description: new FormControl('')
   });
 
   constructor(
@@ -30,7 +31,11 @@ export class EditAccountComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.currentAccount$.subscribe((id: string) => {
       this.accountService.getAccount(id).subscribe((account: Account) => (
-        this.account = account
+        this.account = account,
+        this.editAccountForm = new FormGroup({
+          title: new FormControl(account.title),
+          description: new FormControl(account.description)
+        })
       ));
     });
 
@@ -55,7 +60,6 @@ export class EditAccountComponent implements OnInit {
         return accountItem;
       });
       this.account = account;
-console.log(updatedAccounts);
       this.accountService.accounts$.next(updatedAccounts);
       this.dialog.close();
     },

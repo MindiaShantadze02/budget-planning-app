@@ -1,0 +1,48 @@
+<div class="create-transaction-page">
+    <h1 class="create-transaction-page__title">Create Transaction</h1>
+    <form 
+    class="create-transaction-page__form" 
+    [formGroup]="transactionForm"
+    (ngSubmit)="createTransaction()">
+        <mat-form-field appearance="fill">
+          <mat-label>Transaction Type</mat-label>
+          <mat-select formControlName="transactionType">
+            <mat-option value="Income">Income</mat-option>
+            <mat-option value="Expense">Expense</mat-option>
+          </mat-select>
+        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option value="income category">Home</mat-option>
+              <mat-option value="salary">Shopping</mat-option>
+              <mat-option value="debt payment">Tech</mat-option>
+              <mat-option value="gift">Gift</mat-option>
+              <mat-option value="rental income">Rental Income</mat-option>
+              <mat-option value="bonus">Bonus</mat-option>
+              <mat-option 
+              *ngFor="let category of categories" 
+              [value]="category.title">{{category.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Transaction Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="transactionDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button type="submit" mat-raised-button color="primary">Add Transaction</button>
+    </form>
+</div>
