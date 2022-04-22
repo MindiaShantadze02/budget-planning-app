@@ -48,11 +48,6 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
         throw new Error('Please select an account');
     }
 
-    const { 
-        amount,
-        transactionType
-    } = req.body;
-
     const transaction = await Transaction.create({
         account: req.params.accountId,
         user: req.user.id,
@@ -66,10 +61,7 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
 // PRIVATE
 // for getting a transaction
 exports.getTransaction = asyncWrapper(async (req, res, next) => {
-    const transaction = await Transaction.findOne({
-        _id: req.params.transactionId,
-        account: req.params.accountId
-    });
+    const transaction = await Transaction.findById(req.params.transactionId);
 
     if (req.user.id !== transaction.user.toString()) {
         res.status(401);
@@ -83,36 +75,34 @@ exports.getTransaction = asyncWrapper(async (req, res, next) => {
 // PRIVATE
 // for updating a transaction
 exports.updateTransaction = asyncWrapper(async (req, res, next) => {
-    const transaction = await Transaction.findOne({
-        _id: req.params.transactionId,
-        account: req.params.accountId
-    });
+    const transaction = await Transaction.findById(req.params.transactionId);
 
     if (req.user.id !== transaction.user.toString()) {
         res.status(401);
         throw new Error('Unauthorized');
     }
 
-    await Transaction.findByIdAndUpdate(req.params.transactionId, req.body);
+    const updatedTransaction = await Transaction.findByIdAndUpdate(
+        req.params.transactionId,
+        req.body,
+        { runValidators: true }
+    );
 
-    res.status(201).json('Transaction updated successfully');
+    res.status(201).json(updatedTransaction);
 });
 
 // DELETE /transactions/:accountId/:transactionId
 // PRIVATE
 // for deleting a transaction
 exports.deleteTransaction = asyncWrapper(async (req, res, next) => {
-    const transaction = await Transaction.findOne({
-        _id: req.params.transactionId,
-        account: req.params.accountId
-    });
+    const transaction = await Transaction.findById(req.params.transactionId);
 
     if (req.user.id !== transaction.user.toString()) {
         res.status(401);
         throw new Error('Unauthorized');
     }
 
-    await Transaction.findByIdAndUpdate(req.params.transactionId);
+    await Transaction.findByIdAndDelete(req.params.transactionId);
 
     res.status(201).json('Transaction deleted successfully');
 });

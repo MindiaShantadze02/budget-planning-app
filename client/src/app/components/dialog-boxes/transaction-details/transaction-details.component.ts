@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Transaction } from 'src/app/interfaces/Transaction';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
-import { AccountService } from 'src/app/services/accounts/account.service';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/services/accounts/account.service';
 })
 export class TransactionDetailsComponent implements OnInit {
   transaction: Transaction = {
+    _id: '',
     title: '',
     description: '',
     user: '',
@@ -19,16 +20,34 @@ export class TransactionDetailsComponent implements OnInit {
     amount: '',
     transactionDate: ''
   }
+  transactions: Transaction[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
     this.transactionService.getTransaction(this.data.id).subscribe((transaction: Transaction) => (
-      this.transaction = transaction,
-      console.log(transaction)
+      this.transaction = transaction
     ));
+
+    this.transactionService.transactions$.subscribe((transactions: Transaction[]) => (
+      this.transactions = transactions
+    ));
+  }
+
+  deleteTransaction() {
+    this.dialogService.showTransactionDeleteComponent().afterClosed().subscribe((res: boolean) => {
+      if (res) {
+          this.transactionService.deleteTransaction(this.transaction._id).subscribe((res) => {
+            const filteredTransactions: Transaction[] = this.transactions.filter((transaction: Transaction) => 
+              this.transaction._id !== transaction._id);
+            this.transactionService.transactions$.next([...filteredTransactions]);
+            console.log(res);
+          });
+        }
+      });
   }
 }

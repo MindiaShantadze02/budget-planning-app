@@ -31,6 +31,8 @@ import { LogoutDialogComponent } from './components/dialog-boxes/logout-dialog/l
 import { EditAccountComponent } from './components/dialog-boxes/edit-account/edit-account.component';
 import { CreateTransactionComponent } from './components/create-transaction/create-transaction.component';
 import { TransactionDetailsComponent } from './components/dialog-boxes/transaction-details/transaction-details.component';
+import { DeleteTransactionComponent } from './components/dialog-boxes/delete-transaction/delete-transaction.component';
+import { EditTransactionComponent } from './components/edit-transaction/edit-transaction.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { TransactionDetailsComponent } from './components/dialog-boxes/transacti
     LogoutDialogComponent,
     EditAccountComponent,
     CreateTransactionComponent,
-    TransactionDetailsComponent
+    TransactionDetailsComponent,
+    DeleteTransactionComponent,
+    EditTransactionComponent
   ],
   entryComponents: [
     AccountsDialogBoxComponent,

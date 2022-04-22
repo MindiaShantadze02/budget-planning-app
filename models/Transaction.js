@@ -54,5 +54,13 @@ TransactionSchema.pre('save', function () {
     }
 });
 
+TransactionSchema.pre('update', function () {
+    if (this.transactionType === 'Expense' && this.amount > 0) {
+        this.amount = 0 - Number(this.amount);
+    } else if (this.transactionType === 'Income' && this.amount < 0) {
+        this.amount = Math.abs(this.amount);
+    }
+});
+
 // exporting model
 module.exports = mongoose.model('Transaction', TransactionSchema);

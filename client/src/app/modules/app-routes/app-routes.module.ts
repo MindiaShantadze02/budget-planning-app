@@ -16,6 +16,7 @@ import { HomeComponent } from 'src/app/components/home/home.component';
 import { TransactionsComponent } from 'src/app/components/home/home-components/transactions/transactions.component';
 import { CategoriesPageComponent } from 'src/app/components/categories-page/categories-page.component';
 import { CreateTransactionComponent } from 'src/app/components/create-transaction/create-transaction.component';
+import { EditTransactionComponent } from 'src/app/components/edit-transaction/edit-transaction.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent, canActivate: [AuthGuard],
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
        },
       { path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard] },
       { path: 'categories', component: CategoriesPageComponent },
-      { path: ':id/create-transaction', component: CreateTransactionComponent }
+      { path: ':id/create-transaction', component: CreateTransactionComponent },
+      { path: ':transactionId/edit', component: EditTransactionComponent }
     ]
  },
   { path: 'login', component: LoginComponent },

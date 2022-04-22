@@ -7,6 +7,7 @@ import { AccountDetailsComponent } from 'src/app/components/dialog-boxes/account
 import { LogoutDialogComponent } from 'src/app/components/dialog-boxes/logout-dialog/logout-dialog.component';
 import { EditAccountComponent } from 'src/app/components/dialog-boxes/edit-account/edit-account.component';
 import { TransactionDetailsComponent } from 'src/app/components/dialog-boxes/transaction-details/transaction-details.component';
+import { DeleteTransactionComponent } from 'src/app/components/dialog-boxes/delete-transaction/delete-transaction.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,6 +54,12 @@ export class DialogService {
       data: {
         id
       }
+    });
+  }
+
+  showTransactionDeleteComponent() {
+    return this.dialog.open(DeleteTransactionComponent, {
+      width: '500px'
     });
   }
 

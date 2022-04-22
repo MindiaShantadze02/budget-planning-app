@@ -1,4 +1,5 @@
 export interface Transaction {
+    _id: '',
     user: string,
     account: string,
     transactionType?: string,

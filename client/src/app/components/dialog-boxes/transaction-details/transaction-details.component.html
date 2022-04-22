@@ -1,4 +1,15 @@
 <div class="transaction-details">
+    <div class="account-details-options">
+        <button mat-button (click)="deleteTransaction()">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-button [routerLink]="[transaction._id, 'edit']">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-button>
+            <mat-icon mat-button>close</mat-icon>
+        </button>
+    </div>
     <h1>Transaction</h1>
     <div class="account-details__row">
         <b class="account-details__title">Title</b>

@@ -24,7 +24,7 @@ router.route('/:accountId')
     .post(auth, createTransaction);
 
 // getting deleting and writing transactions
-router.route('/:accountId/:transactionId')
+router.route('/transaction/:transactionId')
     .get(auth, getTransaction)
     .put(auth, updateTransaction)
     .delete(auth, deleteTransaction);

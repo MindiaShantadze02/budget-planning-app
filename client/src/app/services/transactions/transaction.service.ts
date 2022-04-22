@@ -38,15 +38,15 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.apiUrl}/transaction/${transactionId}`);
   }
 
-  updateTransaction(transactionId: string, updatedTransaction: Transaction):Observable<string> {
-    return this.http.post<string>(
-      `${this.apiUrl}/${transactionId}`,
+  updateTransaction(transactionId: string, updatedTransaction: Transaction):Observable<Transaction> {
+    return this.http.put<Transaction>(
+      `${this.apiUrl}/transaction/${transactionId}`,
       updatedTransaction,
       httpOptions
     );
   }
 
   deleteTransaction(transactionId: string):Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/${transactionId}`);
+    return this.http.delete<string>(`${this.apiUrl}/transaction/${transactionId}`);
   }
 }
