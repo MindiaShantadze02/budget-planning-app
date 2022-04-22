@@ -34,19 +34,19 @@ export class TransactionService {
     return this.http.post<Transaction>(`${this.apiUrl}/${accountId}`, transaction, httpOptions);
   } 
 
-  getTransaction(accountId: string, transactionId: string):Observable<Transaction> {
-    return this.http.get<Transaction>(`${this.apiUrl}/${accountId}/${transactionId}`);
+  getTransaction(transactionId: string):Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.apiUrl}/transaction/${transactionId}`);
   }
 
-  updateTransaction(accountId: string, transactionId: string, updatedTransaction: Transaction):Observable<string> {
+  updateTransaction(transactionId: string, updatedTransaction: Transaction):Observable<string> {
     return this.http.post<string>(
-      `${this.apiUrl}/${accountId}/${transactionId}`,
+      `${this.apiUrl}/${transactionId}`,
       updatedTransaction,
       httpOptions
     );
   }
 
-  deleteTransaction(accountId: string, transactionId: string):Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/${accountId}/${transactionId}`);
+  deleteTransaction(transactionId: string):Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/${transactionId}`);
   }
 }

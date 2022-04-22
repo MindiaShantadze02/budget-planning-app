@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Account } from 'src/app/interfaces/Account';
 import { AccountService } from 'src/app/services/accounts/account.service';
-import { AccountDeleteDialogComponent } from '../account-delete-dialog/account-delete-dialog.component';
+import { AccountDeleteDialogComponent } from '../delete-dialog/account-delete-dialog.component';
 
 @Component({
   selector: 'app-edit-account',

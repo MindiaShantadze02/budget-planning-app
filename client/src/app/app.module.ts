@@ -24,12 +24,13 @@ import { CategoriesPageComponent } from './components/categories-page/categories
 import { CategoriesComponent } from './components/categories-page/categories/categories.component';
 import { CategoryComponent } from './components/categories-page/category/category.component';
 import { AccountsDialogBoxComponent } from './components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
-import { AccountDeleteDialogComponent } from './components/dialog-boxes/account-delete-dialog/account-delete-dialog.component';
+import { AccountDeleteDialogComponent } from './components/dialog-boxes/delete-dialog/account-delete-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AccountDetailsComponent } from './components/dialog-boxes/account-details/account-details.component';
 import { LogoutDialogComponent } from './components/dialog-boxes/logout-dialog/logout-dialog.component';
 import { EditAccountComponent } from './components/dialog-boxes/edit-account/edit-account.component';
 import { CreateTransactionComponent } from './components/create-transaction/create-transaction.component';
+import { TransactionDetailsComponent } from './components/dialog-boxes/transaction-details/transaction-details.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CreateTransactionComponent } from './components/create-transaction/crea
     AccountDetailsComponent,
     LogoutDialogComponent,
     EditAccountComponent,
-    CreateTransactionComponent
+    CreateTransactionComponent,
+    TransactionDetailsComponent
   ],
   entryComponents: [
     AccountsDialogBoxComponent,

@@ -6,5 +6,6 @@ export interface Transaction {
     description: string,
     category: string,
     currency?: string,
-    amount: string
+    amount: string,
+    transactionDate: string
 }

@@ -24,8 +24,7 @@ export class AccountDetailsComponent implements OnInit {
     private accountService: AccountService,
     private dialogService: DialogService,
     private dialog: MatDialogRef<AccountDetailsComponent>,
-    private accountDetailsDialog: MatDialogRef<AccountDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) private data:any
+    private accountDetailsDialog: MatDialogRef<AccountDetailsComponent>
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class AccountDetailsComponent implements OnInit {
       this.accounts = accounts
     ));
 
-    this.accountService.getAvailableAmount(this.data.id).subscribe((availableAmount: number) => (
+    this.accountService.getAvailableAmount(this.currentAccountId).subscribe((availableAmount: number) => (
       this.availableAmount = availableAmount
     ));
   };

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Transaction } from 'src/app/interfaces/Transaction';
 import { AccountService } from 'src/app/services/accounts/account.service';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private accountService: AccountService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
