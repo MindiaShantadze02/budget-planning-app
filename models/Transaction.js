@@ -39,7 +39,12 @@ const TransactionSchema = new mongoose.Schema({
         type: String
     },
     amount: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    transactionDate: {
+        type: Date,
+        required: true
     }
 }, {
     timestamps: true
@@ -47,14 +52,6 @@ const TransactionSchema = new mongoose.Schema({
 
 // defining transaction type depending on amount passed by user
 TransactionSchema.pre('save', function () {
-    if (this.transactionType === 'Expense' && this.amount > 0) {
-        this.amount = 0 - Number(this.amount);
-    } else if (this.transactionType === 'Income' && this.amount < 0) {
-        this.amount = Math.abs(this.amount);
-    }
-});
-
-TransactionSchema.pre('update', function () {
     if (this.transactionType === 'Expense' && this.amount > 0) {
         this.amount = 0 - Number(this.amount);
     } else if (this.transactionType === 'Income' && this.amount < 0) {

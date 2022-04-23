@@ -61,7 +61,6 @@ export class CreateTransactionComponent implements OnInit {
         newTransaction
       ).subscribe((transaction: Transaction) => (
         this.transactionService.transactions$.next([transaction , ...this.transactions]),
-        console.log(transaction),
         this.router.navigateByUrl('')
       ), 
       err => {

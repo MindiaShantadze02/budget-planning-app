@@ -3,6 +3,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Transaction = require('../models/Transaction');
+const Account = require('../models/Account');
 
 // GET /transactions
 // PRIVATE
@@ -24,17 +25,25 @@ exports.getAllTransactions = asyncWrapper(async (req, res, next) => {
 // PRIVATE
 // for getting account transactions
 exports.getTransactions = asyncWrapper(async (req, res, next) => {
+    const queryObj = { ...req.query };
+    const excludedFields = ['sort'];
+    excludedFields.forEach(field => delete queryObj[field]);
+
     if (!req.user) {
         res.status(400);
         throw new Error('User not found');
     }
 
-    const transactions = await Transaction.find({
+    let query = Transaction.find({
         user: req.user.id,
         account: req.params.accountId
-    }).sort({
-        createdAt: -1
     });
+
+    if (req.query.sort) {
+        query = query.sort(req.query.sort);
+    }
+
+    const transactions = await query;
 
     res.status(200).json(transactions);
 });
@@ -84,8 +93,7 @@ exports.updateTransaction = asyncWrapper(async (req, res, next) => {
 
     const updatedTransaction = await Transaction.findByIdAndUpdate(
         req.params.transactionId,
-        req.body,
-        { runValidators: true }
+        req.body
     );
 
     res.status(201).json(updatedTransaction);

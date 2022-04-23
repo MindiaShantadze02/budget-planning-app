@@ -33,7 +33,6 @@ export class AccountsComponent implements OnInit {
         this.accountService.deleteAccount(id).subscribe((res: string) => {
           const filteredAccounts: Account[] = this.accounts.filter((account: Account) => account._id !== id);
           this.accountService.accounts$.next(filteredAccounts);
-          console.log("F")
         });
       }
     });

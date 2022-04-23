@@ -22,8 +22,12 @@ export class TransactionService {
 
   transactions$ = new BehaviorSubject<Transaction[]>([]);
 
-  getTransactions(accountId: string):Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.apiUrl}/${accountId}`);
+  getTransactions(accountId: string, params?: any):Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/${accountId}`, {
+      params: {
+        sort: params.sort
+      }
+    });
   }
 
   getAllTransactions():Observable<Transaction[]> {

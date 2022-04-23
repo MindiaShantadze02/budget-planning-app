@@ -4,7 +4,7 @@
         <h4>{{transaction.title}}</h4>
         <span class="transaction__type">{{transaction.transactionType}}</span>
         &#183;
-        <span class="transaction__date">{{transaction.createdAt | date:'MM.dd.y'}}</span>
+        <span class="transaction__date">{{transaction.transactionDate | date:'MM.dd.y'}}</span>
     </div>
     <div class="transaction__amount-wrapper">
         <h2 class="transaction__amount">{{transaction.amount}}$</h2>

@@ -12,6 +12,7 @@ import { DialogService } from 'src/app/services/dialog/dialog.service';
 export class AccountDetailsComponent implements OnInit {
   accounts: Account[] = [];
   account: Account = {
+    availableAmount: 0,
     _id: '',
     user: '',
     title: '',

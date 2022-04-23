@@ -7,7 +7,8 @@
                 <mat-icon>search</mat-icon>
             </button>
         </form>
-        <button class="transactions__sort-by-date">
+        <button *ngIf="accountId" class="transactions__sort-by-date"
+        (click)="sortTransactions()">
             <mat-icon>sort</mat-icon>
             <span>Transactions By Date</span>
         </button>

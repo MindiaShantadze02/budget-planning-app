@@ -13,6 +13,7 @@ import { AccountDeleteDialogComponent } from '../delete-dialog/account-delete-di
 export class EditAccountComponent implements OnInit {
   accounts: Account[] = [];
   account: Account = {
+    availableAmount: 0,
     _id: '',
     user: '',
     title: '',
@@ -54,7 +55,8 @@ export class EditAccountComponent implements OnInit {
         if (accountItem._id === account._id) {
           return {
             ...account,
-            ...this.editAccountForm.value
+            ...this.editAccountForm.value,
+            availableAmount: accountItem.availableAmount + Number(this.editAccountForm.value.amount)
           };
         }
         return accountItem;
