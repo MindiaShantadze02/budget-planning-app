@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/interfaces/Category';
 
 @Component({
@@ -8,10 +8,14 @@ import { Category } from 'src/app/interfaces/Category';
 })
 export class CategoryComponent implements OnInit {
   @Input() category!: Category;
+  @Output() deleteCategory = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onDeleteCategory() {
+    this.deleteCategory.emit();
+  }
 }

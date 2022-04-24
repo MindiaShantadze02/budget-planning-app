@@ -23,6 +23,7 @@ export class AccountsDialogBoxComponent implements OnInit {
       Validators.minLength(10),
       Validators.maxLength(255)])
   });
+  errors:any = {};
 
   constructor(
     private accountService: AccountService,
@@ -40,6 +41,9 @@ export class AccountsDialogBoxComponent implements OnInit {
       this.accountService.accounts$.next([account, ...this.accounts]),
       this.dialog.close(),
       this.accountForm.reset()
-    ));
+    ),
+    err => {
+      this.errors = err.error;
+    });
   }
 }

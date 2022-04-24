@@ -46,44 +46,8 @@
         background-color: #FFF;
         color: #B9E2E6;
     }
-    &__add-transaction-form {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        input {
-            border-radius: 10px;
-            margin-top: 10px;
-            padding: 10px;
-            border: 1px solid #000;
-        }
-        textarea {
-            margin-top: 10px;
-            border: 1px solid #000;
-            border-radius: 10px;
-            padding: 10px;
-            resize: none;
-            margin-bottom: 10px;
-        }
-    }
-    &__category-div {
-        display: flex;
-        flex-direction: column;
-    }
-    #select-category {
-        border: 1px solid #000;
-        margin-top: 5px;
-        padding: 10px;
-        border-radius: 10px;
-    }
-    &__add-transaction-submit {
-        padding: 10px;
-        background: linear-gradient(45deg,#f5a7a7, #9198e5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        color: #FFF;
-        font-size: 20px;
-        margin-top: 10px;
+    &__error-message {
+        text-align: center;
+        color: #EE3F19;
     }
 }

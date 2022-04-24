@@ -50,7 +50,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
         country
     });
     
-    res.json(user);
+    res.json('User created successfully');
 });
 
 // function for logging in user

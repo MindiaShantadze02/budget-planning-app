@@ -14,31 +14,7 @@
                 <mat-icon class="arrow-icon add-plus">add</mat-icon>
                  Add Transaction
             </button>
-            <ng-template *ngIf="message">
-                <p [style.color]="success ? '#000' : 'red'">{{message}}</p>
-            </ng-template>
-            <form 
-            class="options__add-transaction-form"
-            *ngIf="showTransactionForm" 
-            [formGroup]="transactionForm"
-            (ngSubmit)="createTransaction()">
-                <input type="text" placeholder="Transaction Title" formControlName="title">
-                <textarea placeholder="Transaction Description"  formControlName="description"></textarea>
-                <div class="options__category-div">
-                    <label for="select-category">Transaction Category</label>
-                    <select id="select-category" formControlName="category">
-                        <option value="income category">Home</option>
-                        <option value="salary">Shopping</option>
-                        <option value="debt payment">Tech</option>
-                        <option value="gift">Gift</option>
-                        <option value="rental income">Rental Income</option>
-                        <option value="bonus">Bonus</option>
-                        <option *ngFor="let category of categories" [value]="category.title">{{category.title}}</option>
-                    </select>
-                </div>
-                <input type="number" placeholder="Enter Amount" formControlName="amount">
-                <button type="submit" class="options__add-transaction-submit">Submit</button>
-            </form>
+            <p *ngIf="message" class="options__error-message">{{message}}</p>
         </section>
     </div>
 </aside>

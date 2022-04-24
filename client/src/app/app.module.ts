@@ -24,15 +24,15 @@ import { CategoriesPageComponent } from './components/categories-page/categories
 import { CategoriesComponent } from './components/categories-page/categories/categories.component';
 import { CategoryComponent } from './components/categories-page/category/category.component';
 import { AccountsDialogBoxComponent } from './components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
-import { AccountDeleteDialogComponent } from './components/dialog-boxes/delete-dialog/account-delete-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AccountDetailsComponent } from './components/dialog-boxes/account-details/account-details.component';
 import { LogoutDialogComponent } from './components/dialog-boxes/logout-dialog/logout-dialog.component';
 import { EditAccountComponent } from './components/dialog-boxes/edit-account/edit-account.component';
 import { CreateTransactionComponent } from './components/create-transaction/create-transaction.component';
 import { TransactionDetailsComponent } from './components/dialog-boxes/transaction-details/transaction-details.component';
-import { DeleteTransactionComponent } from './components/dialog-boxes/delete-transaction/delete-transaction.component';
 import { EditTransactionComponent } from './components/edit-transaction/edit-transaction.component';
+import { DeleteDialogComponent } from './components/dialog-boxes/delete-dialog/delete-dialog.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -53,18 +53,18 @@ import { EditTransactionComponent } from './components/edit-transaction/edit-tra
     CategoriesComponent,
     CategoryComponent,
     AccountsDialogBoxComponent,
-    AccountDeleteDialogComponent,
     AccountDetailsComponent,
     LogoutDialogComponent,
     EditAccountComponent,
     CreateTransactionComponent,
     TransactionDetailsComponent,
-    DeleteTransactionComponent,
-    EditTransactionComponent
+    EditTransactionComponent,
+    DeleteDialogComponent,
+    StatisticsComponent
   ],
   entryComponents: [
     AccountsDialogBoxComponent,
-    AccountDeleteDialogComponent
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -86,6 +86,11 @@ exports.getTransaction = asyncWrapper(async (req, res, next) => {
 exports.updateTransaction = asyncWrapper(async (req, res, next) => {
     const transaction = await Transaction.findById(req.params.transactionId);
 
+    if (!transaction) {
+        res.status(404);
+        throw new Error('Transaction not found');
+    }
+
     if (req.user.id !== transaction.user.toString()) {
         res.status(401);
         throw new Error('Unauthorized');
@@ -93,7 +98,8 @@ exports.updateTransaction = asyncWrapper(async (req, res, next) => {
 
     const updatedTransaction = await Transaction.findByIdAndUpdate(
         req.params.transactionId,
-        req.body
+        req.body,
+        { runValidators: true }
     );
 
     res.status(201).json(updatedTransaction);

@@ -33,6 +33,7 @@ export class EditTransactionComponent implements OnInit {
     amount: '',
     description: ''
   };
+  errors:any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +80,9 @@ export class EditTransactionComponent implements OnInit {
 
           this.transactionService.transactions$.next(updatedTransactions);
           this.router.navigateByUrl('');
-        });
+    }, 
+    err => {
+      this.errors = err.error;
+    });
   }
 }

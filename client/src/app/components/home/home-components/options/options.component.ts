@@ -75,7 +75,8 @@ export class OptionsComponent implements OnInit {
     if (this.accountId) {
       this.router.navigate(['/', this.accountId, 'create-transaction'])
     } else {
-      console.log('please choose an account')
+      this.message = 'Please choose an account';
+      console.log(this.message);
     }
   }
 }

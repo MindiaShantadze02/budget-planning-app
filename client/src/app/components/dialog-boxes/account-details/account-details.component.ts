@@ -25,7 +25,8 @@ export class AccountDetailsComponent implements OnInit {
     private accountService: AccountService,
     private dialogService: DialogService,
     private dialog: MatDialogRef<AccountDetailsComponent>,
-    private accountDetailsDialog: MatDialogRef<AccountDetailsComponent>
+    private accountDetailsDialog: MatDialogRef<AccountDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
   ) { }
 
   ngOnInit(): void {
@@ -40,13 +41,13 @@ export class AccountDetailsComponent implements OnInit {
       this.accounts = accounts
     ));
 
-    this.accountService.getAvailableAmount(this.currentAccountId).subscribe((availableAmount: number) => (
+    this.accountService.getAvailableAmount(this.data.id).subscribe((availableAmount: number) => (
       this.availableAmount = availableAmount
     ));
   };
 
   deleteAccount(id: string) {
-    this.dialogService.deleteAccountDialog().afterClosed().subscribe(res => {
+    this.dialogService.showDeleteDialog("Are you sure you want to delete this account?").afterClosed().subscribe(res => {
       if (res) {
         this.accountService.deleteAccount(id).subscribe((res: string) => {
           const filteredAccounts: Account[] = this.accounts.filter((account: Account) => account._id !== id);

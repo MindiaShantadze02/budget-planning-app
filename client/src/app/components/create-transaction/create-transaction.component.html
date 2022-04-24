@@ -10,14 +10,17 @@
             <mat-option value="Income">Income</mat-option>
             <mat-option value="Expense">Expense</mat-option>
           </mat-select>
+          <mat-error *ngIf="errors.transactionType">{{errors.transactionType}}</mat-error>
         </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
             <input matInput formControlName="title">
+            <mat-error *ngIf="errors.title">{{errors.title}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description"></textarea>
+            <mat-error *ngIf="errors.description">{{errors.description}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Category</mat-label>
@@ -32,16 +35,19 @@
               *ngFor="let category of categories" 
               [value]="category.title">{{category.title}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="errors.category">{{errors.category}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Amount</mat-label>
             <input matInput formControlName="amount">
+            <mat-error *ngIf="errors.amount">{{errors.amount}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Transaction Date</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="transactionDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="errors.transactionDate">{{errors.transactionDate}}</mat-error>
           </mat-form-field>
           <button type="submit" mat-raised-button color="primary">Add Transaction</button>
     </form>

@@ -3,11 +3,12 @@
     <form 
     class="categories__category-form"
     [formGroup]="categoryForm"
-    (ngSubmit)="createCategory()"
+    (ngSubmit)="buttonText === 'Add Category' ? createCategory() : editCategory(currentCategory._id)"
     >
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
             <input matInput formControlName="title">
+            <p *ngIf="errors.title">{{errors.title}}</p>
         </mat-form-field>
         <mat-radio-group 
         aria-label="Select Transaction Type"
@@ -15,8 +16,13 @@
         formControlName="categoryType">
             <mat-radio-button value="Income" class="radio-button">Income</mat-radio-button>
             <mat-radio-button value="Expense" class="radio-button">Expense</mat-radio-button>
+            <p *ngIf="errors.categoryType">{{errors.categoryType}}</p>
         </mat-radio-group>
-        <button mat-raised-button color="primary" type="submit"><mat-icon>add_plus</mat-icon> Add Category</button>
+        <button 
+        mat-raised-button color="primary" 
+        type="submit"
+        [disabled]="categoryForm.invalid"
+        ><mat-icon *ngIf="buttonText === 'Add Category'">add_plus</mat-icon> {{buttonText}}</button>
     </form>
     <app-categories [categories]="categories"></app-categories>
 </main>

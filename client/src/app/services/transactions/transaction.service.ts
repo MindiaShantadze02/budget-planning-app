@@ -25,7 +25,8 @@ export class TransactionService {
   getTransactions(accountId: string, params?: any):Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.apiUrl}/${accountId}`, {
       params: {
-        sort: params.sort
+        sort: params.sort,
+        title: params.title
       }
     });
   }

@@ -1,4 +1,14 @@
-<mat-card class="category">
-    <h4>{{category.title}}</h4>
-    <span>{{category.categoryType}}</span>
+<mat-card class="category" [routerLink]="['/categories/edit', category._id]" routerLinkActive="active-category">
+    <div>
+        <h4>{{category.title}}</h4>
+        <span>{{category.categoryType}}</span>
+    </div>
+    <div class="category__actions">
+        <button 
+        mat-raised-button color="warn"
+        (click)="onDeleteCategory()">Delete</button>
+        <button 
+        mat-raised-button 
+        color="primary">Edit</button>
+    </div>
 </mat-card>

@@ -13,8 +13,6 @@ export class AccountComponent implements OnInit {
   @Input() account!: Account;
   @Input() currentAccount!: Account;
 
-  @Output() currentAcc = new EventEmitter();
-
   availableAmount: number = 0;
 
   constructor(

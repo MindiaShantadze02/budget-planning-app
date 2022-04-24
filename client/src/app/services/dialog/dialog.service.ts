@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { AccountDeleteDialogComponent } from 'src/app/components/dialog-boxes/delete-dialog/account-delete-dialog.component';
 import { AccountsDialogBoxComponent } from 'src/app/components/dialog-boxes/accounts-dialog-box/accounts-dialog-box.component';
 import { AccountDetailsComponent } from 'src/app/components/dialog-boxes/account-details/account-details.component';
 import { LogoutDialogComponent } from 'src/app/components/dialog-boxes/logout-dialog/logout-dialog.component';
 import { EditAccountComponent } from 'src/app/components/dialog-boxes/edit-account/edit-account.component';
 import { TransactionDetailsComponent } from 'src/app/components/dialog-boxes/transaction-details/transaction-details.component';
-import { DeleteTransactionComponent } from 'src/app/components/dialog-boxes/delete-transaction/delete-transaction.component';
+import { DeleteDialogComponent } from 'src/app/components/dialog-boxes/delete-dialog/delete-dialog.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +22,12 @@ export class DialogService {
     });
   }
 
-  deleteAccountDialog() {
-    return this.dialog.open(AccountDeleteDialogComponent, {
-      width: '300px'
+  showDeleteDialog(message: string) {
+    return this.dialog.open(DeleteDialogComponent, {
+      width: '300px',
+      data: {
+        message
+      }
     });
   }
 
@@ -54,12 +56,6 @@ export class DialogService {
       data: {
         id
       }
-    });
-  }
-
-  showTransactionDeleteComponent() {
-    return this.dialog.open(DeleteTransactionComponent, {
-      width: '500px'
     });
   }
 

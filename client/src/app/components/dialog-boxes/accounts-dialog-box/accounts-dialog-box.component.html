@@ -3,11 +3,13 @@
     <mat-form-field appearance="fill">
         <mat-label>Title (min: 3 chars)</mat-label>
         <input matInput formControlName="title">
+        <p class="error" *ngIf="errors.title">{{errors.title}}</p>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Description (min: 10 chars)</mat-label>
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
+      <p *ngIf="errors.description">{{errors.description}}</p>
     <button 
     mat-raised-button 
     type="submit"

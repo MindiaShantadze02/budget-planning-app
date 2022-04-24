@@ -25,6 +25,8 @@ export class CreateTransactionComponent implements OnInit {
   accountId: string = '';
   transactions: Transaction[] = [];
 
+  errors: any = {};
+
   constructor(
     private categoryService: CategoryService,
     private transactionService: TransactionService,
@@ -64,7 +66,7 @@ export class CreateTransactionComponent implements OnInit {
         this.router.navigateByUrl('')
       ), 
       err => {
-        console.log(err);
+        this.errors = err.error
       });
     }
   }

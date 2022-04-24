@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
 
 const MatModuleItems = [
   MatFormFieldModule,
@@ -31,7 +32,8 @@ const MatModuleItems = [
   MatCardModule,
   MatMenuModule,
   MatDialogModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatTableModule
 ];
 
 @NgModule({

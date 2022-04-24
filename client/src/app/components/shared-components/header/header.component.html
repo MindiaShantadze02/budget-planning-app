@@ -11,7 +11,7 @@
             >Categories</a>
         </li>
         <li class="app-header__list-item">
-            <a class="app-header__link">Statistics</a>
+            <a class="app-header__link" [routerLink]="['/statistics']" routerLinkActive="router-link-active" >Statistics</a>
         </li>
         <li class="app-header__list-item" *ngIf="isAdmin">
             <a class="app-header__link" routerLink="admin">Admin</a>

@@ -9,7 +9,6 @@
         <app-account 
         *ngFor="let account of accounts" 
         [account]="account"
-        (accDelete)="deleteAccount(account._id)"
         ></app-account>
     </div>
     <div *ngIf="accounts.length === 0" [ngStyle]="{marginTop: '10px', color: 'red'}">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Account } from 'src/app/interfaces/Account';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Category } from 'src/app/interfaces/Category';
 import { CategoryService } from 'src/app/services/category/category.service';
 
@@ -11,14 +11,40 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class CategoriesPageComponent implements OnInit {
   categories: Category[] = [];
+  currentCategory: Category = {
+    _id: '',
+    title: '',
+    categoryType: ''
+  };
   categoryForm = new FormGroup({
     title: new FormControl(''),
     categoryType: new FormControl('')
   });
+  buttonText = 'Add Category';
+  categoryId = '';
+  errors: any = {};
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.categoryId = params['categoryId'];
+      if (params['categoryId']) {
+        this.buttonText = 'Edit Category';
+        this.categoryService.getCategory(params['categoryId']).subscribe((category: Category) => (
+          this.currentCategory = category, 
+          this.categoryForm = new FormGroup({
+            title: new FormControl(category.title, [Validators.required]),
+            categoryType: new FormControl(category.categoryType, [Validators.required])
+          })
+        ));
+      }
+    });
+
     this.categoryService.categories$.subscribe((categories: Category[]) => {
       this.categories = categories;
     })
@@ -28,9 +54,21 @@ export class CategoriesPageComponent implements OnInit {
     ));
   }
 
-  createCategory():void {
+  createCategory() {
     this.categoryService.createCategory(this.categoryForm.value).subscribe((category: Category) => (
       this.categoryService.categories$.next([...this.categories, category])
-    ));
+    ),
+    err => {
+      this.errors = err.error;
+    });
+  }
+
+  editCategory(id: string) {
+    if (this.buttonText === 'Edit Category') {
+      this.categoryService.updateCategory(id, this.categoryForm.value).subscribe((category: Category) => (
+        this.router.navigateByUrl('categories')
+      ),
+      err => this.errors = err.error);
+    }
   }
 }

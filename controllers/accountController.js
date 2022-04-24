@@ -9,9 +9,6 @@ const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
 const Piggybank = require('../models/Piggybank');
 
-// defining object id type
-const { ObjectId } = mongoose.Types;
-
 // GET /accounts
 // PRIVATE
 // for getting user accounts
@@ -119,7 +116,7 @@ exports.deleteAccount = asyncWrapper(async (req, res, next) => {
 // GET /accounts/:id/available-amount
 // PRIVATE
 // for getting sum of all transactions of current account
-exports.getAvailableAmount = async (req, res, next) => {
+exports.getAvailableAmount = asyncWrapper(async (req, res, next) => {
     const account = await Account.findById(req.params.id);
     
     if (!account) {
@@ -132,21 +129,15 @@ exports.getAvailableAmount = async (req, res, next) => {
         throw new Error('Unauthorized');
     }
     
-    const availableAmount = await Transaction.aggregate([
-        {
-            $match: {
-                account: ObjectId(req.params.id)
-            }
-        },
-        {
-            $group: {
-                _id: null,
-                availableAmount: { $sum: '$amount' }
-            }   
-        }
-    ]);
+    if (!req.params.id) {
+        res.status(404);
+        throw new Error('Route not found');
+    }
+    
+    const availableAmount = (await Transaction.find({ account: req.params.id })).reduce(
+        (acc, transaction) => acc + transaction.amount,
+        0
+    );
 
-    // transactions = await transactions.find();
-
-    res.status(200).json(availableAmount[0].availableAmount || 0);
-};
+   res.status(200).json(availableAmount);
+});

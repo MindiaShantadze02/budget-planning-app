@@ -27,17 +27,6 @@ export class AccountsComponent implements OnInit {
     ));
   }
 
-  deleteAccount(id: string) {
-    this.dialogService.deleteAccountDialog().afterClosed().subscribe(res => {
-      if (res) {
-        this.accountService.deleteAccount(id).subscribe((res: string) => {
-          const filteredAccounts: Account[] = this.accounts.filter((account: Account) => account._id !== id);
-          this.accountService.accounts$.next(filteredAccounts);
-        });
-      }
-    });
-  }
-
   showDialog() {
     this.dialogService.openAccountForm();
   }

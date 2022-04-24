@@ -39,7 +39,7 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   deleteTransaction() {
-    this.dialogService.showTransactionDeleteComponent().afterClosed().subscribe((res: boolean) => {
+    this.dialogService.showDeleteDialog("Are you sure you want to delete this transaction?").afterClosed().subscribe((res: boolean) => {
       if (res) {
           this.transactionService.deleteTransaction(this.transaction._id).subscribe((res) => {
             const filteredTransactions: Transaction[] = this.transactions.filter((transaction: Transaction) => 

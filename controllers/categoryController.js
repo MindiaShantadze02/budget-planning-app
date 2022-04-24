@@ -73,9 +73,12 @@ exports.updateCategory = asyncWrapper(async (req, res, next) => {
         throw new Error('Unauthorized');
     }
 
-    await Category.findByIdAndUpdate(req.params.id, req.body);
+    const updatedCategory = await Category.findByIdAndUpdate(req.params.id, req.body, {
+        runValidators: true,
+        new: true
+    });
 
-    res.status(200).json('Category Updated Successfully');
+    res.status(200).json(updatedCategory);
 });
 
 // DELETE /categories/:id
