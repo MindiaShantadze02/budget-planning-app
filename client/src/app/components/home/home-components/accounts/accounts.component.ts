@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/accounts/account.service';
 import { Account } from 'src/app/interfaces/Account';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
@@ -13,8 +13,7 @@ export class AccountsComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private dialogService: DialogService,
-    private router: Router
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {

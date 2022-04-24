@@ -3,23 +3,6 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Transaction = require('../models/Transaction');
-const Account = require('../models/Account');
-
-// GET /transactions
-// PRIVATE
-// for getting all transactions
-exports.getAllTransactions = asyncWrapper(async (req, res, next) => {
-    if (!req.user) {
-        res.status(400);
-        throw new Error('User not found');
-    }
-
-    const transactions = await Transaction.find({}).sort({
-        createdAt: -1
-    });
-
-    res.status(200).json(transactions);
-});
 
 // GET /transactions/:accountId
 // PRIVATE
@@ -36,7 +19,9 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
 
     let query = Transaction.find({
         user: req.user.id,
-        account: req.params.accountId
+        account: req.params.accountId,
+        ...queryObj,
+        title: { $regex: queryObj.title ? queryObj.title : '' }
     });
 
     if (req.query.sort) {

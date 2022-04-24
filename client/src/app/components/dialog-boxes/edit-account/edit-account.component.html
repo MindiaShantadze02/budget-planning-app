@@ -4,6 +4,15 @@
         <input formControlName="title" matInput>
     </mat-form-field>
     <mat-form-field appearance="fill">
+        <mat-label>Currency</mat-label>
+        <mat-select formControlName="currency">
+            <mat-option
+            *ngFor="let currency of currencies"
+            [value]="currency">{{currency?.code}}</mat-option>
+        </mat-select>
+        <p class="error" *ngIf="errors.country">{{errors.country}}</p>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
         <textarea formControlName="description" matInput></textarea>
     </mat-form-field>

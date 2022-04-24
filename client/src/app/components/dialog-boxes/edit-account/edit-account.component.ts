@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -16,25 +17,51 @@ export class EditAccountComponent implements OnInit {
     _id: '',
     user: '',
     title: '',
-    description: ''
+    description: '',
+    currency: {
+      country: ''
+    }
   };
   editAccountForm: FormGroup = new FormGroup({
     title: new FormControl(''),
-    description: new FormControl('')
+    description: new FormControl(''),
+    currency: new FormControl({})
   });
+  currencies: any = [];
+  errors: any = {};
 
   constructor(
     private accountService: AccountService,
-    private dialog: MatDialogRef<EditAccountComponent>
+    private dialog: MatDialogRef<EditAccountComponent>,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
+    this.http.get("https://restcountries.com/v3.1/all?fields=currencies,name").subscribe((res: any) => (
+      this.currencies = res.map((currency: any) => {
+        const currencyKey = Object.keys(currency.currencies)[0];
+        const currencyCountry = currency.name.common;
+        if (currencyKey) {
+          const { name, symbol } = currency.currencies[currencyKey];
+          return {
+            name,
+            code: currencyKey,
+            symbol,
+            currencyCountry
+          }
+        }
+
+        return { currencyCountry };
+      })
+    ));
+
     this.accountService.currentAccount$.subscribe((id: string) => {
       this.accountService.getAccount(id).subscribe((account: Account) => (
         this.account = account,
         this.editAccountForm = new FormGroup({
           title: new FormControl(account.title),
-          description: new FormControl(account.description)
+          description: new FormControl(account.description),
+          currency: new FormControl(account.currency)
         })
       ));
     });
@@ -65,7 +92,7 @@ export class EditAccountComponent implements OnInit {
       this.dialog.close();
     },
     err => {
-      console.log(err);
+      this.errors = err.error;
     });
   }
 }

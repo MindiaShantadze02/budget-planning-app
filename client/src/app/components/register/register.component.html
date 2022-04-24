@@ -6,30 +6,45 @@
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>First Name</mat-label>
                 <input matInput autocomplete="off" formControlName="firstName">
+                <p class="error" *ngIf="errors.firstName">{{errors.firstName}}</p>
             </mat-form-field>
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>Last Name</mat-label>
                 <input matInput matInput autocomplete="off" formControlName="lastName">
+                <p class="error" *ngIf="errors.firstName">{{errors.firstName}}</p>
             </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                    <mat-option
+                    *ngFor="let country of countries"
+                    [value]="country">{{country}}</mat-option>
+                </mat-select>
+                <p class="error" *ngIf="errors.country">{{errors.country}}</p>
+              </mat-form-field>
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>Email</mat-label>
                 <input matInput matInput autocomplete="off" formControlName="email">
+                <p class="error" *ngIf="errors.email">{{errors.email}}</p>
             </mat-form-field>
             <mat-radio-group aria-label="Gender" class="register-page__radio-group" formControlName="gender">
                 <h3 [ngStyle]="{fontSize: '1rem', marginLeft: '10px', color: 'rgba(0,0,0,.6)', fontWeight:'550'}">Gender</h3>
                 <mat-radio-button value="Male">Male</mat-radio-button>
                 <mat-radio-button value="Female">Female</mat-radio-button>
                 <mat-radio-button value="Other">Other</mat-radio-button>
+                <p class="error" *ngIf="errors.gender">{{errors.gender}}</p>
             </mat-radio-group>
             <mat-form-field appearance="fill">
                 <mat-label>Choose a date</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="birthDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <p class="error" *ngIf="errors.birthDate">{{errors.birthDate}}</p>
             </mat-form-field>
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" formControlName="password">
+                <p class="error" *ngIf="errors.password">{{errors.password}}</p>
             </mat-form-field>
             <mat-form-field appearance="fill" class="register-page__form-field">
                 <mat-label>Confirm Password</mat-label>

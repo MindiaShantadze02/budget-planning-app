@@ -8,15 +8,11 @@ const {
     getTransaction,
     getTransactions,
     updateTransaction,
-    deleteTransaction,
-    getAllTransactions,
+    deleteTransaction
  } = require('../controllers/transactionController');
 
 // auth middleware
 const auth = require('../middleware/auth');
-
-// getting all transactions
-router.get('/', auth, getAllTransactions);
 
 // getting account transactions and creating a transaction
 router.route('/:accountId')

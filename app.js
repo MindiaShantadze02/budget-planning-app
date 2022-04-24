@@ -11,7 +11,6 @@ const categoryRouter = require('./routes/categoryRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
 const accountRouter = require('./routes/accountRoutes');
 const piggybankRouter = require('./routes/piggyBankRoutes');
-const currencyRouter = require('./routes/currencyRoutes');
 const statisticsRouter = require('./routes/statisticsRoutes');
 
 // error handling middleware
@@ -32,7 +31,6 @@ app.use('/categories', categoryRouter);
 app.use('/transactions', transactionRouter);
 app.use('/accounts', accountRouter);
 app.use('/piggybanks', piggybankRouter);
-app.use('/currencies', currencyRouter);
 app.use('/statistics', statisticsRouter);
 
 // using error handling middleware

@@ -18,16 +18,16 @@ export class TransactionsComponent implements OnInit {
   searchForm:FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required])
   });
+  message = '';
 
   constructor(
     private transactionService: TransactionService,
     private accountService: AccountService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.transactionService.transactions$.subscribe((transactions: any) => {
+    this.transactionService.transactions$.subscribe((transactions: Transaction[]) => {
       this.transactions = transactions;
     });
     this.route.params.subscribe((params: Params) => {
@@ -36,13 +36,14 @@ export class TransactionsComponent implements OnInit {
       this.accountService.currentAccount$.next(params['id']);
       
       if (this.accountId) {
-        this.transactionService.getTransactions(this.accountId, this.sortBy).subscribe((transactions: Transaction[]) => {
+        this.transactionService.getTransactions(this.accountId, {
+          sort: this.sortBy,
+          title: this.searchForm.value.title
+        }).subscribe((transactions: Transaction[]) => {
           this.transactionService.transactions$.next(transactions);
         });
       } else {
-        this.transactionService.getAllTransactions().subscribe((transactions: Transaction[]) => {
-          this.transactionService.transactions$.next(transactions);
-        });
+        this.message = 'Please select an account';
       }
     });
   }
@@ -50,12 +51,15 @@ export class TransactionsComponent implements OnInit {
   filterTransactions() {
     const title: string = this.searchForm.value.title;
 
-    if (title) {
-      this.transactions = this.transactions.filter((transactionItem: Transaction) => 
-        transactionItem.title.toLocaleLowerCase().trim() === title.toLocaleLowerCase().trim()
-      );
+    if (this.accountId) {
+      this.transactionService.getTransactions(this.accountId, {
+        title,
+        sort: this.sortBy
+      }).subscribe((transactions: Transaction[]) => (
+        this.transactionService.transactions$.next(transactions)
+      ));
+      this.searchForm.reset(this.searchForm.value);
     }
-    this.searchForm.reset();
   }
 
   sortTransactions() {
@@ -65,10 +69,13 @@ export class TransactionsComponent implements OnInit {
       this.sortBy = '-transactionDate';
     }
 
-    this.transactionService.getTransactions(this.accountId, {
-      sort: this.sortBy
-    }).subscribe((transactions: Transaction[]) => (
-      this.transactions = transactions
-    ));
+    if (this.accountId) {
+      this.transactionService.getTransactions(this.accountId, {
+        sort: this.sortBy,
+        title: this.searchForm.value.title
+      }).subscribe((transactions: Transaction[]) => (
+        this.transactions = transactions
+      ));
+    }
   }
 }

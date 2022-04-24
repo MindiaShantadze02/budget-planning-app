@@ -42,4 +42,9 @@
     .mat-radio-button ~ .mat-radio-button {
         margin-left: 16px;
     }
+    .error {
+        font-size: 14px;
+        margin-top: 5px;
+        color: red;
+    }
 }

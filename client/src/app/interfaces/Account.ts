@@ -4,5 +4,9 @@ export interface Account {
     availableAmount: number,
     title: string,
     description: string,
-    currency?: string
+    currency?: {
+        code?: string,
+        symbol?: string,
+        country: string
+    }
 }

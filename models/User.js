@@ -49,7 +49,8 @@ const UserSchema = new mongoose.Schema({
         required: [true, 'Please enter your birthday']
     },
     country: {
-        type: 'String'
+        type: String,
+        required: [true, 'Please enter your country of residence']
     }
 }, {
     timestamps: true

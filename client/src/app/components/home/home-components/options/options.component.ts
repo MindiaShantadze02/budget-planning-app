@@ -79,4 +79,24 @@ export class OptionsComponent implements OnInit {
       console.log(this.message);
     }
   }
+
+  showIncomes() {
+    if (this.accountId) {
+      this.transactionService.getTransactions(this.accountId, {
+        transactionType: 'Income'
+      }).subscribe((transactions: Transaction[]) => (
+        this.transactionService.transactions$.next(transactions)
+      ));
+    }
+  }
+
+  showExpenses() {
+    if (this.accountId) {
+      this.transactionService.getTransactions(this.accountId, {
+        transactionType: 'Expense'
+      }).subscribe((transactions: Transaction[]) => (
+        this.transactionService.transactions$.next(transactions)
+      ));
+    }
+  }
 }

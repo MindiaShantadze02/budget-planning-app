@@ -2,13 +2,13 @@
     <h3>Options</h3>
     <div class="options__content-wrapper">
         <section class="options__transaction-options">
-            <button class="options__filter-transactions">
+            <button class="options__filter-transactions" (click)="showExpenses()">
                 <mat-icon class="arrow-icon arrow-downward">arrow_downward</mat-icon>
-                 Income
-            </button>
-            <button class="options__filter-transactions">
-                <mat-icon class="arrow-icon arrow-upward">arrow_upward</mat-icon>
                  Expenses
+            </button>
+            <button class="options__filter-transactions" (click)="showIncomes()">
+                <mat-icon class="arrow-icon arrow-upward">arrow_upward</mat-icon>
+                 Incomes
             </button>
             <button class="options__add-transaction" (click)="showTransactionPage()">
                 <mat-icon class="arrow-icon add-plus">add</mat-icon>

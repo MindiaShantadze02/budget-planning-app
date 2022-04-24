@@ -16,18 +16,14 @@ const AccountSchema = new mongoose.Schema({
         trim: true
     },
     currency: {
-        type: String,
-        // ref: 'Currency'
+        type: Object,
+        required: [true, 'Please enter currency']
     },
     description: {
         type: String,
         maxlength: [512, 'Description must have less than 512 characters'],
         minlength: [10, 'Description must have more than 10 characters'],
         trim: true
-    },
-    availableAmount: {
-        type: Number,
-        default: 0
     }
 }, {
     timestamps: true

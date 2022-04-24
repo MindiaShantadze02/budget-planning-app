@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
+    country: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     gender: new FormControl('', [Validators.required]),
     birthDate: new FormControl('', [Validators.required]),
@@ -20,13 +22,22 @@ export class RegisterComponent implements OnInit {
   });
   success: boolean = false;
   message: string = '';
+  countries: any[] = [];
   
+  errors: any = {};
+
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private httpClient: HttpClient
     ) { }
     
     ngOnInit(): void {
+      this.httpClient.get("https://restcountries.com/v2/all?fields=name").subscribe(
+        (res: any) => (
+          this.countries = res.map((country: any) => country.name)
+        )
+      )
   }
 
   onSubmit() {
@@ -62,8 +73,7 @@ export class RegisterComponent implements OnInit {
         }
       },
       error: err => {
-        this.success = false;
-        this.message = err.error.message;
+        this.errors = err.error;
       }
   });
   }
