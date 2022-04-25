@@ -13,8 +13,12 @@ export class UsersService {
     private http: HttpClient
   ) { }
 
-  getUsers() {
-    return this.http.get(this.apiUrl);
+  getUsers():Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
+  }
+
+  deleteUser(id: string):Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/${id}`);
   }
 
   getMe():Observable<User> {

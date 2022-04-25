@@ -1,0 +1,18 @@
+.admin-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    &__title {
+        text-align: center;
+    }
+    &__user {
+        margin-top: 10px;
+        width: 616px;
+    }
+    &__row {
+        margin-top: 10px;
+    }
+    &__delete-user {
+        margin-top: 10px;
+    }
+}

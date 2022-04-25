@@ -66,7 +66,6 @@ export class AccountsDialogBoxComponent implements OnInit {
     ),
     err => {
       this.errors = err.error;
-      console.log(err.error);
     });
   }
 }

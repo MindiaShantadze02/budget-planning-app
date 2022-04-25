@@ -1,10 +1,35 @@
 <div class="statistics">
     <h3 class="statistics__title">Statistics</h3>
-    <div class="button-group">
-        <button mat-raised-button>Categories Statistics</button>
-        <button mat-raised-button>Monthly Statistics</button>
-    </div>
-    <div class="statistics__category-percentage">
-
+    <form class="statistics__form" [formGroup]="datesForm" (ngSubmit)="getStats()">
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate placeholder="Start date" formControlName="startDate">
+              <input matEndDate placeholder="End date" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Get Stats</button>
+    </form>
+    <div class="statistics__category-table" *ngIf="statistics.length > 0">
+        <table>
+            <tr class="statistics__table-titles">
+                <th>Category</th>
+                <th>Expenses</th>
+                <th>% in total</th>
+            </tr>
+            <tr *ngFor="let statisticsItem of statistics">
+                <td>{{statisticsItem.category}}</td>
+                <td>{{statisticsItem.amount}}</td>
+                <td>{{statisticsItem.percentage | number : '.2-2'}}%</td>
+            </tr>
+        </table>
     </div>
 </div>

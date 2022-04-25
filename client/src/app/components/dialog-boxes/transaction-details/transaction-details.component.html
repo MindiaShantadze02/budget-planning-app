@@ -5,22 +5,24 @@
             <button mat-button (click)="deleteTransaction()">
                 <mat-icon>delete</mat-icon>
             </button>
-            <button mat-button [routerLink]="[transaction._id, 'edit']">
+            <button mat-button (click)="showUpdatePage()">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-button>
+            <button mat-button (click)="closeDialog()">
                 <mat-icon mat-button>close</mat-icon>
             </button>
         </div>
     </div>
-    <div class="transaction-details__amount-info" *ngIf="transaction.transactionType === 'Income'">
+    <div class="transaction-details__amount-info">
         <div class="transaction-details__transaction-type">
             <mat-icon 
-            [style.backgroundColor]="transaction.transactionType === 'Income' ? 'green' : 'red'" 
-            class="arrow-circle arrow-cicle-income">arrow_downward</mat-icon>
+            [style.backgroundColor]="transaction.transactionType === 'Income' ? '#21C206' : '#EE3F19'" 
+            class="arrow-circle arrow-cicle-income">
+            {{transaction.transactionType === 'Income' ? 'arrow_downward' : 'arrow_upward'}}
+            </mat-icon>
             <p>{{transaction.transactionType}}</p>
         </div>
-        <h1 [style.color]="transaction.transactionType === 'Income' ? 'green' : 'red'">{{transaction.amount}}{{transaction.currency?.symbol}}</h1>
+        <h2 [style.color]="transaction.transactionType === 'Income' ? '#21C206' : '#EE3F19'">{{transaction.amount}}{{transaction.currency?.symbol}}</h2>
     </div>
     <h1 class="transaction-details__category">{{transaction.category}}</h1>
     <div class="transaction-details__rows">

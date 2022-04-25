@@ -4,6 +4,8 @@ import { Category } from 'src/app/interfaces/Category';
 import { Transaction } from 'src/app/interfaces/Transaction';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { TransactionDetailsComponent } from '../dialog-boxes/transaction-details/transaction-details.component';
 
 @Component({
   selector: 'app-edit-transaction',
@@ -38,7 +40,8 @@ export class EditTransactionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private transactionService: TransactionService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialogRef<TransactionDetailsComponent>
   ) { }
 
   ngOnInit(): void {
@@ -79,7 +82,7 @@ export class EditTransactionComponent implements OnInit {
           );
 
           this.transactionService.transactions$.next(updatedTransactions);
-          this.router.navigateByUrl('');
+          this.router.navigate(['/categories']);
     }, 
     err => {
       this.errors = err.error;

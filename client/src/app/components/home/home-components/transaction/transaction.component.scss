@@ -21,4 +21,30 @@
         border-radius: 10px;
         text-transform: capitalize;
     }
+    &__description {
+        display: flex;
+        align-items: center;
+        span {
+            margin: 4px;
+        }
+        margin-left: 6px;
+    }
+    &__title {
+        margin-left: 10px;
+    }
+    .arrow-circle {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+        margin-right: 10px;
+        color: #FFF;
+    }
+    &__type {
+        display: flex;
+        align-items: center;
+    }
 }

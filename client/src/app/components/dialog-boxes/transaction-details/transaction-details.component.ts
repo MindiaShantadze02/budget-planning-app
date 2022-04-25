@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Transaction } from 'src/app/interfaces/Transaction';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-details',
@@ -25,7 +26,9 @@ export class TransactionDetailsComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:any,
     private transactionService: TransactionService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialog: MatDialogRef<TransactionDetailsComponent>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +48,18 @@ export class TransactionDetailsComponent implements OnInit {
             const filteredTransactions: Transaction[] = this.transactions.filter((transaction: Transaction) => 
               this.transaction._id !== transaction._id);
             this.transactionService.transactions$.next([...filteredTransactions]);
-            console.log(res);
           });
+          this.dialog.close();
         }
       });
+  }
+
+  showUpdatePage() {
+    this.router.navigate([this.transaction._id, 'edit']);
+    this.dialog.close();
+  }
+
+  closeDialog() {
+    this.dialog.close();
   }
 }

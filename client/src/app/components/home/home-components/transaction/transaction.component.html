@@ -1,12 +1,23 @@
 <div class="transaction" (click)="showTransactionDetailsComponent(transaction._id)">
     <h4 class="transaction__category">{{transaction.category}}</h4>
-    <div class="transaction__description">
-        <h4>{{transaction.title}}</h4>
-        <span class="transaction__type">{{transaction.transactionType}}</span>
-        &#183;
-        <span class="transaction__date">{{transaction.transactionDate | date:'MM.dd.y'}}</span>
+    <div class="transaction__content">
+        <h4 class="transaction__title">{{transaction.title}}</h4>
+        <div class="transaction__description">
+            <span class="transaction__type">
+                <mat-icon 
+                [style.backgroundColor]="transaction.transactionType === 'Income' ? '#21C206' : '#EE3F19'" 
+                class="arrow-circle arrow-cicle-income">
+                {{transaction.transactionType === 'Income' ? 'arrow_downward' : 'arrow_upward'}}
+                </mat-icon>
+                {{transaction.transactionType}}</span>
+                &#183;
+            <span class="transaction__date">{{transaction.transactionDate | date:'MM.dd.y'}}</span>
+        </div>
     </div>
     <div class="transaction__amount-wrapper">
-        <h2 class="transaction__amount">{{transaction.amount}}$</h2>
+        <h2 
+        class="transaction__amount"
+        [style.color]="transaction.transactionType === 'Income' ? '#21C206' : '#EE3F19'"
+        >{{transaction.amount}}{{transaction.currency.symbol}}</h2>
     </div>
 </div>

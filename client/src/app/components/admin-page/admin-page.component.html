@@ -1,1 +1,27 @@
-<h1>admin-page works!</h1>
+<div class="admin-page">
+    <div class="adming-page__user-info">
+        <h3 class="admin-page__title">Admin</h3>
+        <mat-card class="admin-page__user" *ngFor="let user of users">
+            <h2>{{user.firstName | titlecase}} {{user.lastName | titlecase}}</h2>
+            <div class="row">
+                <b>BirthDate</b>
+                <p>{{user.birthDate | date : 'medium'}}</p>
+            </div>
+            <div class="row">
+                <b>Gender</b>
+                <p>{{user.gender}}</p>
+            </div>
+            <div class="row">
+                <b>Email</b>
+                <p>{{user.email}}</p>
+            </div>
+            <button 
+            mat-raised-button
+            color="warn" 
+            class="admin-page__delete-user"
+            (click)="deleteUser(user._id)"
+            >Delete User</button>
+        </mat-card>
+        <h1 *ngf="users.length === 0">There are no registered users</h1>
+    </div>
+</div>

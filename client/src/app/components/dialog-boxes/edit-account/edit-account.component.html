@@ -1,20 +1,14 @@
-<form [formGroup]="editAccountForm" (ngSubmit)="updateAccount()">
-    <mat-form-field appearance="fill" class="edit-account-form">
-        <mat-label>Title</mat-label>
+<form [formGroup]="editAccountForm" (ngSubmit)="updateAccount()" class="edit-account-form">
+    <mat-form-field appearance="fill">
+        <mat-label>Title (min: 3 chars)</mat-label>
         <input formControlName="title" matInput>
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <mat-label>Currency</mat-label>
-        <mat-select formControlName="currency">
-            <mat-option
-            *ngFor="let currency of currencies"
-            [value]="currency">{{currency?.code}}</mat-option>
-        </mat-select>
-        <p class="error" *ngIf="errors.country">{{errors.country}}</p>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
+        <mat-label>Description (min: 10 chars)</mat-label>
         <textarea formControlName="description" matInput></textarea>
     </mat-form-field>
-    <button type="submit">Edit Account</button>
+    <button 
+    mat-raised-button
+    type="submit"
+    color="primary" [disabled]="editAccountForm.invalid">Edit Account</button>
 </form>

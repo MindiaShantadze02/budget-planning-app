@@ -23,9 +23,14 @@ export class EditAccountComponent implements OnInit {
     }
   };
   editAccountForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
-    currency: new FormControl({})
+    title: new FormControl('',[
+      Validators.required, Validators.minLength(3),
+      Validators.maxLength(255)
+    ]),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(255)])
   });
   currencies: any = [];
   errors: any = {};
@@ -59,9 +64,14 @@ export class EditAccountComponent implements OnInit {
       this.accountService.getAccount(id).subscribe((account: Account) => (
         this.account = account,
         this.editAccountForm = new FormGroup({
-          title: new FormControl(account.title),
-          description: new FormControl(account.description),
-          currency: new FormControl(account.currency)
+          title: new FormControl(this.account.title,[
+            Validators.required, Validators.minLength(3),
+            Validators.maxLength(255)
+          ]),
+          description: new FormControl(this.account.description, [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(255)])
         })
       ));
     });

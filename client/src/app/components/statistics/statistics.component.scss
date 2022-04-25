@@ -2,9 +2,30 @@
     &__title {
         text-align: center;
     }
-    &__table {
+    &__category-table {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1fr,3);
+        border-collapse: collapse;
+        border: 1px solid #000;
+        margin-top: 10px;
+        padding: 10px 0;
+        background-color: #FFF;
+        border-radius: 5px;
         tr {
             border: 1px solid #000;
         }
+        td {
+            padding: 10px;
+            border: 1px solid #000;
+        }
+    }
+    &__category-table-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
     }
 }

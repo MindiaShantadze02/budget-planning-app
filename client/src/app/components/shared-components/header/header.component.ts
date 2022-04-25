@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class HeaderComponent implements OnInit {
   user: User = {
+    _id: '',
     email: '',
     password: '',
     role: '',

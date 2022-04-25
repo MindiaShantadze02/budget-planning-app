@@ -12,6 +12,6 @@ const {
     getCategoryStatistics
 } = require('../controllers/statisticsController');
 
-router.get('/categories', auth, getCategoryStatistics);
+router.post('/categories', auth, getCategoryStatistics);
 
 module.exports = router;

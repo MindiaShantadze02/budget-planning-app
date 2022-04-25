@@ -25,12 +25,12 @@
           <mat-form-field appearance="fill">
             <mat-label>Category</mat-label>
             <mat-select formControlName="category">
-              <mat-option value="income category">Home</mat-option>
-              <mat-option value="salary">Shopping</mat-option>
-              <mat-option value="debt payment">Tech</mat-option>
-              <mat-option value="gift">Gift</mat-option>
-              <mat-option value="rental income">Rental Income</mat-option>
-              <mat-option value="bonus">Bonus</mat-option>
+              <mat-option value="Income Category">Home</mat-option>
+              <mat-option value="Salary">Shopping</mat-option>
+              <mat-option value="Debt Payment">Tech</mat-option>
+              <mat-option value="Gift">Gift</mat-option>
+              <mat-option value="Rental Income">Rental Income</mat-option>
+              <mat-option value="Bonus">Bonus</mat-option>
               <mat-option 
               *ngFor="let category of categories" 
               [value]="category.title">{{category.title}}</mat-option>

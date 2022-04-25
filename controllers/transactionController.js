@@ -49,7 +49,8 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
         account: req.params.accountId,
         user: req.user.id,
         currency: account.currency,
-        ...req.body
+        ...req.body,
+        amount: req.body.amount
     });
     
     res.status(201).json(transaction);
