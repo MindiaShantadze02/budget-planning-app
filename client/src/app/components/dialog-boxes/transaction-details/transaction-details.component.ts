@@ -17,7 +17,7 @@ export class TransactionDetailsComponent implements OnInit {
     user: '',
     account: '',
     category: '',
-    amount: '',
+    amount: 0,
     transactionDate: ''
   }
   transactions: Transaction[] = [];

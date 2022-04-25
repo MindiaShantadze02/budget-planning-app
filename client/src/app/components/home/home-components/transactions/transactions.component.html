@@ -19,10 +19,6 @@
     <section class="transactions__account-transactions" *ngIf="transactions.length > 0">
         <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"></app-transaction>
     </section>
-    <section class="transactions__no-transactions" *ngIf="transactions.length === 0 && accountId">
-        <h2>This account does not have any transactions</h2>
-    </section>
-    <section class="transactions__no-transactions" *ngIf="transactions.length === 0 && !accountId">
-        <h2>You don't have any transactions</h2>
-    </section>
+    <h3 class="transactions__info-message" *ngIf="!accountId">Please select an account</h3>
+    <h3 class="transactions__info-message" *ngIf="transactions.length === 0 && accountId">This account does not have any transactions</h3>
 </div>

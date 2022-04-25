@@ -1,44 +1,40 @@
 <div class="transaction-details">
-    <div class="account-details-options">
-        <button mat-button (click)="deleteTransaction()">
-            <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-button [routerLink]="[transaction._id, 'edit']">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-button>
-            <mat-icon mat-button>close</mat-icon>
-        </button>
-    </div>
-    <h1>Transaction</h1>
-    <div class="account-details__row">
-        <b class="account-details__title">Title</b>
-        <div class="account-details__detail-value">
-            <p>{{transaction.title}}</p>
+    <div class="transaction-details__content">
+        <h1>Transaction Details</h1>
+        <div class="transaction-details-options">
+            <button mat-button (click)="deleteTransaction()">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-button [routerLink]="[transaction._id, 'edit']">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-icon mat-button>close</mat-icon>
+            </button>
         </div>
     </div>
-    <div class="account-details__row">
-        <b class="account-details__title">Amount</b>
-        <div class="account-details__detail-value">
-            <p>{{transaction.amount}}</p>
+    <div class="transaction-details__amount-info" *ngIf="transaction.transactionType === 'Income'">
+        <div class="transaction-details__transaction-type">
+            <mat-icon 
+            [style.backgroundColor]="transaction.transactionType === 'Income' ? 'green' : 'red'" 
+            class="arrow-circle arrow-cicle-income">arrow_downward</mat-icon>
+            <p>{{transaction.transactionType}}</p>
         </div>
+        <h1 [style.color]="transaction.transactionType === 'Income' ? 'green' : 'red'">{{transaction.amount}}{{transaction.currency?.symbol}}</h1>
     </div>
-    <div class="account-details__row">
-        <b class="account-details__title">Currency</b>
-        <div class="account-details__detail-value">
-            <p>$</p>
+    <h1 class="transaction-details__category">{{transaction.category}}</h1>
+    <div class="transaction-details__rows">
+        <div class="transaction-details__row">
+            <b class="transaction-details__title">Description: </b>
+            <div class="transaction-details__detail-value">
+                <p>{{transaction.description}}</p>
+            </div>
         </div>
-    </div>
-    <div class="account-details__row">
-        <b class="account-details__title">Description</b>
-        <div class="account-details__detail-value">
-            <p>{{transaction.description}}</p>
-        </div>
-    </div>
-    <div class="account-details__row">
-        <b class="account-details__title">Description</b>
-        <div class="account-details__detail-value">
-            <p>{{transaction.transactionDate | date:'MM.dd.y'}}</p>
+        <div class="transaction-details__row">
+            <b class="transaction-details__title">Transaction Date: </b>
+            <div class="transaction-details__detail-value">
+                <p>{{transaction.transactionDate | date:'MM.dd.y'}}</p>
+            </div>
         </div>
     </div>
 </div>

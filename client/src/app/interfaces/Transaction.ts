@@ -6,7 +6,11 @@ export interface Transaction {
     title: string,
     description: string,
     category: string,
-    currency?: string,
-    amount: string,
+    currency?: {
+        code?: string,
+        symbol?: string,
+        country: string
+    },
+    amount: number,
     transactionDate: string
 }

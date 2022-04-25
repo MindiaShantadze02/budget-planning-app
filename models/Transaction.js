@@ -38,7 +38,7 @@ const TransactionSchema = new mongoose.Schema({
         required: [true, 'Category is required']
     },
     currency: {
-        type: String
+        type: Object
     },
     amount: {
         type: Number,

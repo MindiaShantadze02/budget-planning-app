@@ -30,7 +30,7 @@ export class EditTransactionComponent implements OnInit {
     transactionDate: '',
     transactionType: '',
     category: '',
-    amount: '',
+    amount: 0,
     description: ''
   };
   errors:any = {};

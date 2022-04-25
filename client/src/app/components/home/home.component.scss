@@ -1,6 +1,11 @@
 .home-page {
     padding: 0 40px;
     display: grid;
-    grid-template-columns: 0.9fr 1.2fr 0.9fr;
+    grid-template-columns: repeat(3, 1fr);
     min-height: 100vh;
+}
+@media screen and (max-width: 1000px) {
+    .home-page {
+        grid-template-columns: 1fr;
+    }
 }

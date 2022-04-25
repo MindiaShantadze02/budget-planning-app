@@ -5,8 +5,7 @@ routerLinkActive="current-account">
     <div class="account__account-description">
         <h2>{{account.title}}</h2>
         <p>{{account.description}}</p>
-        <h1>{{availableAmount}}</h1>
+        <h1>{{availableAmount}}{{account.currency?.symbol}}</h1>
     </div>
-    <h1>{{account.currency?.symbol}}</h1>
     <button mat-button class="account__details" (click)="showDetails(account._id)">See Details</button>
 </div>

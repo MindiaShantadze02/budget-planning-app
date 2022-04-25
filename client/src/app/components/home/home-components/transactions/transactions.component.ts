@@ -43,8 +43,8 @@ export class TransactionsComponent implements OnInit {
           this.transactionService.transactions$.next(transactions);
         });
       } else {
-        this.message = 'Please select an account';
-      }
+        this.transactionService.transactions$.next([]);
+      };
     });
   }
 

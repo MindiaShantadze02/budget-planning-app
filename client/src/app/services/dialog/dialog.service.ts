@@ -18,13 +18,13 @@ export class DialogService {
 
   openAccountForm():void {
     this.dialog.open(AccountsDialogBoxComponent, {
-      width: '400px',
+      width: '500px',
     });
   }
 
   showDeleteDialog(message: string) {
     return this.dialog.open(DeleteDialogComponent, {
-      width: '300px',
+      width: '500px',
       data: {
         message
       }
@@ -47,7 +47,7 @@ export class DialogService {
 
   showTransactionDetailsComponent(id: string) {
     this.dialog.open(TransactionDetailsComponent, {
-      width: '500px',
+      width: '550px',
       height: '100%',
       position: {
         right: '0',

@@ -1,5 +1,5 @@
 <main class="categories">
-    <h1 class="categories__categories-title">Categories</h1>
+    <h3 class="categories__categories-title">Categories</h3>
     <form 
     class="categories__category-form"
     [formGroup]="categoryForm"
@@ -8,15 +8,15 @@
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
             <input matInput formControlName="title">
-            <p *ngIf="errors.title">{{errors.title}}</p>
+            <p *ngIf="errors.title" class="error">{{errors.title}}</p>
         </mat-form-field>
-        <mat-radio-group 
+        <mat-radio-group
         aria-label="Select Transaction Type"
         class="categories__category-type" 
         formControlName="categoryType">
             <mat-radio-button value="Income" class="radio-button">Income</mat-radio-button>
             <mat-radio-button value="Expense" class="radio-button">Expense</mat-radio-button>
-            <p *ngIf="errors.categoryType">{{errors.categoryType}}</p>
+            <p *ngIf="errors.categoryType" class="error">{{errors.categoryType}}</p>
         </mat-radio-group>
         <button 
         mat-raised-button color="primary" 

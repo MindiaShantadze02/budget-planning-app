@@ -1,7 +1,9 @@
 .categories {
     min-height: 100vh;
     margin: 0 40px;
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     &__categories-title {
         text-align: center;
     }
@@ -11,24 +13,14 @@
     &__category-form {
         display: flex;
         flex-direction: column;
-        width: 500px;
-        margin: auto;
+        width: 617px;
+        margin-bottom: 15px;
         margin-top: 15px;
-        padding: 20px;
         .radio-button {
             margin-left: 10px;
         }
-        button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 39px;
-            border: 1px solid #000;
-            border-radius: 10px;
-            cursor: pointer;
-            .plus {
-                color: #000;
-            }
-        }
+    }
+    .error {
+        color: red;
     }
 }

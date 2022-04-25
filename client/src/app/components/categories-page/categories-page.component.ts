@@ -26,8 +26,8 @@ export class CategoriesPageComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +56,9 @@ export class CategoriesPageComponent implements OnInit {
 
   createCategory() {
     this.categoryService.createCategory(this.categoryForm.value).subscribe((category: Category) => (
-      this.categoryService.categories$.next([...this.categories, category])
+      this.categoryService.categories$.next([...this.categories, category]),
+      this.router.navigate(['/categories']),
+      this.errors = {}
     ),
     err => {
       this.errors = err.error;
@@ -66,7 +68,8 @@ export class CategoriesPageComponent implements OnInit {
   editCategory(id: string) {
     if (this.buttonText === 'Edit Category') {
       this.categoryService.updateCategory(id, this.categoryForm.value).subscribe((category: Category) => (
-        this.router.navigateByUrl('categories')
+        this.router.navigate(['/categories']),
+        this.errors = {}
       ),
       err => this.errors = err.error);
     }

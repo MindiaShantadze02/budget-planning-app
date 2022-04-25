@@ -3,6 +3,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 // importing models
 const Transaction = require('../models/Transaction');
+const Account = require('../models/Account');
 
 // GET /transactions/:accountId
 // PRIVATE
@@ -37,6 +38,8 @@ exports.getTransactions = asyncWrapper(async (req, res, next) => {
 // PRIVATE
 // for creating a transaction
 exports.createTransaction = asyncWrapper(async (req, res, next) => {
+    const account = await Account.findById(req.params.accountId);
+
     if (!req.params.accountId) {
         res.status(404);
         throw new Error('Please select an account');
@@ -45,6 +48,7 @@ exports.createTransaction = asyncWrapper(async (req, res, next) => {
     const transaction = await Transaction.create({
         account: req.params.accountId,
         user: req.user.id,
+        currency: account.currency,
         ...req.body
     });
     

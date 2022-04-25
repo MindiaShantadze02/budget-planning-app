@@ -1,8 +1,9 @@
-.categories {
-    width: 500px;
-    margin: auto;
-    margin-top: 30px;
-    &__no-category-text {
-        text-align: center;
+.categories-wrapper {
+    width: 100%;
+    .categories {
+        margin-top: 10px;
+        &__no-category-text {
+            text-align: center;
+        }
     }
 }
